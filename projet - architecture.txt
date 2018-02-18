@@ -1,0 +1,35 @@
+La base de données :
+-	Table combo (Listes des combos + valeurs associés)
+-	Table Joueur (id, nom, Cagnotte, dernière_connexion)
+
+
+Les classes :
+
+	Classe Rouleau
+	-	Séquence de base : tab[nb_element]
+	-	Une vitesse : float
+	-	Séquence affiché : tab[3]
+
+
+Déroulement :
+
+	Activité principale :
+	- Création de la fenêtre
+	- Créer les rouleaux
+	- Créer la bdd
+
+	Au lancement de la machine :
+	- Mettre à jour les tableaux en fonction de la vitesse du rouleau
+	-Payer la mise (réduire la cagnotte et maj affichage)
+
+	Au bouton arrêt :
+	- Décrémentation de la vitesse du rouleau associé
+
+	A l’arrêt de tous les rouleaux :
+	- Récupérer la combinaison des rouleaux
+	- Comparer avec les combos en bdd
+	Si victoire :
+		- récupération de la valeur du combo
+		- vérification des boutons multiplicateur (les appliquer si oui)
+		- Mettre à jour la cagnotte et son affichage
+	

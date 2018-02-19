@@ -1,18 +1,84 @@
 <?xml version="1.0" encoding="utf-8"?>
 <android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context="com.example.yazuke.applimobilemachine_a_sous.MainActivity">
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Hello World!"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:padding="10dp" >
+
+        <ImageView
+            android:id="@+id/r1_1"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:src="@mipmap/cherry" />
+
+        <ImageView
+            android:id="@+id/r1_2"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:layout_below="@+id/r1_1"
+            android:layout_marginTop="20dp"
+            android:src="@mipmap/cherry" />
+        <ImageView
+            android:id="@+id/r1_3"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:layout_below="@+id/r1_2"
+            android:layout_marginTop="20dp"
+            android:src="@mipmap/cherry"/>
+
+        <ImageView
+            android:id="@+id/r2_1"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:layout_marginLeft="75dp"
+            android:src="@mipmap/cherry" />
+        <ImageView
+            android:id="@+id/r2_2"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:layout_below="@+id/r2_1"
+            android:layout_marginTop="20dp"
+            android:layout_marginLeft="75dp"
+            android:src="@mipmap/cherry" />
+
+        <ImageView
+            android:id="@+id/r2_3"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:layout_below="@+id/r2_2"
+            android:layout_marginTop="20dp"
+            android:layout_marginLeft="75dp"
+            android:src="@mipmap/cherry" />
+
+        <ImageView
+            android:id="@+id/r3_1"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:layout_marginLeft="150dp"
+            android:src="@mipmap/cherry" />
+        <ImageView
+            android:id="@+id/r3_2"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:layout_below="@+id/r2_1"
+            android:layout_marginTop="20dp"
+            android:layout_marginLeft="150dp"
+            android:src="@mipmap/cherry" />
+
+        <ImageView
+            android:id="@+id/r3_3"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:layout_below="@+id/r2_2"
+            android:layout_marginTop="20dp"
+            android:layout_marginLeft="150dp"
+            android:src="@mipmap/cherry" />
+
+    </RelativeLayout>
 
 </android.support.constraint.ConstraintLayout>

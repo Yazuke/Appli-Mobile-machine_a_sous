@@ -1,3 +1,13 @@
+Symboles des rouleaux:
+.Cerise (C)
+.Orange (O)
+.Cloche	(Cl)
+.Fraise (F)
+.Pasteque (P)-
+.7 (7)-
+.Raisins (R)-
+.Citrons (Ci)
+
 La base de données :
 -	Table combo (Listes des combos + valeurs associés)
 -	Table Joueur (id, nom, Cagnotte, dernière_connexion)
@@ -7,8 +17,13 @@ Les classes :
 
 	Classe Rouleau
 	-	Séquence de base : tab[nb_element]
+		//Séquences de base des 3 rouleaux:
+			. C O Cl F P 7 R Ci
+			. P Cl C O Ci R F 7
+			. 7 C F Ci Cl C P O
+ 
 	-	Une vitesse : float
-	-	Séquence affiché : tab[3]
+	-	Séquence affichée : tab[3]
 
 
 Déroulement :

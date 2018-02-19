@@ -90,7 +90,13 @@ public class Rouleau {
         }
         return res;
     }
+    public String getSequenceAffichee(int n){
+        return sequenceAffichee[n];
+    }
     public int getPosition(){
         return position;
+    }
+    public String getCaseAffichee(int i){
+        return sequenceAffichee[i];
     }
 }

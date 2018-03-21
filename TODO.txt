@@ -1,0 +1,37 @@
+A faire: 
+	- Créer et lier BDD:
+		
+		BDD:
+			- Liste des joueurs
+				- id
+				- nom
+				- argent restant
+
+	- Créer un menu :
+		
+		Menu: 
+			- Titre
+			- Affichage du nom du joueur
+		    	- Bouton Démarrer partie
+			- Bouton Changer utilisateur
+			- Bouton Leaderboard
+			- Bouton exit
+	
+	- Mettre en page le jeu:
+	
+		Jeu:
+			- Affichage du score
+			- Boutons de mise
+			- Affichage de l'argent restant
+			- Affichage du nom du joueur
+			- Animation des rouleaux ( Threads, micro pause entre chaque défilement du rouleau)
+			- Levier de lancement en drag n drop
+
+			- Test de victoire
+			- Victoire->augmente l'argent restant
+			- Victoire->message de victoire
+
+			- Boutons de mise->réduisent l'argent restant
+			- Test si il reste de l'argent en début de partie
+			- Plus d'argent->affichage game over
+

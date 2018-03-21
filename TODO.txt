@@ -1,3 +1,6 @@
+- : à faire
+# : fait
+
 A faire: 
 	- Créer et lier BDD:
 		
@@ -24,6 +27,8 @@ A faire:
 			- Boutons de mise
 			- Affichage de l'argent restant
 			- Affichage du nom du joueur
+			# Affichage des rouleaux
+			# Algo de défilement des rouleaux
 			- Animation des rouleaux ( Threads, micro pause entre chaque défilement du rouleau)
 			- Levier de lancement en drag n drop
 
@@ -35,3 +40,8 @@ A faire:
 			- Test si il reste de l'argent en début de partie
 			- Plus d'argent->affichage game over
 
+
+		Divers:
+			# Icone du jeu
+			- Traduction
+			- Musique/sons

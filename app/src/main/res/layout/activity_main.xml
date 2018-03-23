@@ -9,7 +9,9 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:orientation="vertical">
+        android:orientation="vertical"
+        tools:layout_editor_absoluteX="103dp"
+        tools:layout_editor_absoluteY="0dp">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -23,18 +25,19 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 app:srcCompat="@android:drawable/ic_lock_idle_alarm" />
+
             <TextView
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
-                android:text="@string/multiplicateur"/>
+                android:text="@string/multiplicateur" />
 
 
             <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:orientation="vertical"
-                android:layout_weight="1">
+                android:layout_weight="1"
+                android:orientation="vertical">
 
                 <Button
                     android:id="@+id/button1x"
@@ -43,13 +46,14 @@
                     android:layout_weight="1"
                     android:background="@color/colorAccent"
                     android:text="@string/button1x" />
+
                 <Button
                     android:id="@+id/button2x"
                     android:layout_width="wrap_content"
                     android:layout_height="0dp"
+                    android:layout_below="@+id/button1x"
                     android:layout_weight="1"
                     android:background="@color/colorAccent"
-                    android:layout_below="@+id/button1x"
                     android:text="@string/button2x" />
 
                 <Button
@@ -61,118 +65,136 @@
                     android:background="@color/colorAccent"
                     android:text="@string/button5x" />
             </LinearLayout>
+
             <TextView
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
-                android:text="@string/total"/>
+                android:text="@string/total" />
 
         </LinearLayout>
 
-        <RelativeLayout
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:padding="30dp">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="193dp"
+            android:layout_centerHorizontal="true"
+            android:layout_centerVertical="true"
+            android:layout_weight="1"
+            android:gravity="center_vertical|center_horizontal|center"
+            android:orientation="horizontal">
 
-            <ImageView
-                android:id="@+id/r1_1"
-                android:layout_width="50dp"
-                android:layout_height="50dp"
-                android:src="@mipmap/cherry" />
+            <RelativeLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:padding="30dp">
 
-            <ImageView
-                android:id="@+id/r1_2"
-                android:layout_width="50dp"
-                android:layout_height="50dp"
-                android:layout_below="@+id/r1_1"
-                android:layout_marginTop="20dp"
-                android:src="@mipmap/cherry" />
+                <ImageView
+                    android:id="@+id/r1_1"
+                    android:layout_width="50dp"
+                    android:layout_height="50dp"
+                    android:src="@mipmap/cherry" />
 
-            <ImageView
-                android:id="@+id/r1_3"
-                android:layout_width="50dp"
-                android:layout_height="50dp"
-                android:layout_below="@+id/r1_2"
-                android:layout_marginTop="20dp"
-                android:src="@mipmap/cherry" />
+                <ImageView
+                    android:id="@+id/r1_2"
+                    android:layout_width="50dp"
+                    android:layout_height="50dp"
+                    android:layout_below="@+id/r1_1"
+                    android:layout_marginTop="20dp"
+                    android:src="@mipmap/cherry" />
 
-            <ImageView
-                android:id="@+id/r2_1"
-                android:layout_width="50dp"
-                android:layout_height="50dp"
-                android:layout_marginLeft="75dp"
-                android:src="@mipmap/cherry" />
+                <ImageView
+                    android:id="@+id/r1_3"
+                    android:layout_width="50dp"
+                    android:layout_height="50dp"
+                    android:layout_below="@+id/r1_2"
+                    android:layout_marginTop="20dp"
+                    android:src="@mipmap/cherry" />
 
-            <ImageView
-                android:id="@+id/r2_2"
-                android:layout_width="50dp"
-                android:layout_height="50dp"
-                android:layout_below="@+id/r2_1"
-                android:layout_marginLeft="75dp"
-                android:layout_marginTop="20dp"
-                android:src="@mipmap/cherry" />
+                <ImageView
+                    android:id="@+id/r2_1"
+                    android:layout_width="50dp"
+                    android:layout_height="50dp"
+                    android:layout_marginLeft="75dp"
+                    android:src="@mipmap/cherry" />
 
-            <ImageView
-                android:id="@+id/r2_3"
-                android:layout_width="50dp"
-                android:layout_height="50dp"
-                android:layout_below="@+id/r2_2"
-                android:layout_marginLeft="75dp"
-                android:layout_marginTop="20dp"
-                android:src="@mipmap/cherry" />
+                <ImageView
+                    android:id="@+id/r2_2"
+                    android:layout_width="50dp"
+                    android:layout_height="50dp"
+                    android:layout_below="@+id/r2_1"
+                    android:layout_marginLeft="75dp"
+                    android:layout_marginTop="20dp"
+                    android:src="@mipmap/cherry" />
 
-            <ImageView
-                android:id="@+id/r3_1"
-                android:layout_width="50dp"
-                android:layout_height="50dp"
-                android:layout_marginLeft="150dp"
-                android:src="@mipmap/cherry" />
+                <ImageView
+                    android:id="@+id/r2_3"
+                    android:layout_width="50dp"
+                    android:layout_height="50dp"
+                    android:layout_below="@+id/r2_2"
+                    android:layout_marginLeft="75dp"
+                    android:layout_marginTop="20dp"
+                    android:src="@mipmap/cherry" />
 
-            <ImageView
-                android:id="@+id/r3_2"
-                android:layout_width="50dp"
-                android:layout_height="50dp"
-                android:layout_below="@+id/r2_1"
-                android:layout_marginLeft="150dp"
-                android:layout_marginTop="20dp"
-                android:src="@mipmap/cherry" />
+                <ImageView
+                    android:id="@+id/r3_1"
+                    android:layout_width="50dp"
+                    android:layout_height="50dp"
+                    android:layout_marginLeft="150dp"
+                    android:src="@mipmap/cherry" />
 
-            <ImageView
-                android:id="@+id/r3_3"
-                android:layout_width="50dp"
-                android:layout_height="50dp"
-                android:layout_below="@+id/r2_2"
-                android:layout_marginLeft="150dp"
-                android:layout_marginTop="20dp"
-                android:src="@mipmap/cherry" />
+                <ImageView
+                    android:id="@+id/r3_2"
+                    android:layout_width="50dp"
+                    android:layout_height="50dp"
+                    android:layout_below="@+id/r3_1"
+                    android:layout_marginLeft="150dp"
+                    android:layout_marginTop="20dp"
+                    android:src="@mipmap/cherry" />
+                <ImageView
+                    android:id="@+id/r3_3"
+                    android:layout_width="50dp"
+                    android:layout_height="50dp"
+                    android:layout_below="@+id/r3_2"
+                    android:layout_marginLeft="150dp"
+                    android:layout_marginTop="20dp"
+                    android:src="@mipmap/cherry" />
 
-        </RelativeLayout>
+            </RelativeLayout>
+        </LinearLayout>
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:layout_weight="1"
-            android:orientation="horizontal">
+            android:orientation="horizontal"
+            android:layout_centerHorizontal="true"
+            android:layout_centerVertical="true"
+            android:gravity="center_vertical|center_horizontal|center">
+
             <Button
                 android:id="@+id/button-stop1"
-                android:layout_width="wrap_content"
+                android:layout_width="70dp"
                 android:layout_height="wrap_content"
+                android:layout_marginRight="10dp"
                 android:background="@color/colorPrimary"
-                android:text="Rouleau 1"
-                android:onClick="arretRouleau"/>
+                android:onClick="arretRouleau"
+                android:text="X" />
+
             <Button
                 android:id="@+id/button-stop2"
-                android:layout_width="wrap_content"
+                android:layout_width="70dp"
                 android:layout_height="wrap_content"
+                android:layout_marginRight="10dp"
                 android:background="@color/colorPrimary"
-                android:text="Rouleau 2"
-                android:onClick="arretRouleau"/>
+                android:onClick="arretRouleau"
+                android:text="X" />
+
             <Button
                 android:id="@+id/button-stop3"
-                android:layout_width="wrap_content"
+                android:layout_width="70dp"
                 android:layout_height="wrap_content"
                 android:background="@color/colorPrimary"
-                android:text="Rouleau 3"
-                android:onClick="arretRouleau"/>
+                android:onClick="arretRouleau"
+                android:text="X" />
 
 
         </LinearLayout>

@@ -3,9 +3,12 @@ package com.example.yazuke.applimobilemachine_a_sous;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
 import android.widget.ImageView;
 
 public class MainActivity extends AppCompatActivity {
+
+    private Jeu jeu;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -31,10 +34,10 @@ public class MainActivity extends AppCompatActivity {
         ImageView[] affichageRouleau3={r3_1,r3_2,r3_3};
 
         //Création du jeu
-        Jeu jeu=new Jeu();
+        this.jeu=new Jeu();
 
         //Lancement du jeu
-        jeu.demarrer();
+        this.jeu.demarrer();
 
 
         //Event listener pour les boutons
@@ -42,14 +45,25 @@ public class MainActivity extends AppCompatActivity {
         //  - Lancer jeu.arreterRouleau(id)
 
 
-
-
-        while(true){
-
-        }
     }
 
+    public void arretRouleau(View v){
 
+        switch(v.getId()){
+            case R.id.button_stop1:
+                Log.i("MaS","Arrêt rouleau 1");
+                this.jeu.arreterRouleau(1);
+            break;
+            case R.id.button_stop2:
+                Log.i("MaS","Arrêt rouleau 2");
+                this.jeu.arreterRouleau(2);
+                break;
+            case R.id.button_stop3:
+                Log.i("MaS","Arrêt rouleau 3");
+                this.jeu.arreterRouleau(3);
+                break;
+        }
+    }
 }
 
 
@@ -96,6 +110,10 @@ public class MainActivity extends AppCompatActivity {
 //                }
 //            }
 // }
+
+
+
+
 
 
 

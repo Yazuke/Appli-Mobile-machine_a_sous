@@ -37,9 +37,12 @@ A faire:
 			Rouleaux:
 				# Affichage des rouleaux
 				# Algo de défilement des rouleaux
-				- Animation des rouleaux ( Threads, micro pause entre chaque défilement du rouleau)
+				- Vitesses de défilement différentes
+				- Affichage du contenu des rouleaux
+				//Julien: L'affichage est pas encore bon mais fonctionne en console
+
 				- Test de victoire
-				- Arret des rouleaux
+				# Arret des rouleaux
 				
 			
 			
@@ -47,6 +50,16 @@ A faire:
 				- Bouton en drag n drop
 				- Lancement d'une partie
 
+			Layout:
+				#Images
+				#Multiplicateur
+				#Reserve
+				#Boutons mises
+				#Boutons stop
+				-Skin global
+				-Bouton levier
+				-Menu
+				-
 		Divers:
 			# Icone du jeu
 			- Traduction

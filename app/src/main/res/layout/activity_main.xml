@@ -156,17 +156,24 @@
                 android:id="@+id/button-stop1"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:background="@color/colorPrimary" />
+                android:background="@color/colorPrimary"
+                android:text="Rouleau 1"
+                android:onClick="arretRouleau"/>
             <Button
                 android:id="@+id/button-stop2"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:background="@color/colorPrimary" />
+                android:background="@color/colorPrimary"
+                android:text="Rouleau 2"
+                android:onClick="arretRouleau"/>
             <Button
                 android:id="@+id/button-stop3"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:background="@color/colorPrimary" />
+                android:background="@color/colorPrimary"
+                android:text="Rouleau 3"
+                android:onClick="arretRouleau"/>
+
 
         </LinearLayout>
 

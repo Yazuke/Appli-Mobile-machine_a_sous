@@ -39,14 +39,9 @@ public class MainActivity extends AppCompatActivity {
         //Lancement du jeu
         this.jeu.demarrer();
 
-
-        //Event listener pour les boutons
-        //  - Recup id du rouleau visé
-        //  - Lancer jeu.arreterRouleau(id)
-
-
     }
 
+    //Se lance au clic sur un bouton
     public void arretRouleau(View v){
 
         switch(v.getId()){
@@ -68,7 +63,9 @@ public class MainActivity extends AppCompatActivity {
 
 
 
-//mise à jour rouleau 1 affichage
+//mise à jour des affichages
+//            rouleau 1
+
 //            for(int i=0;i<3;i++){
 //                switch(rouleau1.getCaseAffichee(i)){
 //                    case "C": affichageRouleau1[i].setImageResource(R.drawable.cerise);break;
@@ -82,7 +79,8 @@ public class MainActivity extends AppCompatActivity {
 //                }
 //            }
 //
-//            //mise à jour rouleau 2 affichage
+//            rouleau 2
+
 //            for(int i=0;i<3;i++){
 //                switch(rouleau2.getCaseAffichee(i)){
 //                    case "C": affichageRouleau2[i].setImageResource(R.drawable.cerise);break;
@@ -96,7 +94,8 @@ public class MainActivity extends AppCompatActivity {
 //                }
 //            }
 //
-//            //mise à jour rouleau 3 affichage
+//            rouleau 3
+
 //            for(int i=0;i<3;i++){
 //                switch(rouleau3.getCaseAffichee(i)){
 //                    case "C": affichageRouleau3[i].setImageResource(R.drawable.cerise);break;

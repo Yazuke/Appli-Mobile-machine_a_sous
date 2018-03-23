@@ -8,7 +8,6 @@ A faire:
 			- Liste des joueurs
 				- id
 				- nom
-				- argent restant
 
 	- Créer un menu :
 		
@@ -20,28 +19,36 @@ A faire:
 			- Bouton Leaderboard
 			- Bouton exit
 	
-	- Mettre en page le jeu:
+	- Mettre en place le jeu:
 	
 		Jeu:
-			- Affichage du score
-			- Boutons de mise
-			- Affichage de l'argent restant
-			- Affichage du nom du joueur
-			# Affichage des rouleaux
-			# Algo de défilement des rouleaux
-			- Animation des rouleaux ( Threads, micro pause entre chaque défilement du rouleau)
-			- Levier de lancement en drag n drop
+			Score:
+				- Affichage du score	
+				- Affichage du nom du joueur
+				- Fonctions d'ajout de score
 
-			- Test de victoire
-			- Victoire->augmente l'argent restant
-			- Victoire->message de victoire
+			Mise et argent :
+				- Boutons de mise
+				- Affichage de l'argent restant
+				- Fonctions d'ajout d'argent (en cas de victoire)
+				- Fonctions de retrait d'argent (lors de la mise)
+				- Test si il reste de l'argent en début de partie
 
-			- Boutons de mise->réduisent l'argent restant
-			- Test si il reste de l'argent en début de partie
-			- Plus d'argent->affichage game over
-
+			Rouleaux:
+				# Affichage des rouleaux
+				# Algo de défilement des rouleaux
+				- Animation des rouleaux ( Threads, micro pause entre chaque défilement du rouleau)
+				- Test de victoire
+				- Arret des rouleaux
+				
+			
+			
+			Levier de lancement:
+				- Bouton en drag n drop
+				- Lancement d'une partie
 
 		Divers:
 			# Icone du jeu
 			- Traduction
 			- Musique/sons
+			1112

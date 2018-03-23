@@ -54,7 +54,6 @@ public class Rouleau {
     }
 
 
-
     public void roll(){ //Fait avancer un rouleau d'une case vers le bas
         position++; //si position%8=0, alors on est retourné à l'affichage de base du rouleau
 
@@ -72,8 +71,6 @@ public class Rouleau {
             sequenceAffichee[2]=sequence[position%8+2];
         }
     }
-
-
 
 
     public String getSequence(){
@@ -96,7 +93,6 @@ public class Rouleau {
     public int getPosition(){
         return position;
     }
-    public String getCaseAffichee(int i){
-        return sequenceAffichee[i];
-    }
+    public String getCaseAffichee(int i){return sequenceAffichee[i];}
+
 }

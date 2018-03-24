@@ -86,6 +86,12 @@
             android:orientation="horizontal">
 
             <RelativeLayout
+                android:layout_width="60dp"
+                android:layout_height="match_parent">
+
+            </RelativeLayout>
+
+            <RelativeLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:padding="30dp">
@@ -162,7 +168,20 @@
                     android:src="@mipmap/cherry" />
 
             </RelativeLayout>
+
+            <RelativeLayout
+                android:layout_width="60dp"
+                android:layout_height="match_parent">
+
+                <ImageView
+                    android:layout_width="45dp"
+                    android:layout_height="45dp"
+                    android:layout_centerHorizontal="true"
+                    android:src="@drawable/levier"/>
+            </RelativeLayout>
+
         </LinearLayout>
+
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="0dp"

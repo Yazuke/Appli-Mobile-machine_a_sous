@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -57,6 +58,12 @@ public class MainActivity extends AppCompatActivity {
                 Log.i("MaS","Arrêt rouleau 3");
                 this.jeu.arreterRouleau(3);
                 break;
+        }
+
+        //Change le background si victoire
+        if(jeu.victoire){
+            LinearLayout background=findViewById(R.id.background);
+            background.setBackgroundResource(R.drawable.background_win);
         }
     }
 }

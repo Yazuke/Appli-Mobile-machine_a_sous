@@ -9,6 +9,8 @@ public class Jeu {
         private RouleauThread r2;
         private RouleauThread r3;
 
+        public boolean victoire=false;
+
     public Jeu(){
 
         //Création des threads pour chaque rouleau
@@ -47,6 +49,8 @@ public class Jeu {
             Log.i("MaS", "***Rouleau 1 : " + r1.getRouleau().getSequenceAffichee());
             Log.i("MaS", "***Rouleau 2 : " + r2.getRouleau().getSequenceAffichee());
             Log.i("MaS", "***Rouleau 3 : " + r3.getRouleau().getSequenceAffichee());
+
+            victoire=true;  //pour tester
         }
     }
 

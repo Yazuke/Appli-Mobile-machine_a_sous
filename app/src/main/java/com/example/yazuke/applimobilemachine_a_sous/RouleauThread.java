@@ -10,11 +10,26 @@ public class RouleauThread extends Thread
     private int id;
     public boolean fini;
 
+    /////////////////////////
+    // -- Constructeurs -- //
+    /////////////////////////
+
     //Crée un objet rouleau
     public RouleauThread(int id){
         this.rouleau=new Rouleau(id);
         this.id=id;
     }
+
+    //Crée un rouleau avec sa séquence précédente (nouvelle partie)
+    public RouleauThread(int id, int roll){
+        this.rouleau=new Rouleau(id, roll);
+        this.id=id;
+    }
+
+
+    ///////////////////////////////
+    // -- Fonction principale -- //
+    ///////////////////////////////
 
 
     //Fonction de démarrage du thread
@@ -32,6 +47,12 @@ public class RouleauThread extends Thread
         }
 
     }
+
+
+    //////////////////////
+    // -- Accesseurs -- //
+    //////////////////////
+
 
     public Rouleau getRouleau(){
         return rouleau;

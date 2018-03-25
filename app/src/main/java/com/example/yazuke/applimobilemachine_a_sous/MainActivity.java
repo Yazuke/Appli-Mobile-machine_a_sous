@@ -1,15 +1,10 @@
 package com.example.yazuke.applimobilemachine_a_sous;
 
-import android.content.ClipData;
-import android.graphics.drawable.Drawable;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
-import android.view.DragEvent;
 import android.view.MotionEvent;
 import android.view.View;
-import android.view.ViewGroup;
-import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 
@@ -134,29 +129,35 @@ public class MainActivity extends AppCompatActivity {
 
     public void arretRouleau(View v){
 
-        switch(v.getId()){
-            case R.id.button_stop1:
-                Log.i("MaS","Arrêt rouleau 1");
-                this.jeu.arreterRouleau(1);
-                findViewById(R.id.button_stop1).setBackgroundResource(R.drawable.stopped);
-            break;
-            case R.id.button_stop2:
-                Log.i("MaS","Arrêt rouleau 2");
-                this.jeu.arreterRouleau(2);
-                findViewById(R.id.button_stop2).setBackgroundResource(R.drawable.stopped);
-                break;
-            case R.id.button_stop3:
-                Log.i("MaS","Arrêt rouleau 3");
-                this.jeu.arreterRouleau(3);
-                findViewById(R.id.button_stop3).setBackgroundResource(R.drawable.stopped);
-                break;
+        if(this.jeu.nbIterations!=0){   //Evite les actions sur un jeu non lancé
+            switch(v.getId()){
+                case R.id.button_stop1:
+                    Log.i("MaS","Arrêt rouleau 1");
+                    this.jeu.arreterRouleau(1);
+                    findViewById(R.id.button_stop1).setBackgroundResource(R.drawable.stopped);
+                    break;
+                case R.id.button_stop2:
+                    Log.i("MaS","Arrêt rouleau 2");
+                    this.jeu.arreterRouleau(2);
+                    findViewById(R.id.button_stop2).setBackgroundResource(R.drawable.stopped);
+                    break;
+                case R.id.button_stop3:
+                    Log.i("MaS","Arrêt rouleau 3");
+                    this.jeu.arreterRouleau(3);
+                    findViewById(R.id.button_stop3).setBackgroundResource(R.drawable.stopped);
+                    break;
+            }
+
+            //Change le background si victoire
+            if(jeu.victoire){
+                LinearLayout background=findViewById(R.id.background);
+                background.setBackgroundResource(R.drawable.background_win);
+
+                resetBoutons();
+                findViewById(R.id.levier).setY(0);
+            }
         }
 
-        //Change le background si victoire
-        if(jeu.victoire){
-            LinearLayout background=findViewById(R.id.background);
-            background.setBackgroundResource(R.drawable.background_win);
-        }
     }
 
     public void resetBoutons(){

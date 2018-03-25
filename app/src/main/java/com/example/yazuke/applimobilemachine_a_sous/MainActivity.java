@@ -87,8 +87,11 @@ public class MainActivity extends AppCompatActivity {
 
                         if(view.getY()>=findViewById(R.id.target).getY()){   //Est rentré dans la zone de detection, on lance le jeu
                             if(!jeu.estLance()){                            //Evite de lancer plusieurs fois le jeu
+
                                 jeu.demarrer();
                                 Log.i("MaS","Lancement du jeu");
+
+                                resetBoutons();
                             }
                         }
                         break;
@@ -154,6 +157,13 @@ public class MainActivity extends AppCompatActivity {
             LinearLayout background=findViewById(R.id.background);
             background.setBackgroundResource(R.drawable.background_win);
         }
+    }
+
+    public void resetBoutons(){
+        findViewById(R.id.button_stop1).setBackgroundResource(R.drawable.stopper);
+        findViewById(R.id.button_stop2).setBackgroundResource(R.drawable.stopper);
+        findViewById(R.id.button_stop3).setBackgroundResource(R.drawable.stopper);
+
     }
 
 

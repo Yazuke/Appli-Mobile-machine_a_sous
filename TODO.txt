@@ -62,6 +62,12 @@ A faire:
 				#Skin global
 				#Bouton levier
 				-Menu
+			
+			Boutons d'arret:
+				#Skin bouton
+				#Skin bouton appuyé
+				#Changement d'image ontouch
+				#Reset boutons au lancement du jeu
 
 		Divers:
 			# Icone du jeu

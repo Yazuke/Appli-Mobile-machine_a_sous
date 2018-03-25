@@ -124,21 +124,28 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
-    //Se lance au clic sur un bouton
+
+    /////////////////////////
+    //-- Boutons d'arrêt --//
+    /////////////////////////
+
     public void arretRouleau(View v){
 
         switch(v.getId()){
             case R.id.button_stop1:
                 Log.i("MaS","Arrêt rouleau 1");
                 this.jeu.arreterRouleau(1);
+                findViewById(R.id.button_stop1).setBackgroundResource(R.drawable.stopped);
             break;
             case R.id.button_stop2:
                 Log.i("MaS","Arrêt rouleau 2");
                 this.jeu.arreterRouleau(2);
+                findViewById(R.id.button_stop2).setBackgroundResource(R.drawable.stopped);
                 break;
             case R.id.button_stop3:
                 Log.i("MaS","Arrêt rouleau 3");
                 this.jeu.arreterRouleau(3);
+                findViewById(R.id.button_stop3).setBackgroundResource(R.drawable.stopped);
                 break;
         }
 
@@ -156,7 +163,7 @@ public class MainActivity extends AppCompatActivity {
 
 
 
-//mise à jour des affichages
+//mise à jour des affichages (pas encore fonctionnel, ne pas supprimer)
 //            rouleau 1
 
 //            for(int i=0;i<3;i++){

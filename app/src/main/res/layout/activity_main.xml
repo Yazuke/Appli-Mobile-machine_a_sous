@@ -95,13 +95,16 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:paddingLeft="50dp"
-                android:paddingRight="50dp"
-                >
+                android:paddingRight="50dp">
 
                 <ImageView
                     android:id="@+id/r1_1"
                     android:layout_width="50dp"
                     android:layout_height="50dp"
+                    android:layout_alignParentLeft="true"
+                    android:layout_alignParentStart="true"
+                    android:layout_alignParentTop="true"
+                    android:layout_marginLeft="4dp"
                     android:src="@mipmap/cherry" />
 
                 <ImageView
@@ -110,6 +113,7 @@
                     android:layout_height="50dp"
                     android:layout_below="@+id/r1_1"
                     android:layout_marginTop="20dp"
+                    android:layout_marginLeft="4dp"
                     android:src="@mipmap/cherry" />
 
                 <ImageView
@@ -118,6 +122,7 @@
                     android:layout_height="50dp"
                     android:layout_below="@+id/r1_2"
                     android:layout_marginTop="20dp"
+                    android:layout_marginLeft="4dp"
                     android:src="@mipmap/cherry" />
 
                 <ImageView
@@ -149,7 +154,7 @@
                     android:id="@+id/r3_1"
                     android:layout_width="50dp"
                     android:layout_height="50dp"
-                    android:layout_marginLeft="150dp"
+                    android:layout_marginLeft="145dp"
                     android:src="@mipmap/cherry" />
 
                 <ImageView
@@ -157,15 +162,16 @@
                     android:layout_width="50dp"
                     android:layout_height="50dp"
                     android:layout_below="@+id/r3_1"
-                    android:layout_marginLeft="150dp"
+                    android:layout_marginLeft="145dp"
                     android:layout_marginTop="20dp"
                     android:src="@mipmap/cherry" />
+
                 <ImageView
                     android:id="@+id/r3_3"
                     android:layout_width="50dp"
                     android:layout_height="50dp"
                     android:layout_below="@+id/r3_2"
-                    android:layout_marginLeft="150dp"
+                    android:layout_marginLeft="145dp"
                     android:layout_marginTop="20dp"
                     android:src="@mipmap/cherry" />
 
@@ -211,27 +217,27 @@
 
             <Button
                 android:id="@+id/button-stop1"
-                android:layout_width="70dp"
-                android:layout_height="wrap_content"
-                android:layout_marginRight="10dp"
-                android:background="@color/colorPrimary"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:background="@drawable/stopper"
                 android:onClick="arretRouleau"
                 android:text="X" />
 
             <Button
                 android:id="@+id/button-stop2"
-                android:layout_width="70dp"
-                android:layout_height="wrap_content"
-                android:layout_marginRight="10dp"
-                android:background="@color/colorPrimary"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:layout_marginLeft="20dp"
+                android:layout_marginRight="20dp"
+                android:background="@drawable/stopper"
                 android:onClick="arretRouleau"
                 android:text="X" />
 
             <Button
                 android:id="@+id/button-stop3"
-                android:layout_width="70dp"
-                android:layout_height="wrap_content"
-                android:background="@color/colorPrimary"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:background="@drawable/stopper"
                 android:onClick="arretRouleau"
                 android:text="X" />
 

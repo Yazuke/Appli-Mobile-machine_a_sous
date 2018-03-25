@@ -70,28 +70,41 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public boolean onTouch(View view, MotionEvent event) {
                 switch (event.getAction()) {
+                    //Lors d'un clic sur le bouton
                     case MotionEvent.ACTION_DOWN:
-
-                        if(view.getY()>findViewById(R.id.target).getY()+50) //Déplace le levier de 20 vers le bas pour éviter les blocages, sauf si il est tout en bas
-                            view.setY(view.getY()+20);
                         dY = view.getY() - event.getRawY();              //Récupère sa position relative
                         break;
+
+                    //Lors d'un mouvement du bouton
                     case MotionEvent.ACTION_MOVE:
                         //Ne peut pas avoir une position négative, ni trop forte.
-                        if(view.getY()>=0 && view.getY()<=findViewById(R.id.target).getY()){    //
+                        if(view.getY()>=0 && view.getY()<findViewById(R.id.target).getY()){    //Teste si le bouton ne dépasse pas les bords
                             view.animate()
-                                    .y(event.getRawY() + dY)
+                                    .y(event.getRawY() + dY)                                    //Déplace le bouton et le verrouille verticalement
                                     .setDuration(0)
                                     .start();
                         }
 
-                        if(view.getY()>findViewById(R.id.target).getY()){   //Est rentré dans la zone de detection, on lance le jeu
+                        if(view.getY()>=findViewById(R.id.target).getY()){   //Est rentré dans la zone de detection, on lance le jeu
                             if(!jeu.estLance()){                            //Evite de lancer plusieurs fois le jeu
                                 jeu.demarrer();
                                 Log.i("MaS","Lancement du jeu");
                             }
                         }
                         break;
+
+                    //Lors du relachement du bouton
+                    case MotionEvent.ACTION_UP:
+                        //Evite les blocages, si le levier sort du cadre, on le replace correctement
+
+                        //Si le levier est trop haut
+                        if(view.getY()<0)
+                            view.setY(0);
+
+                        //Si il descend plus bas que la cible (trop bas)
+                        if(view.getY()>=findViewById(R.id.target).getY())
+                            view.setY(findViewById(R.id.target).getY());
+
                     default:
                         return false;
                 }

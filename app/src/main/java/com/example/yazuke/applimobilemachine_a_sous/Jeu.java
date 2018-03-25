@@ -10,6 +10,7 @@ public class Jeu {
         private RouleauThread r3;
 
         public boolean victoire=false;
+        private boolean estLance=false;
 
     public Jeu(){
 
@@ -30,6 +31,9 @@ public class Jeu {
         r1.start();
         r2.start();
         r3.start();
+
+        estLance=true;
+        victoire=false;
     }
 
     public void arreterRouleau(int idRouleau) {
@@ -50,8 +54,13 @@ public class Jeu {
             Log.i("MaS", "***Rouleau 2 : " + r2.getRouleau().getSequenceAffichee());
             Log.i("MaS", "***Rouleau 3 : " + r3.getRouleau().getSequenceAffichee());
 
-            victoire=true;  //pour tester
+            victoire=true;
+            estLance=false;
         }
+    }
+
+    public boolean estLance(){
+        return estLance;
     }
 
 

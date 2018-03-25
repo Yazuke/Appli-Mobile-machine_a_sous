@@ -172,18 +172,30 @@
             </RelativeLayout>
 
             <RelativeLayout
+                android:id="@+id/layout_levier"
                 android:layout_width="60dp"
                 android:layout_height="match_parent">
 
                 <ImageView
+                    android:id="@+id/background_levier"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:src="@drawable/levier_background"/>
                 <ImageView
+                    android:id="@+id/levier"
                     android:layout_width="45dp"
                     android:layout_height="45dp"
                     android:layout_centerHorizontal="true"
                     android:src="@drawable/levier"/>
+
+                <ImageView
+                    android:id="@+id/target"
+                    android:layout_width="45dp"
+                    android:layout_height="45dp"
+                    android:layout_alignLeft="@+id/levier"
+                    android:layout_alignParentBottom="true"
+                    android:layout_alignStart="@+id/levier" />
+
             </RelativeLayout>
 
         </LinearLayout>

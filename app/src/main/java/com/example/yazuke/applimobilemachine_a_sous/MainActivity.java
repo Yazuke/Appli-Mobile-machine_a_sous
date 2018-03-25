@@ -1,20 +1,31 @@
 package com.example.yazuke.applimobilemachine_a_sous;
 
+import android.content.ClipData;
+import android.graphics.drawable.Drawable;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.DragEvent;
+import android.view.MotionEvent;
 import android.view.View;
+import android.view.ViewGroup;
+import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 
 public class MainActivity extends AppCompatActivity {
 
     private Jeu jeu;
+    ImageView levier;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        /////////////////////////////
+        //-- Images des rouleaux --//
+        /////////////////////////////
 
         //Récupération des images utilisées pour l'affichage
         ImageView r1_1 = (ImageView) findViewById(R.id.r1_1);
@@ -34,11 +45,69 @@ public class MainActivity extends AppCompatActivity {
         ImageView[] affichageRouleau2={r2_1,r2_2,r2_3};
         ImageView[] affichageRouleau3={r3_1,r3_2,r3_3};
 
+
+
+        ////////////////////////
+        //-- Gestion du jeu --//
+        ////////////////////////
+
         //Création du jeu
         this.jeu=new Jeu();
 
         //Lancement du jeu
-        this.jeu.demarrer();
+        //this.jeu.demarrer();
+
+
+
+
+        ///////////////////////////
+        //-- Gestion du levier --//
+        ///////////////////////////
+
+        //Evenements lors d'un drag sur le levier
+        final class MyTouchListener implements View.OnTouchListener {
+            float dY;
+            @Override
+            public boolean onTouch(View view, MotionEvent event) {
+                switch (event.getAction()) {
+                    case MotionEvent.ACTION_DOWN:
+
+                        if(view.getY()>findViewById(R.id.target).getY()+50) //Déplace le levier de 20 vers le bas pour éviter les blocages, sauf si il est tout en bas
+                            view.setY(view.getY()+20);
+                        dY = view.getY() - event.getRawY();              //Récupère sa position relative
+                        break;
+                    case MotionEvent.ACTION_MOVE:
+                        //Ne peut pas avoir une position négative, ni trop forte.
+                        if(view.getY()>=0 && view.getY()<=findViewById(R.id.target).getY()){    //
+                            view.animate()
+                                    .y(event.getRawY() + dY)
+                                    .setDuration(0)
+                                    .start();
+                        }
+
+                        if(view.getY()>findViewById(R.id.target).getY()){   //Est rentré dans la zone de detection, on lance le jeu
+                            if(!jeu.estLance()){                            //Evite de lancer plusieurs fois le jeu
+                                jeu.demarrer();
+                                Log.i("MaS","Lancement du jeu");
+                            }
+                        }
+                        break;
+                    default:
+                        return false;
+                }
+                return true;
+            }
+        }
+
+        findViewById(R.id.levier).setOnTouchListener(new MyTouchListener());
+
+
+
+
+
+
+
+
 
     }
 
@@ -66,6 +135,10 @@ public class MainActivity extends AppCompatActivity {
             background.setBackgroundResource(R.drawable.background_win);
         }
     }
+
+
+
+
 }
 
 

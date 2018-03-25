@@ -28,7 +28,7 @@ A faire:
 				- Fonctions d'ajout de score
 
 			Mise et argent :
-				- Boutons de mise
+				# Boutons de mise
 				- Affichage de l'argent restant
 				- Fonctions d'ajout d'argent (en cas de victoire)
 				- Fonctions de retrait d'argent (lors de la mise)
@@ -37,18 +37,21 @@ A faire:
 			Rouleaux:
 				# Affichage des rouleaux
 				# Algo de défilement des rouleaux
-				- Vitesses de défilement différentes
+				# Vitesses de défilement différentes
 				- Affichage du contenu des rouleaux
 				//Julien: L'affichage est pas encore bon mais fonctionne en console
 
 				- Test de victoire
 				# Arret des rouleaux
+				# Background changeant avec la victoire
 				
 			
-			
 			Levier de lancement:
-				- Bouton en drag n drop
-				- Lancement d'une partie
+				# Levier indépendant et adaptatif au layout
+				# Bouton draggable verticalement
+				# Zone d'arrivée et évenement
+				# Lancement du jeu et blocage du levier
+				- Reset du levier à la victoire	//même problème qu'avec les threads et l'ui
 
 			Layout:
 				#Images
@@ -56,12 +59,12 @@ A faire:
 				#Reserve
 				#Boutons mises
 				#Boutons stop
-				-Skin global
-				-Bouton levier
+				#Skin global
+				#Bouton levier
 				-Menu
-				-
+
 		Divers:
 			# Icone du jeu
 			- Traduction
 			- Musique/sons
-			1112
+			- Leaderboard

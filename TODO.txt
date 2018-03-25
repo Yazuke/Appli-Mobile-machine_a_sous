@@ -69,6 +69,11 @@ A faire:
 				#Changement d'image ontouch
 				#Reset boutons au lancement du jeu
 
+			Nouvelles parties:
+				#Reset des boutons
+				#Création de nouveaux rouleaux
+				#Nouveaux rouleaux à la position de ceux de la partie d'avant (nouveaux constructeurs et accesseurs)
+
 		Divers:
 			# Icone du jeu
 			- Traduction

@@ -150,11 +150,20 @@ public class MainActivity extends AppCompatActivity {
 
             //Change le background si victoire
             if(jeu.victoire){
-                LinearLayout background=findViewById(R.id.background);
-                background.setBackgroundResource(R.drawable.background_win);
+
+//                Change le background pour celui éclairé
+//                LinearLayout background=findViewById(R.id.background);
+//                background.setBackgroundResource(R.drawable.background_win);
+
 
                 resetBoutons();
-                findViewById(R.id.levier).setY(0);
+
+                //Replace le levier au top
+                levier=findViewById(R.id.levier);
+                levier.animate()
+                        .y(0)
+                        .setDuration(500)
+                        .start();
             }
         }
 

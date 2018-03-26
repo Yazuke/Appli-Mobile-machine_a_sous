@@ -21,9 +21,9 @@ public class Rouleau {
     public Rouleau(int numeroRouleau){
         switch (numeroRouleau){
             case 1:
-                sequence[0]="C";
+                sequence[0]="Cl";
                 sequence[1]="O";
-                sequence[2]="Cl";
+                sequence[2]="C";
                 sequence[3]="F";
                 sequence[4]="P";
                 sequence[5]="7";
@@ -31,9 +31,9 @@ public class Rouleau {
                 sequence[7]="Ci";
                 break;
             case 2:
-                sequence[0]="P";
+                sequence[0]="C";
                 sequence[1]="Cl";
-                sequence[2]="C";
+                sequence[2]="P";
                 sequence[3]="O";
                 sequence[4]="Ci";
                 sequence[5]="R";
@@ -41,9 +41,9 @@ public class Rouleau {
                 sequence[7]="7";
                 break;
             case 3:
-                sequence[0]="7";
+                sequence[0]="F";
                 sequence[1]="C";
-                sequence[2]="F";
+                sequence[2]="7";
                 sequence[3]="Ci";
                 sequence[4]="Cl";
                 sequence[5]="C";
@@ -168,6 +168,5 @@ public class Rouleau {
         return sequenceAffichee[n];
     }
     public String getCaseAffichee(int i){return sequenceAffichee[i];}
-
-
+    public String getProchain(){return sequence[(roll+3)%8];}
 }

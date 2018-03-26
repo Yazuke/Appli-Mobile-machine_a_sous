@@ -1,44 +1,91 @@
 package com.example.yazuke.applimobilemachine_a_sous;
 
+import android.content.Context;
+import android.graphics.Color;
+import android.os.AsyncTask;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.ProgressBar;
+import android.widget.TextView;
+import android.widget.Toast;
 
-public class MainActivity extends AppCompatActivity {
+import org.w3c.dom.Text;
+
+public class MainActivity extends AppCompatActivity implements AsyncListener{
 
     private Jeu jeu;
-    ImageView levier;
+    private ImageView levier;
+
+    private ImageView[][] affichageRouleaux;
+
+    //private RouleauAsync[] rouleauxAsync;
+
+    private Button boutonAsynchrone;
+    private MaTacheInsynchrone maTacheAsynchrone1;
+    private MaTacheInsynchrone maTacheAsynchrone2;
+    private MaTacheInsynchrone maTacheAsynchrone3;
+
+    private float defautY0;
+    private float defautY1;
+    private float defautY2;
+    private float defautY3;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        //////////////////////////////////////
+        //////////////////////////////////////
+
+        //////////////////////////////////////
+        //////////////////////////////////////
+
+
+
+
         /////////////////////////////
         //-- Images des rouleaux --//
         /////////////////////////////
 
         //Récupération des images utilisées pour l'affichage
+        ImageView r1_0 = (ImageView) findViewById(R.id.r1_0);
         ImageView r1_1 = (ImageView) findViewById(R.id.r1_1);
         ImageView r1_2 = (ImageView) findViewById(R.id.r1_2);
         ImageView r1_3 = (ImageView) findViewById(R.id.r1_3);
+        this.defautY0 = r1_0.getY();
+        this.defautY1 = r1_1.getY();
+        this.defautY2 = r1_2.getY();
+        this.defautY3 = r1_3.getY();
 
+
+        ImageView r2_0 = (ImageView) findViewById(R.id.r2_0);
         ImageView r2_1 = (ImageView) findViewById(R.id.r2_1);
         ImageView r2_2 = (ImageView) findViewById(R.id.r2_2);
         ImageView r2_3 = (ImageView) findViewById(R.id.r2_3);
 
+        ImageView r3_0 = (ImageView) findViewById(R.id.r3_0);
         ImageView r3_1 = (ImageView) findViewById(R.id.r3_1);
         ImageView r3_2 = (ImageView) findViewById(R.id.r3_2);
         ImageView r3_3 = (ImageView) findViewById(R.id.r3_3);
 
-        //Regroupement par rouleau
-        ImageView[] affichageRouleau1={r1_1,r1_2,r1_3};
-        ImageView[] affichageRouleau2={r2_1,r2_2,r2_3};
-        ImageView[] affichageRouleau3={r3_1,r3_2,r3_3};
+        ImageView[] affichageRouleaux1 = new ImageView[]{r1_0, r1_1,r1_2,r1_3};
+        ImageView[] affichageRouleaux2 = new ImageView[]{r2_0, r2_1,r2_2,r2_3};
+        ImageView[] affichageRouleaux3 = new ImageView[]{r3_0, r3_1,r3_2,r3_3};
+        this.affichageRouleaux=new ImageView[][]{affichageRouleaux1,affichageRouleaux2,affichageRouleaux3};
+
+
+        //Initialisation des images de base des rouleaux
+
+
 
 
 
@@ -87,6 +134,20 @@ public class MainActivity extends AppCompatActivity {
                                 Log.i("MaS","Lancement du jeu");
 
                                 resetBoutons();
+
+
+
+                                //Crée les async tasks, une par rouleau
+                                maTacheAsynchrone1 = new MaTacheInsynchrone(MainActivity.this,1);
+                                maTacheAsynchrone2 = new MaTacheInsynchrone(MainActivity.this,2);
+                                maTacheAsynchrone3 = new MaTacheInsynchrone(MainActivity.this,3);
+
+
+                                //Lance les trois async tasks simultanément, en threads
+                                maTacheAsynchrone1.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
+                                maTacheAsynchrone2.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
+                                maTacheAsynchrone3.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
+
                             }
                         }
                         break;
@@ -111,15 +172,6 @@ public class MainActivity extends AppCompatActivity {
         }
 
         findViewById(R.id.levier).setOnTouchListener(new MyTouchListener());
-
-
-
-
-
-
-
-
-
     }
 
 
@@ -134,15 +186,18 @@ public class MainActivity extends AppCompatActivity {
                 case R.id.button_stop1:
                     Log.i("MaS","Arrêt rouleau 1");
                     this.jeu.arreterRouleau(1);
+                    maTacheAsynchrone1.cancel=true;
                     findViewById(R.id.button_stop1).setBackgroundResource(R.drawable.stopped);
                     break;
                 case R.id.button_stop2:
                     Log.i("MaS","Arrêt rouleau 2");
                     this.jeu.arreterRouleau(2);
+                    maTacheAsynchrone2.cancel=true;
                     findViewById(R.id.button_stop2).setBackgroundResource(R.drawable.stopped);
                     break;
                 case R.id.button_stop3:
                     Log.i("MaS","Arrêt rouleau 3");
+                    maTacheAsynchrone3.cancel=true;
                     this.jeu.arreterRouleau(3);
                     findViewById(R.id.button_stop3).setBackgroundResource(R.drawable.stopped);
                     break;
@@ -154,7 +209,7 @@ public class MainActivity extends AppCompatActivity {
 //                Change le background pour celui éclairé
 //                LinearLayout background=findViewById(R.id.background);
 //                background.setBackgroundResource(R.drawable.background_win);
-
+                //TODO: Arreter AsyncTasks
 
                 resetBoutons();
 
@@ -177,59 +232,114 @@ public class MainActivity extends AppCompatActivity {
     }
 
 
+    ////////////////////////////////
+    //-- Animation des rouleaux --//
+    ////////////////////////////////
 
+    public void animationRouleau(int id,String prochain){
+        id=id-1; //rouleau 1 a l'id 0
+
+//
+//        affichageRouleaux[id][0].setBackgroundColor(Color.GREEN);
+//        affichageRouleaux[id][1].setBackgroundColor(Color.BLUE);
+//        affichageRouleaux[id][2].setBackgroundColor(Color.RED);
+//        affichageRouleaux[id][3].setBackgroundColor(Color.MAGENTA);
+//
+
+
+        //Place la prochaine image, anime le rouleau choisi d'une case vers le bas et remonte toutes les cases (pour boucler)
+
+
+
+        //Place la prochaine image
+        switch(prochain){
+            //On remplace l'image 0 du rouleau choisi (id) par l'image correspondante
+                    case "C": affichageRouleaux[id][0].setImageResource(R.drawable.cerise);break;
+                    case "Ci": affichageRouleaux[id][0].setImageResource(R.drawable.citron);break;
+                    case "Cl": affichageRouleaux[id][0].setImageResource(R.drawable.cloche);break;
+                    case "F": affichageRouleaux[id][0].setImageResource(R.drawable.fraise);break;
+                    case "O": affichageRouleaux[id][0].setImageResource(R.drawable.orange);break;
+                    case "P": affichageRouleaux[id][0].setImageResource(R.drawable.pasteque);break;
+                    case "R": affichageRouleaux[id][0].setImageResource(R.drawable.raisin);break;
+                    case "7": affichageRouleaux[id][0].setImageResource(R.drawable.sept);break;
+        }
+
+
+        //Anime le rouleau vers le bas
+        affichageRouleaux[id][0].animate()
+            .y(affichageRouleaux[id][0].getY()+200)
+            .setDuration(300)
+            .start();
+
+        affichageRouleaux[id][1].animate()
+                .y(affichageRouleaux[id][1].getY()+200)
+                .setDuration(300)
+                .start();
+
+        affichageRouleaux[id][2].animate()
+                .y(affichageRouleaux[id][2].getY()+200)
+                .setDuration(300)
+                .start();
+
+        affichageRouleaux[id][3].animate()
+                .y(affichageRouleaux[id][3].getY()+200)
+                .setDuration(300)
+                .start();
+
+
+        //Les symboles sont réassignés
+//        affichageRouleaux[id][0]=affichageRouleaux[id][3];
+//        affichageRouleaux[id][3]=affichageRouleaux[id][2];
+//        affichageRouleaux[id][2]=affichageRouleaux[id][1];
+//        affichageRouleaux[id][1]=affichageRouleaux[id][0];
+//
+
+
+//            switch(id){
+//                default:
+//                    affichageRouleaux[id][3].animate()
+//                            .setStartDelay(300)
+//                            .setDuration(0)
+//                            .y(defautY0)
+//                            .start();
+//                    break;
+//
+//            }
+////
+//
+//            affichageRouleaux[id][0]=affichageRouleaux[id][3];
+//            affichageRouleaux[id][1]=affichageRouleaux[id][0];
+//            affichageRouleaux[id][2]=affichageRouleaux[id][1];
+//            affichageRouleaux[id][3]=affichageRouleaux[id][2];
+        }
+
+
+
+
+    ///////////////////////////////////
+    // -- Gestion des async tasks -- //
+    ///////////////////////////////////
+
+    //On reçoit les informations grace à AsyncListener qui fait le lien avec les AsyncTasks
+    @Override
+    public void onProgressUpdate(int numRouleau,String prochain) {      //Récéption d'un numéro de rouleau lorsqu'il fait un tour et du prochain symbole à arriver
+
+        animationRouleau(numRouleau,prochain);
+
+    }
+
+
+    @Override
+    public void onComplete(int numRouleau){
+        //Replace le levier au top
+        levier=findViewById(R.id.levier);
+        levier.animate()
+                .y(0)
+                .setDuration(500)
+                .start();
+    }
 
 }
-
-
-
-//mise à jour des affichages (pas encore fonctionnel, ne pas supprimer)
-//            rouleau 1
-
-//            for(int i=0;i<3;i++){
-//                switch(rouleau1.getCaseAffichee(i)){
-//                    case "C": affichageRouleau1[i].setImageResource(R.drawable.cerise);break;
-//                    case "Ci": affichageRouleau1[i].setImageResource(R.drawable.citron);break;
-//                    case "Cl": affichageRouleau1[i].setImageResource(R.drawable.cloche);break;
-//                    case "F": affichageRouleau1[i].setImageResource(R.drawable.fraise);break;
-//                    case "O": affichageRouleau1[i].setImageResource(R.drawable.orange);break;
-//                    case "P": affichageRouleau1[i].setImageResource(R.drawable.pasteque);break;
-//                    case "R": affichageRouleau1[i].setImageResource(R.drawable.raisin);break;
-//                    case "7": affichageRouleau1[i].setImageResource(R.drawable.sept);break;
-//                }
-//            }
-//
-//            rouleau 2
-
-//            for(int i=0;i<3;i++){
-//                switch(rouleau2.getCaseAffichee(i)){
-//                    case "C": affichageRouleau2[i].setImageResource(R.drawable.cerise);break;
-//                    case "Ci": affichageRouleau2[i].setImageResource(R.drawable.citron);break;
-//                    case "Cl": affichageRouleau2[i].setImageResource(R.drawable.cloche);break;
-//                    case "F": affichageRouleau2[i].setImageResource(R.drawable.fraise);break;
-//                    case "O": affichageRouleau2[i].setImageResource(R.drawable.orange);break;
-//                    case "P": affichageRouleau2[i].setImageResource(R.drawable.pasteque);break;
-//                    case "R": affichageRouleau2[i].setImageResource(R.drawable.raisin);break;
-//                    case "7": affichageRouleau2[i].setImageResource(R.drawable.sept);break;
-//                }
-//            }
-//
-//            rouleau 3
-
-//            for(int i=0;i<3;i++){
-//                switch(rouleau3.getCaseAffichee(i)){
-//                    case "C": affichageRouleau3[i].setImageResource(R.drawable.cerise);break;
-//                    case "Ci": affichageRouleau3[i].setImageResource(R.drawable.citron);break;
-//                    case "Cl": affichageRouleau3[i].setImageResource(R.drawable.cloche);break;
-//                    case "F": affichageRouleau3[i].setImageResource(R.drawable.fraise);break;
-//                    case "O": affichageRouleau3[i].setImageResource(R.drawable.orange);break;
-//                    case "P": affichageRouleau3[i].setImageResource(R.drawable.pasteque);break;
-//                    case "R": affichageRouleau3[i].setImageResource(R.drawable.raisin);break;
-//                    case "7": affichageRouleau3[i].setImageResource(R.drawable.sept);break;
-//                }
-//            }
-// }
-
 
 
 

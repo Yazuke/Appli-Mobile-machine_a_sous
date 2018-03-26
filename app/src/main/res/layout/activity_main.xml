@@ -10,10 +10,10 @@
         android:id="@+id/background"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:background="@drawable/background_normal"
         android:orientation="vertical"
         tools:layout_editor_absoluteX="103dp"
-        tools:layout_editor_absoluteY="0dp"
-        android:background="@drawable/background_normal">
+        tools:layout_editor_absoluteY="0dp">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -21,12 +21,26 @@
             android:layout_weight="1"
             android:orientation="horizontal">
 
-            <ImageView
+            <ProgressBar
+                android:id="@+id/barreProgression"
+                style="@android:style/Widget.ProgressBar.Horizontal"
+                android:layout_width="100dp"
+                android:layout_height="wrap_content"
+                android:layout_margin="10sp"
+                android:visibility="gone" />
+            <!--ImageView
                 android:id="@+id/imageView"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                app:srcCompat="@android:drawable/ic_lock_idle_alarm" />
+                app:srcCompat="@android:drawable/ic_lock_idle_alarm" /-->
+
+            <TextView
+                android:id="@+id/txtAsync"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:text="Recu : "/>
 
             <TextView
                 android:layout_width="0dp"
@@ -93,53 +107,84 @@
 
             <RelativeLayout
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_height="fill_parent"
+                android:paddingTop="30dp"
+                android:paddingBottom="30dp"
                 android:paddingLeft="50dp"
-                android:paddingRight="50dp">
+                android:paddingRight="50dp"
+                >
+                <ImageView
+                    android:id="@+id/defaultRouleau1"
+                    android:layout_marginLeft="4dp"
+                    android:layout_width="25dp"
+                    android:layout_height="25dp"
+                    />
+
+
+                <ImageView
+                    android:id="@+id/r1_0"
+                    android:layout_marginLeft="4dp"
+
+                    android:layout_width="25dp"
+                    android:layout_height="25dp"
+                    android:src="@drawable/fraise" />
+
 
                 <ImageView
                     android:id="@+id/r1_1"
-                    android:layout_width="50dp"
-                    android:layout_height="50dp"
+                    android:layout_width="25dp"
+                    android:layout_height="25dp"
                     android:layout_alignParentLeft="true"
                     android:layout_alignParentStart="true"
                     android:layout_alignParentTop="true"
+                    android:layout_marginTop="40dp"
                     android:layout_marginLeft="4dp"
-                    android:src="@mipmap/cherry" />
+                    android:src="@drawable/cloche"
+                    />
 
                 <ImageView
                     android:id="@+id/r1_2"
-                    android:layout_width="50dp"
-                    android:layout_height="50dp"
-                    android:layout_below="@+id/r1_1"
-                    android:layout_marginTop="20dp"
+                    android:layout_width="25dp"
+                    android:layout_height="25dp"
+                    android:layout_centerVertical="true"
                     android:layout_marginLeft="4dp"
-                    android:src="@mipmap/cherry" />
+                    android:layout_marginTop="20dp"
+                    android:src="@drawable/orange" />
 
                 <ImageView
                     android:id="@+id/r1_3"
+                    android:layout_width="25dp"
+                    android:layout_height="25dp"
+                    android:layout_below="@+id/r1_2"
+                    android:layout_marginLeft="4dp"
+                    android:layout_marginTop="20dp"
+                    android:src="@drawable/cherry" />
+
+                <ImageView
+                    android:id="@+id/r2_0"
                     android:layout_width="50dp"
                     android:layout_height="50dp"
-                    android:layout_below="@+id/r1_2"
-                    android:layout_marginTop="20dp"
-                    android:layout_marginLeft="4dp"
-                    android:src="@mipmap/cherry" />
+                    android:layout_alignLeft="@+id/r2_1"
+                    android:layout_alignStart="@+id/r2_1"
+                    android:layout_alignTop="@+id/r3_0"
+                    android:src="@drawable/orange" />
 
                 <ImageView
                     android:id="@+id/r2_1"
                     android:layout_width="50dp"
                     android:layout_height="50dp"
                     android:layout_marginLeft="75dp"
-                    android:src="@mipmap/cherry" />
+                    android:src="@drawable/cherry" />
 
                 <ImageView
                     android:id="@+id/r2_2"
                     android:layout_width="50dp"
                     android:layout_height="50dp"
                     android:layout_below="@+id/r2_1"
+                    android:layout_centerVertical="true"
                     android:layout_marginLeft="75dp"
                     android:layout_marginTop="20dp"
-                    android:src="@mipmap/cherry" />
+                    android:src="@drawable/cloche" />
 
                 <ImageView
                     android:id="@+id/r2_3"
@@ -148,23 +193,32 @@
                     android:layout_below="@+id/r2_2"
                     android:layout_marginLeft="75dp"
                     android:layout_marginTop="20dp"
-                    android:src="@mipmap/cherry" />
+                    android:src="@drawable/pasteque" />
+
+                <ImageView
+                    android:id="@+id/r3_0"
+                    android:layout_marginLeft="145dp"
+                    android:layout_marginTop="-70dp"
+                    android:layout_width="50dp"
+                    android:layout_height="50dp"
+                    android:src="@drawable/citron" />
 
                 <ImageView
                     android:id="@+id/r3_1"
                     android:layout_width="50dp"
                     android:layout_height="50dp"
                     android:layout_marginLeft="145dp"
-                    android:src="@mipmap/cherry" />
+                    android:src="@drawable/fraise" />
 
                 <ImageView
                     android:id="@+id/r3_2"
                     android:layout_width="50dp"
                     android:layout_height="50dp"
                     android:layout_below="@+id/r3_1"
+                    android:layout_centerVertical="true"
                     android:layout_marginLeft="145dp"
                     android:layout_marginTop="20dp"
-                    android:src="@mipmap/cherry" />
+                    android:src="@drawable/cherry" />
 
                 <ImageView
                     android:id="@+id/r3_3"
@@ -173,7 +227,7 @@
                     android:layout_below="@+id/r3_2"
                     android:layout_marginLeft="145dp"
                     android:layout_marginTop="20dp"
-                    android:src="@mipmap/cherry" />
+                    android:src="@drawable/sept" />
 
             </RelativeLayout>
 
@@ -186,13 +240,14 @@
                     android:id="@+id/background_levier"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:src="@drawable/levier_background"/>
+                    android:src="@drawable/levier_background" />
+
                 <ImageView
                     android:id="@+id/levier"
                     android:layout_width="45dp"
                     android:layout_height="45dp"
                     android:layout_centerHorizontal="true"
-                    android:src="@drawable/levier"/>
+                    android:src="@drawable/levier" />
 
                 <ImageView
                     android:id="@+id/target"
@@ -209,11 +264,11 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            android:layout_weight="1"
-            android:orientation="horizontal"
             android:layout_centerHorizontal="true"
             android:layout_centerVertical="true"
-            android:gravity="center_vertical|center_horizontal|center">
+            android:layout_weight="1"
+            android:gravity="center_vertical|center_horizontal|center"
+            android:orientation="horizontal">
 
             <Button
                 android:id="@+id/button-stop1"

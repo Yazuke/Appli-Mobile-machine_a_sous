@@ -41,6 +41,9 @@ public class RouleauThread extends Thread
             if(count==5000000/id){              //division par 1,2 ou 3 pour des vitesses de défilement différentes
                 Log.i("MaS",id+"");
                 this.rouleau.roll();
+
+                //appel MainActivity.animationRouleaux();
+
                 count=0;
             }
             count++;

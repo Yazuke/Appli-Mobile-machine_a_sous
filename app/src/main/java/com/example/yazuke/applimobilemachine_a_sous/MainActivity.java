@@ -1,22 +1,12 @@
 package com.example.yazuke.applimobilemachine_a_sous;
 
-import android.content.Context;
-import android.graphics.Color;
 import android.os.AsyncTask;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
-import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
-import android.widget.Button;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
-import android.widget.ProgressBar;
-import android.widget.TextView;
-import android.widget.Toast;
-
-import org.w3c.dom.Text;
 
 public class MainActivity extends AppCompatActivity implements AsyncListener{
 
@@ -25,18 +15,9 @@ public class MainActivity extends AppCompatActivity implements AsyncListener{
 
     private ImageView[][] affichageRouleaux;
 
-    //private RouleauAsync[] rouleauxAsync;
-
-    private Button boutonAsynchrone;
-    private MaTacheInsynchrone maTacheAsynchrone1;
-    private MaTacheInsynchrone maTacheAsynchrone2;
-    private MaTacheInsynchrone maTacheAsynchrone3;
-
-    private float defautY0;
-    private float defautY1;
-    private float defautY2;
-    private float defautY3;
-
+    private RouleauAsync maTacheAsynchrone1;
+    private RouleauAsync maTacheAsynchrone2;
+    private RouleauAsync maTacheAsynchrone3;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -46,8 +27,6 @@ public class MainActivity extends AppCompatActivity implements AsyncListener{
         //////////////////////////////////////
         //////////////////////////////////////
 
-        //////////////////////////////////////
-        //////////////////////////////////////
 
 
 
@@ -57,33 +36,26 @@ public class MainActivity extends AppCompatActivity implements AsyncListener{
         /////////////////////////////
 
         //Récupération des images utilisées pour l'affichage
-        ImageView r1_0 = (ImageView) findViewById(R.id.r1_0);
-        ImageView r1_1 = (ImageView) findViewById(R.id.r1_1);
-        ImageView r1_2 = (ImageView) findViewById(R.id.r1_2);
-        ImageView r1_3 = (ImageView) findViewById(R.id.r1_3);
-        this.defautY0 = r1_0.getY();
-        this.defautY1 = r1_1.getY();
-        this.defautY2 = r1_2.getY();
-        this.defautY3 = r1_3.getY();
+        ImageView r1_0 = findViewById(R.id.r1_0);
+        ImageView r1_1 = findViewById(R.id.r1_1);
+        ImageView r1_2 = findViewById(R.id.r1_2);
+        ImageView r1_3 = findViewById(R.id.r1_3);
 
+        ImageView r2_0 = findViewById(R.id.r2_0);
+        ImageView r2_1 = findViewById(R.id.r2_1);
+        ImageView r2_2 = findViewById(R.id.r2_2);
+        ImageView r2_3 = findViewById(R.id.r2_3);
 
-        ImageView r2_0 = (ImageView) findViewById(R.id.r2_0);
-        ImageView r2_1 = (ImageView) findViewById(R.id.r2_1);
-        ImageView r2_2 = (ImageView) findViewById(R.id.r2_2);
-        ImageView r2_3 = (ImageView) findViewById(R.id.r2_3);
+        ImageView r3_0 = findViewById(R.id.r3_0);
+        ImageView r3_1 = findViewById(R.id.r3_1);
+        ImageView r3_2 = findViewById(R.id.r3_2);
+        ImageView r3_3 = findViewById(R.id.r3_3);
 
-        ImageView r3_0 = (ImageView) findViewById(R.id.r3_0);
-        ImageView r3_1 = (ImageView) findViewById(R.id.r3_1);
-        ImageView r3_2 = (ImageView) findViewById(R.id.r3_2);
-        ImageView r3_3 = (ImageView) findViewById(R.id.r3_3);
-
+        //Range tout dans un tableau affichageRouleaux[numRouleau][numCase]
         ImageView[] affichageRouleaux1 = new ImageView[]{r1_0, r1_1,r1_2,r1_3};
         ImageView[] affichageRouleaux2 = new ImageView[]{r2_0, r2_1,r2_2,r2_3};
         ImageView[] affichageRouleaux3 = new ImageView[]{r3_0, r3_1,r3_2,r3_3};
         this.affichageRouleaux=new ImageView[][]{affichageRouleaux1,affichageRouleaux2,affichageRouleaux3};
-
-
-        //Initialisation des images de base des rouleaux
 
 
 
@@ -96,8 +68,6 @@ public class MainActivity extends AppCompatActivity implements AsyncListener{
         //Création du jeu
         this.jeu=new Jeu();
 
-        //Lancement du jeu
-        //this.jeu.demarrer();
 
 
 
@@ -114,33 +84,30 @@ public class MainActivity extends AppCompatActivity implements AsyncListener{
                 switch (event.getAction()) {
                     //Lors d'un clic sur le bouton
                     case MotionEvent.ACTION_DOWN:
-                        dY = view.getY() - event.getRawY();              //Récupère sa position relative
+                        dY = view.getY() - event.getRawY();//Récupère sa position relative
                         break;
 
                     //Lors d'un mouvement du bouton
                     case MotionEvent.ACTION_MOVE:
                         //Ne peut pas avoir une position négative, ni trop forte.
-                        if(view.getY()>=0 && view.getY()<findViewById(R.id.target).getY()){    //Teste si le bouton ne dépasse pas les bords
+                        if(view.getY()>=0 && view.getY()<findViewById(R.id.target).getY()){//Teste si le bouton ne dépasse pas les bords
                             view.animate()
-                                    .y(event.getRawY() + dY)                                    //Déplace le bouton et le verrouille verticalement
+                                    .y(event.getRawY() + dY) //Déplace le bouton et le verrouille verticalement
                                     .setDuration(0)
                                     .start();
                         }
 
-                        if(view.getY()>=findViewById(R.id.target).getY()){   //Est rentré dans la zone de detection, on lance le jeu
-                            if(!jeu.estLance()){                            //Evite de lancer plusieurs fois le jeu
+                        if(view.getY()>=findViewById(R.id.target).getY()){//Est rentré dans la zone de detection, on lance le jeu
+                            if(!jeu.estLance()){                          //Evite de lancer plusieurs fois le jeu
 
                                 jeu.demarrer();
-                                Log.i("MaS","Lancement du jeu");
 
                                 resetBoutons();
 
-
-
                                 //Crée les async tasks, une par rouleau
-                                maTacheAsynchrone1 = new MaTacheInsynchrone(MainActivity.this,1);
-                                maTacheAsynchrone2 = new MaTacheInsynchrone(MainActivity.this,2);
-                                maTacheAsynchrone3 = new MaTacheInsynchrone(MainActivity.this,3);
+                                maTacheAsynchrone1 = new RouleauAsync(MainActivity.this,1);
+                                maTacheAsynchrone2 = new RouleauAsync(MainActivity.this,2);
+                                maTacheAsynchrone3 = new RouleauAsync(MainActivity.this,3);
 
 
                                 //Lance les trois async tasks simultanément, en threads
@@ -170,9 +137,11 @@ public class MainActivity extends AppCompatActivity implements AsyncListener{
                 return true;
             }
         }
-
         findViewById(R.id.levier).setOnTouchListener(new MyTouchListener());
     }
+
+
+
 
 
     /////////////////////////
@@ -185,20 +154,17 @@ public class MainActivity extends AppCompatActivity implements AsyncListener{
             switch(v.getId()){
                 case R.id.button_stop1:
                     Log.i("MaS","Arrêt rouleau 1");
-                    this.jeu.arreterRouleau(1);
                     maTacheAsynchrone1.cancel=true;
                     findViewById(R.id.button_stop1).setBackgroundResource(R.drawable.stopped);
                     break;
                 case R.id.button_stop2:
                     Log.i("MaS","Arrêt rouleau 2");
-                    this.jeu.arreterRouleau(2);
                     maTacheAsynchrone2.cancel=true;
                     findViewById(R.id.button_stop2).setBackgroundResource(R.drawable.stopped);
                     break;
                 case R.id.button_stop3:
                     Log.i("MaS","Arrêt rouleau 3");
                     maTacheAsynchrone3.cancel=true;
-                    this.jeu.arreterRouleau(3);
                     findViewById(R.id.button_stop3).setBackgroundResource(R.drawable.stopped);
                     break;
             }
@@ -206,11 +172,11 @@ public class MainActivity extends AppCompatActivity implements AsyncListener{
             //Change le background si victoire
             if(jeu.victoire){
 
-//                Change le background pour celui éclairé
-//                LinearLayout background=findViewById(R.id.background);
-//                background.setBackgroundResource(R.drawable.background_win);
-                //TODO: Arreter AsyncTasks
+                //Change le background pour celui éclairé
+                //LinearLayout background=findViewById(R.id.background);
+                //background.setBackgroundResource(R.drawable.background_win);
 
+                //Remet les boutons dans un été non cliqué
                 resetBoutons();
 
                 //Replace le levier au top
@@ -219,6 +185,7 @@ public class MainActivity extends AppCompatActivity implements AsyncListener{
                         .y(0)
                         .setDuration(500)
                         .start();
+
             }
         }
 
@@ -230,6 +197,9 @@ public class MainActivity extends AppCompatActivity implements AsyncListener{
         findViewById(R.id.button_stop3).setBackgroundResource(R.drawable.stopper);
 
     }
+
+
+
 
 
     ////////////////////////////////
@@ -312,6 +282,7 @@ public class MainActivity extends AppCompatActivity implements AsyncListener{
 //            affichageRouleaux[id][2]=affichageRouleaux[id][1];
 //            affichageRouleaux[id][3]=affichageRouleaux[id][2];
         }
+
 
 
 

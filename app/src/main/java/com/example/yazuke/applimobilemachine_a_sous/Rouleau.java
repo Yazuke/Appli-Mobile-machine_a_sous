@@ -1,16 +1,12 @@
 package com.example.yazuke.applimobilemachine_a_sous;
 
-import android.util.Log;
-
-/**
- * Created by Skiwa on 18-Feb-18.
- */
 
 public class Rouleau {
 
     private String[] sequence=new String[8];            //Séquence d'un rouleau
     private String[] sequenceAffichee=new String[3];    //3 symboles affichés à un moment t
     private int roll=0;
+
 
     /////////////////////////
     // -- Constructeurs -- //

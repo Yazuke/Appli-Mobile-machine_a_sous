@@ -155,23 +155,27 @@ public class MainActivity extends AppCompatActivity implements AsyncListener{
                 case R.id.button_stop1:
                     Log.i("MaS","Arrêt rouleau 1");
                     maTacheAsynchrone1.cancel=true;
+                    jeu.arreter(1);
                     findViewById(R.id.button_stop1).setBackgroundResource(R.drawable.stopped);
                     break;
                 case R.id.button_stop2:
                     Log.i("MaS","Arrêt rouleau 2");
                     maTacheAsynchrone2.cancel=true;
+                    jeu.arreter(2);
                     findViewById(R.id.button_stop2).setBackgroundResource(R.drawable.stopped);
                     break;
                 case R.id.button_stop3:
                     Log.i("MaS","Arrêt rouleau 3");
                     maTacheAsynchrone3.cancel=true;
+                    jeu.arreter(3);
                     findViewById(R.id.button_stop3).setBackgroundResource(R.drawable.stopped);
                     break;
             }
 
             //Change le background si victoire
             if(jeu.victoire){
-
+                Log.i("MaS","Jeu fini");
+                
                 //Change le background pour celui éclairé
                 //LinearLayout background=findViewById(R.id.background);
                 //background.setBackgroundResource(R.drawable.background_win);
@@ -302,12 +306,7 @@ public class MainActivity extends AppCompatActivity implements AsyncListener{
 
     @Override
     public void onComplete(int numRouleau){
-        //Replace le levier au top
-        levier=findViewById(R.id.levier);
-        levier.animate()
-                .y(0)
-                .setDuration(500)
-                .start();
+
     }
 
 }

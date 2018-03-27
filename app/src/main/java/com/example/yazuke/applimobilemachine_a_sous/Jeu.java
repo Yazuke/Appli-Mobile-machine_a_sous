@@ -5,13 +5,14 @@ import android.util.Log;
 
 public class Jeu {
 
-        public int nbIterations=0;
-        public boolean victoire=false;
-        private boolean estLance=false;
+    public int nbIterations=0;
+    public boolean victoire=false;
+    private boolean estLance=false;
 
-    public Jeu(){
-        //TODO, trucs à initialiser
-    }
+    private boolean[] rouleauxTournent={false,false,false};
+
+
+    public Jeu(){}
 
 
     ////////////////////////////
@@ -21,22 +22,33 @@ public class Jeu {
     //IMPORTANT/////////
 
     //Les threads sont remplacés par des AsyncTasks dans le MainActivity
-    //La classe jeu va juste servir à gérer les mises etc mais pas les rouleaux eux mêmes
+    //La classe jeu va juste servir à gérer les mises, les tests de victoire etc mais pas les rouleaux eux mêmes
 
     //////////////////
 
 
-
-
-    //Lance les threads
     public void demarrer(){
         nbIterations++;
+
+        rouleauxTournent[0]=true;
+        rouleauxTournent[1]=true;
+        rouleauxTournent[2]=true;
 
         Log.i("MaS","Lancement du jeu");
         estLance=true;
         victoire=false;
     }
 
+    public void arreter(int id){
+        id-=1;
+
+        rouleauxTournent[id]=false;
+
+        if((!rouleauxTournent[0])&&(!rouleauxTournent[1])&&(!rouleauxTournent[2])){
+            victoire=true;
+            Log.i("MaS","Tous les rouleaux sont arretés");
+        }
+    }
 
     //////////////////////
     // -- Accesseurs -- //

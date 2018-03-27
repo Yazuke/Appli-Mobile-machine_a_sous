@@ -7,7 +7,7 @@ public class Jeu {
 
     public int nbIterations=0;
     public boolean victoire=false;
-    private boolean estLance=false;
+    public boolean estLance=false;
 
     private boolean[] rouleauxTournent={false,false,false};
 

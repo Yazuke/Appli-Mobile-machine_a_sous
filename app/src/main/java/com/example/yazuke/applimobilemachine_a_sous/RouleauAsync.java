@@ -16,6 +16,7 @@ public class RouleauAsync
         this.listener = listener;
         this.id=id;
         this.rouleau=new Rouleau(id);
+        cancel=false;
     }
 
 

@@ -15,9 +15,9 @@ public class MainActivity extends AppCompatActivity implements AsyncListener{
 
     private ImageView[][] affichageRouleaux;
 
-    private RouleauAsync maTacheAsynchrone1;
-    private RouleauAsync maTacheAsynchrone2;
-    private RouleauAsync maTacheAsynchrone3;
+    private RouleauAsync rouleauAsync1;
+    private RouleauAsync rouleauAsync2;
+    private RouleauAsync rouleauAsync3;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -98,22 +98,22 @@ public class MainActivity extends AppCompatActivity implements AsyncListener{
                         }
 
                         if(view.getY()>=findViewById(R.id.target).getY()){//Est rentré dans la zone de detection, on lance le jeu
-                            if(!jeu.estLance()){                          //Evite de lancer plusieurs fois le jeu
+                            if(!jeu.estLance){                          //Evite de lancer plusieurs fois le jeu
 
                                 jeu.demarrer();
 
                                 resetBoutons();
 
                                 //Crée les async tasks, une par rouleau
-                                maTacheAsynchrone1 = new RouleauAsync(MainActivity.this,1);
-                                maTacheAsynchrone2 = new RouleauAsync(MainActivity.this,2);
-                                maTacheAsynchrone3 = new RouleauAsync(MainActivity.this,3);
+                                rouleauAsync1 = new RouleauAsync(MainActivity.this,1);
+                                rouleauAsync2 = new RouleauAsync(MainActivity.this,2);
+                                rouleauAsync3 = new RouleauAsync(MainActivity.this,3);
 
 
                                 //Lance les trois async tasks simultanément, en threads
-                                maTacheAsynchrone1.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
-                                maTacheAsynchrone2.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
-                                maTacheAsynchrone3.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
+                                rouleauAsync1.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
+                                rouleauAsync2.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
+                                rouleauAsync3.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
 
                             }
                         }
@@ -154,19 +154,19 @@ public class MainActivity extends AppCompatActivity implements AsyncListener{
             switch(v.getId()){
                 case R.id.button_stop1:
                     Log.i("MaS","Arrêt rouleau 1");
-                    maTacheAsynchrone1.cancel=true;
+                    rouleauAsync1.cancel=true;
                     jeu.arreter(1);
                     findViewById(R.id.button_stop1).setBackgroundResource(R.drawable.stopped);
                     break;
                 case R.id.button_stop2:
                     Log.i("MaS","Arrêt rouleau 2");
-                    maTacheAsynchrone2.cancel=true;
+                    rouleauAsync2.cancel=true;
                     jeu.arreter(2);
                     findViewById(R.id.button_stop2).setBackgroundResource(R.drawable.stopped);
                     break;
                 case R.id.button_stop3:
                     Log.i("MaS","Arrêt rouleau 3");
-                    maTacheAsynchrone3.cancel=true;
+                    rouleauAsync3.cancel=true;
                     jeu.arreter(3);
                     findViewById(R.id.button_stop3).setBackgroundResource(R.drawable.stopped);
                     break;
@@ -175,11 +175,12 @@ public class MainActivity extends AppCompatActivity implements AsyncListener{
             //Change le background si victoire
             if(jeu.victoire){
                 Log.i("MaS","Jeu fini");
-                
+
                 //Change le background pour celui éclairé
                 //LinearLayout background=findViewById(R.id.background);
                 //background.setBackgroundResource(R.drawable.background_win);
 
+                jeu.estLance=false;
                 //Remet les boutons dans un été non cliqué
                 resetBoutons();
 

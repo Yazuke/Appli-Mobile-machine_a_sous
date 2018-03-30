@@ -3,12 +3,14 @@ package com.example.yazuke.applimobilemachine_a_sous;
 import android.os.AsyncTask;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.widget.PopupMenu;
 import android.util.Log;
+import android.view.MenuItem;
 import android.view.MotionEvent;
 import android.view.View;
 import android.widget.ImageView;
 
-public class MainActivity extends AppCompatActivity implements AsyncListener{
+public class MainActivity extends AppCompatActivity implements AsyncListener, PopupMenu.OnMenuItemClickListener {
 
     private Jeu jeu;
     private ImageView levier;
@@ -310,6 +312,28 @@ public class MainActivity extends AppCompatActivity implements AsyncListener{
 
     }
 
+    public void showPopup(View v){
+        PopupMenu popup = new PopupMenu(this, v);
+        popup.setOnMenuItemClickListener(this);
+        popup.inflate(R.menu.popup_menu);
+        popup.show();
+    }
+
+    @Override
+    public boolean onMenuItemClick(MenuItem item) {
+        switch (item.getItemId()){
+            case R.id.item1:
+                return true;
+            case R.id.item2:
+                return true;
+            case R.id.item3:
+                return true;
+            case R.id.item4:
+                return true;
+            default:
+                return false;
+        }
+    }
 }
 
 

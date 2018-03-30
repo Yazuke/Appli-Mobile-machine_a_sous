@@ -12,8 +12,8 @@
         android:layout_height="match_parent"
         android:background="@drawable/background_normal"
         android:orientation="vertical"
-        tools:layout_editor_absoluteX="103dp"
-        tools:layout_editor_absoluteY="0dp">
+        tools:layout_editor_absoluteX="0dp"
+        tools:layout_editor_absoluteY="75dp">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -40,7 +40,7 @@
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
-                android:text="Recu : "/>
+                android:text="Recu : " />
 
             <TextView
                 android:layout_width="0dp"
@@ -88,6 +88,12 @@
                 android:layout_weight="1"
                 android:text="@string/total" />
 
+            <Button
+                android:layout_width="10px"
+                android:layout_height="150px"
+                android:layout_weight="1"
+                android:background="@drawable/menu"
+                android:onClick="showPopup" />
         </LinearLayout>
 
         <LinearLayout
@@ -108,25 +114,24 @@
             <RelativeLayout
                 android:layout_width="wrap_content"
                 android:layout_height="fill_parent"
-                android:paddingTop="30dp"
                 android:paddingBottom="30dp"
                 android:paddingLeft="50dp"
                 android:paddingRight="50dp"
-                >
+                android:paddingTop="30dp">
+
                 <ImageView
                     android:id="@+id/defaultRouleau1"
-                    android:layout_marginLeft="4dp"
                     android:layout_width="25dp"
                     android:layout_height="25dp"
-                    />
+                    android:layout_marginLeft="4dp" />
 
 
                 <ImageView
                     android:id="@+id/r1_0"
-                    android:layout_marginLeft="4dp"
-
                     android:layout_width="25dp"
+
                     android:layout_height="25dp"
+                    android:layout_marginLeft="4dp"
                     android:src="@drawable/fraise" />
 
 
@@ -137,10 +142,9 @@
                     android:layout_alignParentLeft="true"
                     android:layout_alignParentStart="true"
                     android:layout_alignParentTop="true"
-                    android:layout_marginTop="40dp"
                     android:layout_marginLeft="4dp"
-                    android:src="@drawable/cloche"
-                    />
+                    android:layout_marginTop="40dp"
+                    android:src="@drawable/cloche" />
 
                 <ImageView
                     android:id="@+id/r1_2"
@@ -197,10 +201,10 @@
 
                 <ImageView
                     android:id="@+id/r3_0"
-                    android:layout_marginLeft="145dp"
-                    android:layout_marginTop="-70dp"
                     android:layout_width="50dp"
                     android:layout_height="50dp"
+                    android:layout_marginLeft="145dp"
+                    android:layout_marginTop="-70dp"
                     android:src="@drawable/citron" />
 
                 <ImageView

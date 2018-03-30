@@ -3,7 +3,6 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/Appli-Mobile-machine_a_sous.iml" filepath="$PROJECT_DIR$/Appli-Mobile-machine_a_sous.iml" />
-      <module fileurl="file://D:\Appli-Mobile-machine_a_sous\AppliMobilemachine_a_sous.iml" filepath="D:\Appli-Mobile-machine_a_sous\AppliMobilemachine_a_sous.iml" />
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
     </modules>
   </component>

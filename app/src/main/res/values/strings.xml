@@ -1,5 +1,6 @@
 <resources>
     <string name="app_name">777</string>
+    <string name="combo">COMBOS</string>
     <string name="multiplicateur">x1</string>
     <string name="button1x">x1</string>
     <string name="button2x">x2</string>

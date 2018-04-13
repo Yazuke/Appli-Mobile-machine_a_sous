@@ -1,5 +1,6 @@
 package com.example.yazuke.applimobilemachine_a_sous;
 
+import android.content.Intent;
 import android.os.AsyncTask;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -317,6 +318,11 @@ public class MainActivity extends AppCompatActivity implements AsyncListener, Po
         popup.setOnMenuItemClickListener(this);
         popup.inflate(R.menu.popup_menu);
         popup.show();
+    }
+
+    public void combo(View view){
+        Intent i = new Intent(this, ComboActivity.class);
+        startActivity(i);
     }
 
     @Override

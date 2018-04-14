@@ -1,5 +1,8 @@
 package com.example.yazuke.applimobilemachine_a_sous;
 
+import android.content.Intent;
+import android.graphics.Color;
+import android.media.Image;
 import android.os.AsyncTask;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -8,6 +11,7 @@ import android.util.Log;
 import android.view.MenuItem;
 import android.view.MotionEvent;
 import android.view.View;
+import android.widget.FrameLayout;
 import android.widget.ImageView;
 
 public class MainActivity extends AppCompatActivity implements AsyncListener, PopupMenu.OnMenuItemClickListener {
@@ -16,10 +20,19 @@ public class MainActivity extends AppCompatActivity implements AsyncListener, Po
     private ImageView levier;
 
     private ImageView[][] affichageRouleaux;
+    private FrameLayout[][] layoutRouleaux;
 
     private RouleauAsync rouleauAsync1;
     private RouleauAsync rouleauAsync2;
     private RouleauAsync rouleauAsync3;
+
+    private float distance;
+
+    private ImageView baseTop;
+
+    private int[] countPos=new int[3];
+
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -28,7 +41,6 @@ public class MainActivity extends AppCompatActivity implements AsyncListener, Po
 
         //////////////////////////////////////
         //////////////////////////////////////
-
 
 
 
@@ -58,6 +70,35 @@ public class MainActivity extends AppCompatActivity implements AsyncListener, Po
         ImageView[] affichageRouleaux2 = new ImageView[]{r2_0, r2_1,r2_2,r2_3};
         ImageView[] affichageRouleaux3 = new ImageView[]{r3_0, r3_1,r3_2,r3_3};
         this.affichageRouleaux=new ImageView[][]{affichageRouleaux1,affichageRouleaux2,affichageRouleaux3};
+
+
+        //Récupération des layouts
+        FrameLayout f1_0 = findViewById(R.id.f1_0);
+        FrameLayout f1_1 = findViewById(R.id.f1_1);
+        FrameLayout f1_2 = findViewById(R.id.f1_2);
+        FrameLayout f1_3 = findViewById(R.id.f1_3);
+
+        FrameLayout f2_0 = findViewById(R.id.f2_0);
+        FrameLayout f2_1 = findViewById(R.id.f2_1);
+        FrameLayout f2_2 = findViewById(R.id.f2_2);
+        FrameLayout f2_3 = findViewById(R.id.f2_3);
+
+        FrameLayout f3_0 = findViewById(R.id.f3_0);
+        FrameLayout f3_1 = findViewById(R.id.f3_1);
+        FrameLayout f3_2 = findViewById(R.id.f3_2);
+        FrameLayout f3_3 = findViewById(R.id.f3_3);
+
+        //Range tout dans un tableau affichageRouleaux[numRouleau][numCase]
+        FrameLayout[] layoutRouleau1 = new FrameLayout[]{f1_0, f1_1,f1_2,f1_3};
+        FrameLayout[] layoutRouleau2 = new FrameLayout[]{f2_0, f2_1,f2_2,f2_3};
+        FrameLayout[] layoutRouleau3 = new FrameLayout[]{f3_0, f3_1,f3_2,f3_3};
+        this.layoutRouleaux=new FrameLayout[][]{layoutRouleau1,layoutRouleau2,layoutRouleau3};
+
+
+        this.baseTop=findViewById(R.id.baseTop);
+
+
+        this.distance = getResources().getDimensionPixelSize(R.dimen.distance);
 
 
 
@@ -212,85 +253,263 @@ public class MainActivity extends AppCompatActivity implements AsyncListener, Po
     ////////////////////////////////
     //-- Animation des rouleaux --//
     ////////////////////////////////
-
-    public void animationRouleau(int id,String prochain){
-        id=id-1; //rouleau 1 a l'id 0
-
 //
-//        affichageRouleaux[id][0].setBackgroundColor(Color.GREEN);
-//        affichageRouleaux[id][1].setBackgroundColor(Color.BLUE);
-//        affichageRouleaux[id][2].setBackgroundColor(Color.RED);
-//        affichageRouleaux[id][3].setBackgroundColor(Color.MAGENTA);
+//    public void animationnRouleau(int id,String prochain){
+//        id-=1; //le rouleau 1 a l'id 0
 //
-
-
-        //Place la prochaine image, anime le rouleau choisi d'une case vers le bas et remonte toutes les cases (pour boucler)
-
-
-
-        //Place la prochaine image
-        switch(prochain){
-            //On remplace l'image 0 du rouleau choisi (id) par l'image correspondante
-                    case "C": affichageRouleaux[id][0].setImageResource(R.drawable.cerise);break;
-                    case "Ci": affichageRouleaux[id][0].setImageResource(R.drawable.citron);break;
-                    case "Cl": affichageRouleaux[id][0].setImageResource(R.drawable.cloche);break;
-                    case "F": affichageRouleaux[id][0].setImageResource(R.drawable.fraise);break;
-                    case "O": affichageRouleaux[id][0].setImageResource(R.drawable.orange);break;
-                    case "P": affichageRouleaux[id][0].setImageResource(R.drawable.pasteque);break;
-                    case "R": affichageRouleaux[id][0].setImageResource(R.drawable.raisin);break;
-                    case "7": affichageRouleaux[id][0].setImageResource(R.drawable.sept);break;
-        }
-
-
-        //Anime le rouleau vers le bas
-        affichageRouleaux[id][0].animate()
-            .y(affichageRouleaux[id][0].getY()+200)
-            .setDuration(300)
-            .start();
-
-        affichageRouleaux[id][1].animate()
-                .y(affichageRouleaux[id][1].getY()+200)
-                .setDuration(300)
-                .start();
-
-        affichageRouleaux[id][2].animate()
-                .y(affichageRouleaux[id][2].getY()+200)
-                .setDuration(300)
-                .start();
-
-        affichageRouleaux[id][3].animate()
-                .y(affichageRouleaux[id][3].getY()+200)
-                .setDuration(300)
-                .start();
-
-
-        //Les symboles sont réassignés
-//        affichageRouleaux[id][0]=affichageRouleaux[id][3];
-//        affichageRouleaux[id][3]=affichageRouleaux[id][2];
-//        affichageRouleaux[id][2]=affichageRouleaux[id][1];
-//        affichageRouleaux[id][1]=affichageRouleaux[id][0];
 //
-
-
-//            switch(id){
-//                default:
-//                    affichageRouleaux[id][3].animate()
-//                            .setStartDelay(300)
-//                            .setDuration(0)
-//                            .y(defautY0)
-//                            .start();
-//                    break;
+////
+////        affichageRouleaux[id][0].setBackgroundColor(Color.RED);
+////        affichageRouleaux[id][1].setBackgroundColor(Color.GREEN);
+////        affichageRouleaux[id][2].setBackgroundColor(Color.BLUE);
+////        affichageRouleaux[id][3].setBackgroundColor(Color.BLACK);
 //
-//            }
+//        //Place la prochaine image, anime le rouleau choisi d'une case vers le bas et remonte toutes les cases (pour boucler)
+//
+//
+//        //Place la prochaine image
+//        switch(prochain){
+//            //On remplace l'image 0 du rouleau choisi (id) par l'image correspondante
+//                    case "C": affichageRouleaux[id][0].setImageResource(R.drawable.cerise);break;
+//                    case "Ci": affichageRouleaux[id][0].setImageResource(R.drawable.citron);break;
+//                    case "Cl": affichageRouleaux[id][0].setImageResource(R.drawable.cloche);break;
+//                    case "F": affichageRouleaux[id][0].setImageResource(R.drawable.fraise);break;
+//                    case "O": affichageRouleaux[id][0].setImageResource(R.drawable.orange);break;
+//                    case "P": affichageRouleaux[id][0].setImageResource(R.drawable.pasteque);break;
+//                    case "R": affichageRouleaux[id][0].setImageResource(R.drawable.raisin);break;
+//                    case "7": affichageRouleaux[id][0].setImageResource(R.drawable.sept);break;
+//        }
+//
+////        affichageRouleaux[id][0].setImageResource(R.drawable.stopper);
+//
+//
+////        affichageRouleaux[id][0].animate()
+////                .setStartDelay(0)
+////                .setDuration(0)
+////                .y(baseTop.getY()-distance)
+////                .start();
+////
+////        affichageRouleaux[id][1].animate()
+////                .setStartDelay(0)
+////                .setDuration(0)
+////                .y(baseTop.getY())
+////                .start();
+////
+////        affichageRouleaux[id][2].animate()
+////                .setStartDelay(0)
+////                .setDuration(0)
+////                .y(baseTop.getY()+distance)
+////                .start();
+//////
+////
+////        affichageRouleaux[id][3].animate()
+////                .setStartDelay(0)
+////                .setDuration(0)
+////                .y(baseTop.getY()+distance*2)
+////                .start();
+//
+//
+//
+//        //Anime le rouleau vers le bas
+//        affichageRouleaux[id][0].animate()
+//            .y(affichageRouleaux[id][0].getY()+distance)
+//            .setDuration(300)
+//            .start();
+//
+//        affichageRouleaux[id][1].animate()
+//            .y(affichageRouleaux[id][1].getY()+distance)
+//            .setDuration(300)
+//            .start();
+//
+//        affichageRouleaux[id][2].animate()
+//            .y(affichageRouleaux[id][2].getY()+distance)
+//            .setDuration(300)
+//            .start();
+////
+////        affichageRouleaux[id][3].animate()
+////            .y(affichageRouleaux[id][3].getY()+distance)
+////            .setDuration(300)
+////            .start();
+//
+//
+//
+//        affichageRouleaux[id][3].animate()
+////                .setStartDelay(300)
+//                .setDuration(0)
+//                .y(baseTop.getY())
+//                .start();
+//
+//
+//        //Les symboles sont réassignés
+////        affichageRouleaux[id][0]=affichageRouleaux[id][3];
+////        affichageRouleaux[id][3]=affichageRouleaux[id][2];
+////        affichageRouleaux[id][2]=affichageRouleaux[id][1];
+////        affichageRouleaux[id][1]=affichageRouleaux[id][0];
 ////
 //
-//            affichageRouleaux[id][0]=affichageRouleaux[id][3];
-//            affichageRouleaux[id][1]=affichageRouleaux[id][0];
-//            affichageRouleaux[id][2]=affichageRouleaux[id][1];
-//            affichageRouleaux[id][3]=affichageRouleaux[id][2];
+//
+//        if(id==0){
+//
+////
+////            affichageRouleaux[id][0]= (ImageView)findViewById(R.id.r1_3);
+////            affichageRouleaux[id][1]= (ImageView)findViewById(R.id.r1_0);
+////            affichageRouleaux[id][2]= (ImageView)findViewById(R.id.r1_1);
+////            affichageRouleaux[id][3]= (ImageView)findViewById(R.id.r1_2);
+//
+//            affichageRouleaux[id][1].setImageResource(R.drawable.stopper);
+//        }
+//
+//
+//
+//
+////
+////        switch(id){
+////            case 0:
+////                break;
+////            case 1:
+////                affichageRouleaux[id][0]=findViewById(R.id.r2_3);
+////                affichageRouleaux[id][1]=findViewById(R.id.r2_0);
+////                affichageRouleaux[id][2]=findViewById(R.id.r2_1);
+////                affichageRouleaux[id][3]=findViewById(R.id.r2_2);
+////                break;
+////            case 2:
+////                affichageRouleaux[id][0]=findViewById(R.id.r3_3);
+////                affichageRouleaux[id][1]=findViewById(R.id.r3_0);
+////                affichageRouleaux[id][2]=findViewById(R.id.r3_1);
+////                affichageRouleaux[id][3]=findViewById(R.id.r3_2);
+////                break;
+////        }
+//////
+////        affichageRouleaux[id][0].setBackgroundColor(Color.RED);
+////        affichageRouleaux[id][1].setBackgroundColor(Color.GREEN);
+////        affichageRouleaux[id][2].setBackgroundColor(Color.BLUE);
+////        affichageRouleaux[id][3].setBackgroundColor(Color.BLACK);
+//        }
+//
+
+    public void animationRouleau(int id,String prochain){
+        id--;
+
+        switch(countPos[id]%4) {
+            case 0:
+                layoutRouleaux[id][0].animate()
+                        .y(layoutRouleaux[id][0].getY() + distance)
+                        .setDuration(300)
+                        .start();
+                layoutRouleaux[id][1].animate()
+                        .y(layoutRouleaux[id][1].getY() + distance)
+                        .setDuration(300)
+                        .start();
+
+                layoutRouleaux[id][2].animate()
+                        .y(layoutRouleaux[id][2].getY() + distance)
+                        .setDuration(300)
+                        .start();
+                layoutRouleaux[id][3].animate()
+                        .y(layoutRouleaux[id][3].getY() + distance)
+                        .setDuration(300)
+                        .start();
+
+                layoutRouleaux[id][3].animate()
+                        .y(layoutRouleaux[id][0].getY())
+                        .setStartDelay(0)
+                        .setDuration(0)
+                        .start();
+                break;
+            case 1:
+                layoutRouleaux[id][3].animate()
+                        .y(layoutRouleaux[id][3].getY() + distance)
+                        .setDuration(300)
+                        .start();
+                layoutRouleaux[id][0].animate()
+                        .y(layoutRouleaux[id][0].getY() + distance)
+                        .setDuration(300)
+                        .start();
+
+                layoutRouleaux[id][1].animate()
+                        .y(layoutRouleaux[id][1].getY() + distance)
+                        .setDuration(300)
+                        .start();
+
+                layoutRouleaux[id][2].animate()
+                        .y(layoutRouleaux[id][2].getY() + distance)
+                        .setDuration(300)
+                        .start();
+
+
+                //renvoie vers le haut
+                layoutRouleaux[id][2].animate()
+                        .y(layoutRouleaux[id][3].getY())
+                        .setStartDelay(0)
+                        .setDuration(0)
+                        .start();
+                break;
+            case 2:
+                layoutRouleaux[id][2].animate()
+                        .y(layoutRouleaux[id][2].getY() + distance)
+                        .setDuration(300)
+                        .start();
+                layoutRouleaux[id][3].animate()
+                        .y(layoutRouleaux[id][3].getY() + distance)
+                        .setDuration(300)
+                        .start();
+
+                layoutRouleaux[id][0].animate()
+                        .y(layoutRouleaux[id][0].getY() + distance)
+                        .setDuration(300)
+                        .start();
+
+                layoutRouleaux[id][1].animate()
+                        .y(layoutRouleaux[id][1].getY() + distance)
+                        .setDuration(300)
+                        .start();
+
+                //renvoie vers le haut
+                layoutRouleaux[id][1].animate()
+                        .y(layoutRouleaux[id][2].getY())
+                        .setStartDelay(0)
+                        .setDuration(0)
+                        .start();
+                break;
+            case 3:
+                layoutRouleaux[id][1].animate()
+                        .y(layoutRouleaux[id][1].getY() + distance)
+                        .setDuration(300)
+                        .start();
+                layoutRouleaux[id][2].animate()
+                        .y(layoutRouleaux[id][2].getY() + distance)
+                        .setDuration(300)
+                        .start();
+
+                layoutRouleaux[id][3].animate()
+                        .y(layoutRouleaux[id][3].getY() + distance)
+                        .setDuration(300)
+                        .start();
+
+                layoutRouleaux[id][0].animate()
+                        .y(layoutRouleaux[id][0].getY() + distance)
+                        .setDuration(300)
+                        .start();
+
+                //renvoie vers le haut
+                layoutRouleaux[id][0].animate()
+                        .y(layoutRouleaux[id][1].getY())
+                        .setStartDelay(0)
+                        .setDuration(0)
+                        .start();
+                break;
+
         }
+            countPos[id]++;
+    }
 
 
+
+
+    public void combo(View view){
+        Intent i = new Intent(this, ComboActivity.class);
+        startActivity(i);
+    }
 
 
 

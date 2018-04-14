@@ -15,6 +15,7 @@ import android.view.animation.Interpolator;
 import android.view.animation.LinearInterpolator;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
+import android.widget.Toast;
 
 public class MainActivity extends AppCompatActivity implements AsyncListener, PopupMenu.OnMenuItemClickListener {
 
@@ -445,16 +446,24 @@ public class MainActivity extends AppCompatActivity implements AsyncListener, Po
     public boolean onMenuItemClick(MenuItem item) {
         switch (item.getItemId()){
             case R.id.item1:
+                Toast.makeText(this, "TEST", Toast.LENGTH_SHORT).show();
                 return true;
             case R.id.item2:
                 return true;
             case R.id.item3:
                 return true;
             case R.id.item4:
+                Intent homeIntent = new Intent(Intent.ACTION_MAIN);
+                homeIntent.addCategory( Intent.CATEGORY_HOME );
+                homeIntent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                startActivity(homeIntent);
                 return true;
             default:
                 return false;
         }
+    }
+    public void quitApp(){
+        finish();
     }
 }
 

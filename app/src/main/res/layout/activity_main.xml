@@ -127,8 +127,9 @@
                 android:paddingTop="30dp">
 
 
-                <ImageView
+                <FrameLayout
                     android:id="@+id/baseTop"
+                    android:layout_marginTop="-70dp"
                     android:layout_width="50dp"
                     android:layout_height="50dp" />
 
@@ -136,7 +137,8 @@
                     android:id="@+id/f1_0"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="-70dp">
+                    android:layout_marginTop="0dp"
+                    android:layout_marginLeft="4dp">
                     <ImageView
                         android:id="@+id/r1_0"
                         android:layout_width="50dp"
@@ -197,7 +199,7 @@
                     android:id="@+id/f2_0"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="-70dp"
+                    android:layout_marginTop="00dp"
                     android:layout_marginLeft="75dp">
                     <ImageView
                         android:id="@+id/r2_0"
@@ -264,7 +266,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_alignLeft="@id/f2_0"
-                    android:layout_marginTop="-70dp"
+                    android:layout_marginTop="0dp"
                     android:layout_marginLeft="75dp">
                     <ImageView
                         android:id="@+id/r3_0"
@@ -300,7 +302,7 @@
                         android:id="@+id/r3_2"
                         android:layout_width="50dp"
                         android:layout_height="50dp"
-                        android:src="@drawable/citron"/>
+                        android:src="@drawable/cherry"/>
                 </FrameLayout>
 
 

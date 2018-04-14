@@ -11,6 +11,8 @@ import android.util.Log;
 import android.view.MenuItem;
 import android.view.MotionEvent;
 import android.view.View;
+import android.view.animation.Interpolator;
+import android.view.animation.LinearInterpolator;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
 
@@ -28,10 +30,10 @@ public class MainActivity extends AppCompatActivity implements AsyncListener, Po
 
     private float distance;
 
-    private ImageView baseTop;
+    private FrameLayout baseTop;
 
     private int[] countPos=new int[3];
-
+    private long tempsRotation=200;
 
 
     @Override
@@ -253,249 +255,150 @@ public class MainActivity extends AppCompatActivity implements AsyncListener, Po
     ////////////////////////////////
     //-- Animation des rouleaux --//
     ////////////////////////////////
-//
-//    public void animationnRouleau(int id,String prochain){
-//        id-=1; //le rouleau 1 a l'id 0
-//
-//
-////
-////        affichageRouleaux[id][0].setBackgroundColor(Color.RED);
-////        affichageRouleaux[id][1].setBackgroundColor(Color.GREEN);
-////        affichageRouleaux[id][2].setBackgroundColor(Color.BLUE);
-////        affichageRouleaux[id][3].setBackgroundColor(Color.BLACK);
-//
-//        //Place la prochaine image, anime le rouleau choisi d'une case vers le bas et remonte toutes les cases (pour boucler)
-//
-//
-//        //Place la prochaine image
-//        switch(prochain){
-//            //On remplace l'image 0 du rouleau choisi (id) par l'image correspondante
-//                    case "C": affichageRouleaux[id][0].setImageResource(R.drawable.cerise);break;
-//                    case "Ci": affichageRouleaux[id][0].setImageResource(R.drawable.citron);break;
-//                    case "Cl": affichageRouleaux[id][0].setImageResource(R.drawable.cloche);break;
-//                    case "F": affichageRouleaux[id][0].setImageResource(R.drawable.fraise);break;
-//                    case "O": affichageRouleaux[id][0].setImageResource(R.drawable.orange);break;
-//                    case "P": affichageRouleaux[id][0].setImageResource(R.drawable.pasteque);break;
-//                    case "R": affichageRouleaux[id][0].setImageResource(R.drawable.raisin);break;
-//                    case "7": affichageRouleaux[id][0].setImageResource(R.drawable.sept);break;
-//        }
-//
-////        affichageRouleaux[id][0].setImageResource(R.drawable.stopper);
-//
-//
-////        affichageRouleaux[id][0].animate()
-////                .setStartDelay(0)
-////                .setDuration(0)
-////                .y(baseTop.getY()-distance)
-////                .start();
-////
-////        affichageRouleaux[id][1].animate()
-////                .setStartDelay(0)
-////                .setDuration(0)
-////                .y(baseTop.getY())
-////                .start();
-////
-////        affichageRouleaux[id][2].animate()
-////                .setStartDelay(0)
-////                .setDuration(0)
-////                .y(baseTop.getY()+distance)
-////                .start();
-//////
-////
-////        affichageRouleaux[id][3].animate()
-////                .setStartDelay(0)
-////                .setDuration(0)
-////                .y(baseTop.getY()+distance*2)
-////                .start();
-//
-//
-//
-//        //Anime le rouleau vers le bas
-//        affichageRouleaux[id][0].animate()
-//            .y(affichageRouleaux[id][0].getY()+distance)
-//            .setDuration(300)
-//            .start();
-//
-//        affichageRouleaux[id][1].animate()
-//            .y(affichageRouleaux[id][1].getY()+distance)
-//            .setDuration(300)
-//            .start();
-//
-//        affichageRouleaux[id][2].animate()
-//            .y(affichageRouleaux[id][2].getY()+distance)
-//            .setDuration(300)
-//            .start();
-////
-////        affichageRouleaux[id][3].animate()
-////            .y(affichageRouleaux[id][3].getY()+distance)
-////            .setDuration(300)
-////            .start();
-//
-//
-//
-//        affichageRouleaux[id][3].animate()
-////                .setStartDelay(300)
-//                .setDuration(0)
-//                .y(baseTop.getY())
-//                .start();
-//
-//
-//        //Les symboles sont réassignés
-////        affichageRouleaux[id][0]=affichageRouleaux[id][3];
-////        affichageRouleaux[id][3]=affichageRouleaux[id][2];
-////        affichageRouleaux[id][2]=affichageRouleaux[id][1];
-////        affichageRouleaux[id][1]=affichageRouleaux[id][0];
-////
-//
-//
-//        if(id==0){
-//
-////
-////            affichageRouleaux[id][0]= (ImageView)findViewById(R.id.r1_3);
-////            affichageRouleaux[id][1]= (ImageView)findViewById(R.id.r1_0);
-////            affichageRouleaux[id][2]= (ImageView)findViewById(R.id.r1_1);
-////            affichageRouleaux[id][3]= (ImageView)findViewById(R.id.r1_2);
-//
-//            affichageRouleaux[id][1].setImageResource(R.drawable.stopper);
-//        }
-//
-//
-//
-//
-////
-////        switch(id){
-////            case 0:
-////                break;
-////            case 1:
-////                affichageRouleaux[id][0]=findViewById(R.id.r2_3);
-////                affichageRouleaux[id][1]=findViewById(R.id.r2_0);
-////                affichageRouleaux[id][2]=findViewById(R.id.r2_1);
-////                affichageRouleaux[id][3]=findViewById(R.id.r2_2);
-////                break;
-////            case 2:
-////                affichageRouleaux[id][0]=findViewById(R.id.r3_3);
-////                affichageRouleaux[id][1]=findViewById(R.id.r3_0);
-////                affichageRouleaux[id][2]=findViewById(R.id.r3_1);
-////                affichageRouleaux[id][3]=findViewById(R.id.r3_2);
-////                break;
-////        }
-//////
-////        affichageRouleaux[id][0].setBackgroundColor(Color.RED);
-////        affichageRouleaux[id][1].setBackgroundColor(Color.GREEN);
-////        affichageRouleaux[id][2].setBackgroundColor(Color.BLUE);
-////        affichageRouleaux[id][3].setBackgroundColor(Color.BLACK);
-//        }
-//
+
 
     public void animationRouleau(int id,String prochain){
         id--;
+        tempsRotation=RouleauAsync.temps;
+        tempsRotation/=(id+1);
+
+        Interpolator interpolator=new LinearInterpolator();
 
         switch(countPos[id]%4) {
             case 0:
+
+                //renvoie top
+                layoutRouleaux[id][3].animate()
+                        .y(baseTop.getY())
+                        .setStartDelay(0)
+                        .setDuration(0)
+                        .start();
+
+
                 layoutRouleaux[id][0].animate()
                         .y(layoutRouleaux[id][0].getY() + distance)
-                        .setDuration(300)
+                        .setInterpolator(interpolator)
+                        .setDuration(tempsRotation)
                         .start();
                 layoutRouleaux[id][1].animate()
                         .y(layoutRouleaux[id][1].getY() + distance)
-                        .setDuration(300)
+                        .setInterpolator(interpolator)
+                        .setDuration(tempsRotation)
                         .start();
 
                 layoutRouleaux[id][2].animate()
                         .y(layoutRouleaux[id][2].getY() + distance)
-                        .setDuration(300)
+                        .setInterpolator(interpolator)
+                        .setDuration(tempsRotation)
                         .start();
                 layoutRouleaux[id][3].animate()
                         .y(layoutRouleaux[id][3].getY() + distance)
-                        .setDuration(300)
+                        .setInterpolator(interpolator)
+                        .setDuration(tempsRotation)
                         .start();
 
-                layoutRouleaux[id][3].animate()
-                        .y(layoutRouleaux[id][0].getY())
-                        .setStartDelay(0)
-                        .setDuration(0)
-                        .start();
+
                 break;
             case 1:
+
+                //renvoie top
+                layoutRouleaux[id][2].animate()
+                        .y(baseTop.getY())
+                        .setStartDelay(0)
+                        .setDuration(0)
+                        .start();
+
+
                 layoutRouleaux[id][3].animate()
                         .y(layoutRouleaux[id][3].getY() + distance)
-                        .setDuration(300)
+                        .setInterpolator(interpolator)
+                        .setDuration(tempsRotation)
                         .start();
                 layoutRouleaux[id][0].animate()
                         .y(layoutRouleaux[id][0].getY() + distance)
-                        .setDuration(300)
+                        .setInterpolator(interpolator)
+                        .setDuration(tempsRotation)
                         .start();
 
                 layoutRouleaux[id][1].animate()
                         .y(layoutRouleaux[id][1].getY() + distance)
-                        .setDuration(300)
+                        .setInterpolator(interpolator)
+                        .setDuration(tempsRotation)
                         .start();
 
                 layoutRouleaux[id][2].animate()
                         .y(layoutRouleaux[id][2].getY() + distance)
-                        .setDuration(300)
+                        .setInterpolator(interpolator)
+                        .setDuration(tempsRotation)
                         .start();
 
-
-                //renvoie vers le haut
-                layoutRouleaux[id][2].animate()
-                        .y(layoutRouleaux[id][3].getY())
-                        .setStartDelay(0)
-                        .setDuration(0)
-                        .start();
                 break;
             case 2:
+
+                //renvoie top
+                layoutRouleaux[id][1].animate()
+                        .y(baseTop.getY())
+                        .setStartDelay(0)
+                        .setDuration(0)
+                        .start();
+
+
                 layoutRouleaux[id][2].animate()
                         .y(layoutRouleaux[id][2].getY() + distance)
-                        .setDuration(300)
+                        .setInterpolator(interpolator)
+                        .setDuration(tempsRotation)
                         .start();
                 layoutRouleaux[id][3].animate()
                         .y(layoutRouleaux[id][3].getY() + distance)
-                        .setDuration(300)
+                        .setInterpolator(interpolator)
+                        .setDuration(tempsRotation)
                         .start();
 
                 layoutRouleaux[id][0].animate()
                         .y(layoutRouleaux[id][0].getY() + distance)
-                        .setDuration(300)
+                        .setInterpolator(interpolator)
+                        .setDuration(tempsRotation)
                         .start();
 
                 layoutRouleaux[id][1].animate()
                         .y(layoutRouleaux[id][1].getY() + distance)
-                        .setDuration(300)
+                        .setInterpolator(interpolator)
+                        .setDuration(tempsRotation)
                         .start();
 
-                //renvoie vers le haut
-                layoutRouleaux[id][1].animate()
-                        .y(layoutRouleaux[id][2].getY())
-                        .setStartDelay(0)
-                        .setDuration(0)
-                        .start();
                 break;
             case 3:
+
+
+
+                //renvoie top
+                layoutRouleaux[id][0].animate()
+                        .y(baseTop.getY())
+                        .setStartDelay(0)
+                        .setDuration(0)
+                        .start();
+
                 layoutRouleaux[id][1].animate()
                         .y(layoutRouleaux[id][1].getY() + distance)
-                        .setDuration(300)
+                        .setInterpolator(interpolator)
+                        .setDuration(tempsRotation)
                         .start();
                 layoutRouleaux[id][2].animate()
                         .y(layoutRouleaux[id][2].getY() + distance)
-                        .setDuration(300)
+                        .setInterpolator(interpolator)
+                        .setDuration(tempsRotation)
                         .start();
 
                 layoutRouleaux[id][3].animate()
                         .y(layoutRouleaux[id][3].getY() + distance)
-                        .setDuration(300)
+                        .setInterpolator(interpolator)
+                        .setDuration(tempsRotation)
                         .start();
 
                 layoutRouleaux[id][0].animate()
                         .y(layoutRouleaux[id][0].getY() + distance)
-                        .setDuration(300)
-                        .start();
-
-                //renvoie vers le haut
-                layoutRouleaux[id][0].animate()
-                        .y(layoutRouleaux[id][1].getY())
-                        .setStartDelay(0)
-                        .setDuration(0)
+                        .setInterpolator(interpolator)
+                        .setDuration(tempsRotation)
                         .start();
                 break;
 

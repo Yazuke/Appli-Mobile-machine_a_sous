@@ -9,7 +9,7 @@ public class RouleauAsync
     private int id;
     private Rouleau rouleau;
     public boolean cancel;
-
+    public static long temps=500L;
 
     //Crée l'Async task sans la démarrer.On lui attribue un rouleau
     public RouleauAsync(AsyncListener listener, int id) {
@@ -37,7 +37,7 @@ public class RouleauAsync
             // Rouleau 1: 1s
             // Rouleau 2: 0.5s
             // Rouleau 3: 0.3s
-            try {Thread.sleep(1000L/id);} catch (InterruptedException e) {e.printStackTrace();}
+            try {Thread.sleep(temps/id);} catch (InterruptedException e) {e.printStackTrace();}
             publishProgress();
         }
         return "Executed";

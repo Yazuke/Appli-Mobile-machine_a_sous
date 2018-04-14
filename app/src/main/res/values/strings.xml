@@ -6,4 +6,8 @@
     <string name="button5x">x5</string>
     <string name="total">1000$</string>
     <string name="combo">COMBOS</string>
+    <string name="menu1">Change user</string>
+    <string name="menu2">Settings</string>
+    <string name="menu3">Leaderboard</string>
+    <string name="menu4">Quit</string>
 </resources>

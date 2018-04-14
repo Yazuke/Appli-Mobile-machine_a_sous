@@ -102,6 +102,9 @@ public class MainActivity extends AppCompatActivity implements AsyncListener, Po
 
         this.distance = getResources().getDimensionPixelSize(R.dimen.distance);
 
+        this.countPos[0]=0;
+        this.countPos[1]=0;
+        this.countPos[2]=0;
 
 
 
@@ -150,9 +153,9 @@ public class MainActivity extends AppCompatActivity implements AsyncListener, Po
                                 resetBoutons();
 
                                 //Crée les async tasks, une par rouleau
-                                rouleauAsync1 = new RouleauAsync(MainActivity.this,1);
-                                rouleauAsync2 = new RouleauAsync(MainActivity.this,2);
-                                rouleauAsync3 = new RouleauAsync(MainActivity.this,3);
+                                rouleauAsync1 = new RouleauAsync(MainActivity.this,1, countPos[0]);
+                                rouleauAsync2 = new RouleauAsync(MainActivity.this,2, countPos[1]);
+                                rouleauAsync3 = new RouleauAsync(MainActivity.this,3, countPos[2]);
 
 
                                 //Lance les trois async tasks simultanément, en threads
@@ -263,10 +266,22 @@ public class MainActivity extends AppCompatActivity implements AsyncListener, Po
         tempsRotation/=(id+1);
 
         Interpolator interpolator=new LinearInterpolator();
-
+        if(id==0){
+//            Log.i("MaS",prochain);
+        }
         switch(countPos[id]%4) {
             case 0:
-
+                switch(prochain){
+                    //On remplace l'image 0 du rouleau choisi (id) par l'image correspondante
+                    case "C": affichageRouleaux[id][3].setImageResource(R.drawable.cerise);break;
+                    case "Ci": affichageRouleaux[id][3].setImageResource(R.drawable.citron);break;
+                    case "Cl": affichageRouleaux[id][3].setImageResource(R.drawable.cloche);break;
+                    case "F": affichageRouleaux[id][3].setImageResource(R.drawable.fraise);break;
+                    case "O": affichageRouleaux[id][3].setImageResource(R.drawable.orange);break;
+                    case "P": affichageRouleaux[id][3].setImageResource(R.drawable.pasteque);break;
+                    case "R": affichageRouleaux[id][3].setImageResource(R.drawable.raisin);break;
+                    case "7": affichageRouleaux[id][3].setImageResource(R.drawable.sept);break;
+                }
                 //renvoie top
                 layoutRouleaux[id][3].animate()
                         .y(baseTop.getY())
@@ -300,7 +315,17 @@ public class MainActivity extends AppCompatActivity implements AsyncListener, Po
 
                 break;
             case 1:
-
+                switch(prochain){
+                    //On remplace l'image 0 du rouleau choisi (id) par l'image correspondante
+                    case "C": affichageRouleaux[id][2].setImageResource(R.drawable.cerise);break;
+                    case "Ci": affichageRouleaux[id][2].setImageResource(R.drawable.citron);break;
+                    case "Cl": affichageRouleaux[id][2].setImageResource(R.drawable.cloche);break;
+                    case "F": affichageRouleaux[id][2].setImageResource(R.drawable.fraise);break;
+                    case "O": affichageRouleaux[id][2].setImageResource(R.drawable.orange);break;
+                    case "P": affichageRouleaux[id][2].setImageResource(R.drawable.pasteque);break;
+                    case "R": affichageRouleaux[id][2].setImageResource(R.drawable.raisin);break;
+                    case "7": affichageRouleaux[id][2].setImageResource(R.drawable.sept);break;
+                }
                 //renvoie top
                 layoutRouleaux[id][2].animate()
                         .y(baseTop.getY())
@@ -334,6 +359,17 @@ public class MainActivity extends AppCompatActivity implements AsyncListener, Po
 
                 break;
             case 2:
+                switch(prochain){
+                    //On remplace l'image 0 du rouleau choisi (id) par l'image correspondante
+                    case "C": affichageRouleaux[id][1].setImageResource(R.drawable.cerise);break;
+                    case "Ci": affichageRouleaux[id][1].setImageResource(R.drawable.citron);break;
+                    case "Cl": affichageRouleaux[id][1].setImageResource(R.drawable.cloche);break;
+                    case "F": affichageRouleaux[id][1].setImageResource(R.drawable.fraise);break;
+                    case "O": affichageRouleaux[id][1].setImageResource(R.drawable.orange);break;
+                    case "P": affichageRouleaux[id][1].setImageResource(R.drawable.pasteque);break;
+                    case "R": affichageRouleaux[id][1].setImageResource(R.drawable.raisin);break;
+                    case "7": affichageRouleaux[id][1].setImageResource(R.drawable.sept);break;
+                }
 
                 //renvoie top
                 layoutRouleaux[id][1].animate()
@@ -368,8 +404,17 @@ public class MainActivity extends AppCompatActivity implements AsyncListener, Po
 
                 break;
             case 3:
-
-
+                switch(prochain){
+                    //On remplace l'image 0 du rouleau choisi (id) par l'image correspondante
+                    case "C": affichageRouleaux[id][0].setImageResource(R.drawable.cerise);break;
+                    case "Ci": affichageRouleaux[id][0].setImageResource(R.drawable.citron);break;
+                    case "Cl": affichageRouleaux[id][0].setImageResource(R.drawable.cloche);break;
+                    case "F": affichageRouleaux[id][0].setImageResource(R.drawable.fraise);break;
+                    case "O": affichageRouleaux[id][0].setImageResource(R.drawable.orange);break;
+                    case "P": affichageRouleaux[id][0].setImageResource(R.drawable.pasteque);break;
+                    case "R": affichageRouleaux[id][0].setImageResource(R.drawable.raisin);break;
+                    case "7": affichageRouleaux[id][0].setImageResource(R.drawable.sept);break;
+                }
 
                 //renvoie top
                 layoutRouleaux[id][0].animate()
@@ -403,7 +448,7 @@ public class MainActivity extends AppCompatActivity implements AsyncListener, Po
                 break;
 
         }
-            countPos[id]++;
+            this.countPos[id]++;
     }
 
 

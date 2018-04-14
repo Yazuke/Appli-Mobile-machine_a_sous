@@ -125,6 +125,8 @@ public class MainActivity extends AppCompatActivity implements AsyncListener, Po
         //-- Gestion du levier --//
         ///////////////////////////
 
+
+
         //Evenements lors d'un drag sur le levier
         final class MyTouchListener implements View.OnTouchListener {
             float dY;
@@ -191,11 +193,11 @@ public class MainActivity extends AppCompatActivity implements AsyncListener, Po
 
 
 
-
-
     /////////////////////////
     //-- Boutons d'arrêt --//
     /////////////////////////
+
+
 
     public void arretRouleau(View v){
 
@@ -245,6 +247,7 @@ public class MainActivity extends AppCompatActivity implements AsyncListener, Po
 
     }
 
+
     public void resetBoutons(){
         findViewById(R.id.button_stop1).setBackgroundResource(R.drawable.stopper);
         findViewById(R.id.button_stop2).setBackgroundResource(R.drawable.stopper);
@@ -254,11 +257,10 @@ public class MainActivity extends AppCompatActivity implements AsyncListener, Po
 
 
 
-
-
     ////////////////////////////////
     //-- Animation des rouleaux --//
     ////////////////////////////////
+
 
 
     public void animationRouleau(int id,String prochain){
@@ -267,9 +269,7 @@ public class MainActivity extends AppCompatActivity implements AsyncListener, Po
         tempsRotation/=(id+1);
 
         Interpolator interpolator=new LinearInterpolator();
-        if(id==0){
-//            Log.i("MaS",prochain);
-        }
+
         switch(countPos[id]%4) {
             case 0:
                 switch(prochain){
@@ -454,17 +454,10 @@ public class MainActivity extends AppCompatActivity implements AsyncListener, Po
 
 
 
-
-    public void combo(View view){
-        Intent i = new Intent(this, ComboActivity.class);
-        startActivity(i);
-    }
-
-
-
     ///////////////////////////////////
     // -- Gestion des async tasks -- //
     ///////////////////////////////////
+
 
     //On reçoit les informations grace à AsyncListener qui fait le lien avec les AsyncTasks
     @Override
@@ -476,16 +469,8 @@ public class MainActivity extends AppCompatActivity implements AsyncListener, Po
 
 
     @Override
-    public void onComplete(int numRouleau){
+    public void onComplete(int numRouleau){}
 
-    }
-
-    public void showPopup(View v){
-        PopupMenu popup = new PopupMenu(this, v);
-        popup.setOnMenuItemClickListener(this);
-        popup.inflate(R.menu.popup_menu);
-        popup.show();
-    }
 
     @Override
     public boolean onMenuItemClick(MenuItem item) {
@@ -507,9 +492,22 @@ public class MainActivity extends AppCompatActivity implements AsyncListener, Po
                 return false;
         }
     }
-    public void quitApp(){
-        finish();
+
+
+    //////////////
+    //-- Menu --//
+    //////////////
+
+    public void showPopup(View v){
+        PopupMenu popup = new PopupMenu(this, v);
+        popup.setOnMenuItemClickListener(this);
+        popup.inflate(R.menu.popup_menu);
+        popup.show();
     }
+
+
+    public void quitApp(){finish();}
+
 }
 
 

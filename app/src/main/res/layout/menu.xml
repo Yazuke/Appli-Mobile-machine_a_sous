@@ -10,9 +10,9 @@
         android:id="@+id/imageView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentStart="true"
         android:layout_alignParentTop="true"
-        android:layout_marginTop="30dp"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="39dp"
         app:srcCompat="@drawable/logo" />
 
     <Button
@@ -21,8 +21,9 @@
         android:layout_height="wrap_content"
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="231dp"
-        android:text="Démarrer Partie" />
+        android:layout_marginTop="201dp"
+        android:onClick="DemarrerPartie"
+        android:text="@string/demarrer_partie" />
 
     <Button
         android:id="@+id/button2"
@@ -30,8 +31,8 @@
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"
-        android:layout_marginBottom="218dp"
-        android:text="Changer Utilisateur" />
+        android:layout_marginBottom="245dp"
+        android:text="@string/menu1" />
 
     <Button
         android:id="@+id/button3"
@@ -39,8 +40,8 @@
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"
-        android:layout_marginBottom="150dp"
-        android:text="Leaderboard" />
+        android:layout_marginBottom="153dp"
+        android:text="@string/menu3" />
 
     <Button
         android:id="@+id/button4"
@@ -48,6 +49,7 @@
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"
-        android:layout_marginBottom="64dp"
-        android:text="Quitter" />
+        android:layout_marginBottom="34dp"
+        android:onClick="quitterApp"
+        android:text="@string/menu4" />
 </RelativeLayout>

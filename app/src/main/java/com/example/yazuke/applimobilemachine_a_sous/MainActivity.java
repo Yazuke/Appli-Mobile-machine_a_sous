@@ -448,7 +448,10 @@ public class MainActivity extends AppCompatActivity implements AsyncListener, Po
             case R.id.item1:
                 Toast.makeText(this, "TEST", Toast.LENGTH_SHORT).show();
                 return true;
-            case R.id.item2:
+            case R.id.item2: // Retour au menu principal
+                Intent intent = new Intent(MainActivity.this, // New intent avec en paramètres
+                        Menu.class); // le contex de l'application et la classe menu.
+                startActivity(intent);
                 return true;
             case R.id.item3:
                 return true;

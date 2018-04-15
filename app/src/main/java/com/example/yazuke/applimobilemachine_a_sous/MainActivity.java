@@ -461,6 +461,14 @@ public class MainActivity extends AppCompatActivity implements AsyncListener, Po
         }
     }
 
+    public void combo(View v) {
+        Intent intent = new Intent(MainActivity.this, ComboActivity.class);
+        startActivity(intent);
+    }
+    //////////////
+    //-- Menu --//
+    //////////////
+
 
     @Override
     public boolean onMenuItemClick(MenuItem item) {
@@ -484,9 +492,6 @@ public class MainActivity extends AppCompatActivity implements AsyncListener, Po
     }
 
 
-    //////////////
-    //-- Menu --//
-    //////////////
 
     public void showPopup(View v){
         PopupMenu popup = new PopupMenu(this, v);

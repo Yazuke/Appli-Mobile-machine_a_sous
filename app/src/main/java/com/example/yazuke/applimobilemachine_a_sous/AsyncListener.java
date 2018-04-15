@@ -4,5 +4,5 @@ package com.example.yazuke.applimobilemachine_a_sous;
 
 public interface AsyncListener {
     public void onProgressUpdate(int numRouleau,String prochain);
-    public void onComplete(int numRouleau);
+    public void onComplete(int numRouleau,String prochain);
 }

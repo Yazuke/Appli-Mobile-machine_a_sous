@@ -30,8 +30,8 @@
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
-                android:background="@color/colorAccent"
                 android:onClick="combo"
+                android:textSize="80px"
                 android:text="@string/combo" />
 
             <ProgressBar
@@ -59,7 +59,7 @@
             android:layout_width="wrap_content"
             android:layout_height="0dp"
             android:layout_weight="1"
-            android:background="@color/colorAccent"
+            android:textSize="35px"
             android:text="@string/button1x" />
 
             <Button
@@ -68,7 +68,7 @@
             android:layout_height="0dp"
             android:layout_below="@+id/button1x"
             android:layout_weight="1"
-            android:background="@color/colorAccent"
+            android:textSize="35px"
             android:text="@string/button2x" />
 
             <Button
@@ -77,7 +77,7 @@
             android:layout_height="0dp"
             android:layout_below="@+id/button2x"
             android:layout_weight="1"
-            android:background="@color/colorAccent"
+            android:textSize="35px"
             android:text="@string/button5x" />
             </LinearLayout>
 
@@ -85,6 +85,7 @@
             android:layout_width="200dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
+            android:textSize="70px"
             android:text="@string/multiplicateur" />
 
 
@@ -92,6 +93,7 @@
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
+            android:textSize="50px"
             android:text="@string/total" />
 
             <Button
@@ -174,7 +176,7 @@
                         android:id="@+id/r1_2"
                         android:layout_width="50dp"
                         android:layout_height="50dp"
-                        android:src="@drawable/orange"/>
+                        android:src="@drawable/cherry"/>
                 </FrameLayout>
 
 
@@ -191,9 +193,17 @@
                         android:id="@+id/r1_3"
                         android:layout_width="50dp"
                         android:layout_height="50dp"
-                        android:src="@drawable/cherry"/>
+                        android:src="@drawable/fraise"/>
+
                 </FrameLayout>
 
+                <FrameLayout
+                    android:id="@+id/baseBottom"
+                    android:layout_marginTop="20dp"
+                    android:layout_below="@id/f1_2"
+                    android:layout_marginLeft="4dp"
+                    android:layout_width="50dp"
+                    android:layout_height="50dp" />
 
                 <FrameLayout
                     android:id="@+id/f2_0"
@@ -205,7 +215,7 @@
                         android:id="@+id/r2_0"
                         android:layout_width="50dp"
                         android:layout_height="50dp"
-                        android:src="@drawable/orange" />
+                        android:src="@drawable/cherry" />
                 </FrameLayout>
 
                 <FrameLayout
@@ -222,7 +232,7 @@
                         android:id="@+id/r2_1"
                         android:layout_width="50dp"
                         android:layout_height="50dp"
-                        android:src="@drawable/cherry" />
+                        android:src="@drawable/cloche" />
                 </FrameLayout>
 
                 <FrameLayout
@@ -239,7 +249,7 @@
                         android:id="@+id/r2_2"
                         android:layout_width="50dp"
                         android:layout_height="50dp"
-                        android:src="@drawable/cloche" />
+                        android:src="@drawable/pasteque" />
                 </FrameLayout>
 
 
@@ -257,7 +267,7 @@
                         android:id="@+id/r2_3"
                         android:layout_width="50dp"
                         android:layout_height="50dp"
-                        android:src="@drawable/pasteque" />
+                        android:src="@drawable/fraise" />
                 </FrameLayout>
 
 
@@ -272,7 +282,7 @@
                         android:id="@+id/r3_0"
                         android:layout_width="50dp"
                         android:layout_height="50dp"
-                        android:src="@drawable/citron"  />
+                        android:src="@drawable/fraise"  />
                 </FrameLayout>
 
                 <FrameLayout
@@ -287,7 +297,7 @@
                         android:id="@+id/r3_1"
                         android:layout_width="50dp"
                         android:layout_height="50dp"
-                        android:src="@drawable/fraise" />
+                        android:src="@drawable/cherry" />
                 </FrameLayout>
 
                 <FrameLayout
@@ -302,7 +312,7 @@
                         android:id="@+id/r3_2"
                         android:layout_width="50dp"
                         android:layout_height="50dp"
-                        android:src="@drawable/cherry"/>
+                        android:src="@drawable/sept"/>
                 </FrameLayout>
 
 

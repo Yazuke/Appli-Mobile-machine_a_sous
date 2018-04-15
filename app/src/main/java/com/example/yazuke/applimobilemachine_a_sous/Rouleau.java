@@ -17,9 +17,9 @@ public class Rouleau {
     public Rouleau(int numeroRouleau){
         switch (numeroRouleau){
             case 1:
-                sequence[0]="Cl";
+                sequence[0]="C";
                 sequence[1]="O";
-                sequence[2]="C";
+                sequence[2]="Cl";
                 sequence[3]="F";
                 sequence[4]="P";
                 sequence[5]="7";
@@ -27,9 +27,9 @@ public class Rouleau {
                 sequence[7]="Ci";
                 break;
             case 2:
-                sequence[0]="C";
+                sequence[0]="P";
                 sequence[1]="Cl";
-                sequence[2]="P";
+                sequence[2]="C";
                 sequence[3]="O";
                 sequence[4]="Ci";
                 sequence[5]="R";
@@ -37,9 +37,9 @@ public class Rouleau {
                 sequence[7]="7";
                 break;
             case 3:
-                sequence[0]="F";
-                sequence[1]="C";
-                sequence[2]="7";
+                sequence[0]="7";
+                sequence[1]="R";
+                sequence[2]="F";
                 sequence[3]="Ci";
                 sequence[4]="Cl";
                 sequence[5]="C";
@@ -83,7 +83,7 @@ public class Rouleau {
                 sequence[2]="F";
                 sequence[3]="Ci";
                 sequence[4]="Cl";
-                sequence[5]="C";
+                sequence[5]="R";
                 sequence[6]="P";
                 sequence[7]="O";
                 break;
@@ -104,38 +104,38 @@ public class Rouleau {
 
 
     public void roll(){ //Fait avancer un rouleau d'une case vers le bas
-        roll++; //si position%8=0, alors on est retourné à l'affichage de base du rouleau
+        this.roll++; //si position%8=0, alors on est retourné à l'affichage de base du rouleau
 
-        sequenceAffichee[0]=sequence[roll%8];
+        this.sequenceAffichee[0]=this.sequence[roll%8];
 
         //Cas spéciaux
         if(roll%8==6){
-            sequenceAffichee[1]=sequence[7];
-            sequenceAffichee[2]=sequence[0];
+            this.sequenceAffichee[1]=this.sequence[7];
+            this.sequenceAffichee[2]=this.sequence[0];
         }else if(roll%8==7){
-            sequenceAffichee[1]=sequence[0];
-            sequenceAffichee[2]=sequence[1];
+            this.sequenceAffichee[1]=this.sequence[0];
+            this.sequenceAffichee[2]=this.sequence[1];
         }else{
-            sequenceAffichee[1]=sequence[roll%8+1];
-            sequenceAffichee[2]=sequence[roll%8+2];
+            this.sequenceAffichee[1]=this.sequence[roll%8+1];
+            this.sequenceAffichee[2]=this.sequence[roll%8+2];
         }
     }
 
     public void roll(int roll){ //Fait avancer un rouleau d'un nombre de cases
-        roll+=roll; //si position%8=0, alors on est retourné à l'affichage de base du rouleau
+        this.roll+=roll;
 
-        sequenceAffichee[0]=sequence[roll%8];
+        this.sequenceAffichee[0]=this.sequence[roll%8];
 
         //Cas spéciaux
         if(roll%8==6){
-            sequenceAffichee[1]=sequence[7];
-            sequenceAffichee[2]=sequence[0];
+            this.sequenceAffichee[1]=this.sequence[7];
+            this.sequenceAffichee[2]=this.sequence[0];
         }else if(roll%8==7){
-            sequenceAffichee[1]=sequence[0];
-            sequenceAffichee[2]=sequence[1];
+            this.sequenceAffichee[1]=this.sequence[0];
+            this.sequenceAffichee[2]=this.sequence[1];
         }else{
-            sequenceAffichee[1]=sequence[roll%8+1];
-            sequenceAffichee[2]=sequence[roll%8+2];
+            this.sequenceAffichee[1]=this.sequence[roll%8+1];
+            this.sequenceAffichee[2]=this.sequence[roll%8+2];
         }
     }
 
@@ -152,10 +152,11 @@ public class Rouleau {
         }
         return res;
     }
-    public String getSequenceAffichee(){
-        String res=new String();
+    public String[] getSequenceAffichee(){
+        String[] res=new String[3];
+
         for (int i=0;i<3;i++){
-            res+=sequenceAffichee[i]+" ";
+            res[i]=sequenceAffichee[i]+" ";
         }
         return res;
     }
@@ -163,6 +164,16 @@ public class Rouleau {
     public String getSequenceAffichee(int n){
         return sequenceAffichee[n];
     }
-    public String getCaseAffichee(int i){return sequenceAffichee[i];}
+    public String get1(){return sequence[(roll+1)%8];}
+    public String get2(){return sequence[(roll+2)%8];}
+    public String get3(){return sequence[(roll+3)%8];}
+    public String[] getAffichage(){
+        String[] res=new String[3];
+        res[0]=sequence[(roll+1)%8];
+        res[1]=sequence[(roll+2)%8];
+        res[2]=sequence[(roll+3)%8];
+
+        return res;
+    }
     public String getProchain(){return sequence[(roll+3)%8];}
 }

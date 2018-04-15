@@ -6,7 +6,7 @@ import android.util.Log;
 public class Jeu {
 
     public int nbIterations=0;
-    public boolean victoire=false;
+    public boolean fini=false;
     public boolean estLance=false;
 
     private boolean[] rouleauxTournent={false,false,false};
@@ -36,7 +36,7 @@ public class Jeu {
 
         Log.i("MaS","Lancement du jeu");
         estLance=true;
-        victoire=false;
+        fini=false;
     }
 
     public void arreter(int id){
@@ -45,7 +45,7 @@ public class Jeu {
         rouleauxTournent[id]=false;
 
         if((!rouleauxTournent[0])&&(!rouleauxTournent[1])&&(!rouleauxTournent[2])){
-            victoire=true;
+            fini=true;
             Log.i("MaS","Tous les rouleaux sont arretés");
         }
     }

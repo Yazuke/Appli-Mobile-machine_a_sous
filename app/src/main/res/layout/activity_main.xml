@@ -30,8 +30,8 @@
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
-                android:background="@color/colorAccent"
                 android:onClick="combo"
+                android:textSize="80px"
                 android:text="@string/combo" />
 
             <ProgressBar
@@ -59,7 +59,7 @@
             android:layout_width="wrap_content"
             android:layout_height="0dp"
             android:layout_weight="1"
-            android:background="@color/colorAccent"
+            android:textSize="35px"
             android:text="@string/button1x" />
 
             <Button
@@ -68,7 +68,7 @@
             android:layout_height="0dp"
             android:layout_below="@+id/button1x"
             android:layout_weight="1"
-            android:background="@color/colorAccent"
+            android:textSize="35px"
             android:text="@string/button2x" />
 
             <Button
@@ -77,7 +77,7 @@
             android:layout_height="0dp"
             android:layout_below="@+id/button2x"
             android:layout_weight="1"
-            android:background="@color/colorAccent"
+            android:textSize="35px"
             android:text="@string/button5x" />
             </LinearLayout>
 
@@ -85,6 +85,7 @@
             android:layout_width="200dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
+            android:textSize="70px"
             android:text="@string/multiplicateur" />
 
 
@@ -92,6 +93,7 @@
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
+            android:textSize="50px"
             android:text="@string/total" />
 
             <Button

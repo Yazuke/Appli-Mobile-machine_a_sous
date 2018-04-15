@@ -8,7 +8,7 @@ public class RouleauAsync
 
     private final AsyncListener listener;
     private int id;
-    public Rouleau rouleau;
+    private Rouleau rouleau;
     public boolean cancel;
     public static long temps=500L;
 
@@ -20,9 +20,6 @@ public class RouleauAsync
         cancel=false;
     }
 
-    public String[] getSequenceAffichee(){
-        return this.rouleau.getSequenceAffichee();
-    }
 
 
 
@@ -37,6 +34,7 @@ public class RouleauAsync
     protected String doInBackground(Void... params) {
         while(!cancel){
             try {
+                //Légère pause, puis tour du rouleau et informe qu'un tour a eu lieu
                 Thread.sleep(temps/id);
                 this.rouleau.roll();
                 publishProgress();
@@ -59,4 +57,7 @@ public class RouleauAsync
         super.onPostExecute(result);
         listener.onComplete(this.id,this.rouleau.getProchain());
     }
+
+
+    public Rouleau getRouleau(){return rouleau;}
 }

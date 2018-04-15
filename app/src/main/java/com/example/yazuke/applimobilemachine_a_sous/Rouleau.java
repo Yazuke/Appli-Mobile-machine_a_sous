@@ -2,9 +2,11 @@ package com.example.yazuke.applimobilemachine_a_sous;
 
 
 public class Rouleau {
-
-    private String[] sequence=new String[8];            //Séquence d'un rouleau
-    private String[] sequenceAffichee=new String[3];    //3 symboles affichés à un moment t
+    //Séquence d'un rouleau
+    private String[] sequence=new String[8];
+    //les 3 symboles actuellement affichés
+    private String[] sequenceAffichee=new String[3];
+    //nombre de tours effectués
     private int roll=0;
 
 
@@ -89,6 +91,7 @@ public class Rouleau {
                 break;
         }
 
+        //Trois premières cases de la séquences, affichées en début de partie
         sequenceAffichee[0]=sequence[0];
         sequenceAffichee[1]=sequence[1];
         sequenceAffichee[2]=sequence[2];
@@ -102,10 +105,11 @@ public class Rouleau {
     // -- Fonctions de roulement -- //
     //////////////////////////////////
 
+    //Fait avancer un rouleau d'une case vers le bas
+    public void roll(){
+        this.roll++;
 
-    public void roll(){ //Fait avancer un rouleau d'une case vers le bas
-        this.roll++; //si position%8=0, alors on est retourné à l'affichage de base du rouleau
-
+        //si position%8=0, alors on est retourné à l'affichage de base du rouleau
         this.sequenceAffichee[0]=this.sequence[roll%8];
 
         //Cas spéciaux
@@ -121,9 +125,11 @@ public class Rouleau {
         }
     }
 
-    public void roll(int roll){ //Fait avancer un rouleau d'un nombre de cases
+    //Fait avancer un rouleau d'un nombre de cases
+    public void roll(int roll){
         this.roll+=roll;
 
+        //si position%8=0, alors on est retourné à l'affichage de base du rouleau
         this.sequenceAffichee[0]=this.sequence[roll%8];
 
         //Cas spéciaux

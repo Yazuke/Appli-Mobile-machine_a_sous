@@ -77,7 +77,7 @@ public class MainActivity extends AppCompatActivity implements AsyncListener, Po
         this.affichageRouleaux=new ImageView[][]{affichageRouleaux1,affichageRouleaux2,affichageRouleaux3};
 
 
-        //Récupération des layouts
+        //Récupération des layouts pour chaque image (évite de redimensionner des images en les bougeant)
         FrameLayout f1_0 = findViewById(R.id.f1_0);
         FrameLayout f1_1 = findViewById(R.id.f1_1);
         FrameLayout f1_2 = findViewById(R.id.f1_2);
@@ -93,19 +93,20 @@ public class MainActivity extends AppCompatActivity implements AsyncListener, Po
         FrameLayout f3_2 = findViewById(R.id.f3_2);
         FrameLayout f3_3 = findViewById(R.id.f3_3);
 
-        //Range tout dans un tableau affichageRouleaux[numRouleau][numCase]
+        //Range tout dans un tableau
         FrameLayout[] layoutRouleau1 = new FrameLayout[]{f1_0, f1_1,f1_2,f1_3};
         FrameLayout[] layoutRouleau2 = new FrameLayout[]{f2_0, f2_1,f2_2,f2_3};
         FrameLayout[] layoutRouleau3 = new FrameLayout[]{f3_0, f3_1,f3_2,f3_3};
         this.layoutRouleaux=new FrameLayout[][]{layoutRouleau1,layoutRouleau2,layoutRouleau3};
 
 
+        //Layouts invisibles utilisés comme références
         this.baseTop=findViewById(R.id.baseTop);
         this.baseBottom=findViewById(R.id.baseBottom);
 
-
         this.distance = getResources().getDimensionPixelSize(R.dimen.distance);
 
+        //Utilisé pour compter le nombre de tours passés
         this.countPos[0]=0;
         this.countPos[1]=0;
         this.countPos[2]=0;
@@ -207,6 +208,7 @@ public class MainActivity extends AppCompatActivity implements AsyncListener, Po
 
     public void arretRouleau(View v) {
 
+        //Arrete le rouleau et l'async Task liés au bouton d'arret
         if (this.jeu.nbIterations != 0) {   //Evite les actions sur un jeu non lancé
             switch (v.getId()) {
                 case R.id.button_stop1:
@@ -235,6 +237,7 @@ public class MainActivity extends AppCompatActivity implements AsyncListener, Po
         }
     }
 
+    //Remet les boutons dans un état non cliqué
     public void resetBoutons(){
         findViewById(R.id.button_stop1).setBackgroundResource(R.drawable.stopper);
         findViewById(R.id.button_stop2).setBackgroundResource(R.drawable.stopper);
@@ -249,52 +252,66 @@ public class MainActivity extends AppCompatActivity implements AsyncListener, Po
 
 
     public void verifRouleaux(){
-            //Remet les boutons dans un état non cliqué
-            resetBoutons();
+        //Remet les boutons dans un état non cliqué
+        resetBoutons();
 
-            //Replace le levier au top
-            levier=findViewById(R.id.levier);
-            levier.animate()
-                    .y(0)
-                    .setDuration(500)
-                    .start();
+        //Replace le levier au top
+        levier=findViewById(R.id.levier);
+        levier.animate()
+                .y(0)
+                .setDuration(500)
+                .start();
 
+        //Remet le fond par défaut
+        backgroundDefault();
 
+        //Récupère les trois symboles affichés
+        String[] sequence1=rouleauAsync1.getRouleau().getAffichage();
+        String[] sequence2=rouleauAsync2.getRouleau().getAffichage();
+        String[] sequence3=rouleauAsync3.getRouleau().getAffichage();
 
-        Log.i("MaS","Verif lancée");
-
-
-        String[] sequence1=rouleauAsync1.rouleau.getAffichage();
-        String[] sequence2=rouleauAsync2.rouleau.getAffichage();
-        String[] sequence3=rouleauAsync3.rouleau.getAffichage();
-
-
+        //Affiche les symboles affichés
         Log.i("MaS","Rouleau 1: "+sequence1[0]+" "+sequence1[1]+" "+sequence1[2]);
         Log.i("MaS","Rouleau 2: "+sequence2[0]+" "+sequence2[1]+" "+sequence2[2]);
         Log.i("MaS","Rouleau 3: "+sequence3[0]+" "+sequence3[1]+" "+sequence3[2]);
 
-        for(int i=0;i<3;i++){
-            //tests lignes
-            if(sequence1[i].equals(sequence2[i])&&sequence2[i].equals(sequence3[i])){
-                LinearLayout background=findViewById(R.id.background);
-                background.setBackgroundResource(R.drawable.background_win);
 
+        //Teste chaque ligne horizontale pour voir si elle est gagnante
+        for(int i=0;i<3;i++){
+            if(sequence1[i].equals(sequence2[i])&&sequence2[i].equals(sequence3[i])){
+                backgroundWin();
                 Log.i("MaS","WIN EN LIGNE "+(i+1)+", symbole: "+sequence1[i]);
             }
         }
 
+        //Teste les diagonales
         if(sequence1[0].equals(sequence2[1])&&sequence2[1].equals(sequence3[2])){
-            LinearLayout background=findViewById(R.id.background);
-            background.setBackgroundResource(R.drawable.background_win);
-
+            backgroundWin();
             Log.i("MaS","WIN EN DIAGONALE , symbole: "+sequence1[0]);
         }
         if(sequence1[2].equals(sequence2[1])&&sequence2[1].equals(sequence3[0])){
-            LinearLayout background=findViewById(R.id.background);
-            background.setBackgroundResource(R.drawable.background_win);
-
+            backgroundWin();
             Log.i("MaS","WIN EN DIAGONALE , symbole: "+sequence1[2]);
         }
+    }
+
+
+
+    ////////////////////
+    //-- Background --//
+    ////////////////////
+
+
+    //Change le fond pour celui de victoire
+    public void backgroundWin(){
+        LinearLayout background=findViewById(R.id.background);
+        background.setBackgroundResource(R.drawable.background_win);
+    }
+
+    //Change le fond pour celui par défaut
+    public void backgroundDefault(){
+        LinearLayout background=findViewById(R.id.background);
+        background.setBackgroundResource(R.drawable.background_normal);
     }
 
 
@@ -305,15 +322,19 @@ public class MainActivity extends AppCompatActivity implements AsyncListener, Po
 
 
     public void animationRouleau(int id,String prochain){
-        id--;
+        id--;        //puisque le rouleau 1 a l'id 0
+
+        //Récupère le temps de rotation d'un rouleauAsync (pour permettre une animation propre)
         tempsRotation=RouleauAsync.temps;
         tempsRotation/=(id+1);
 
+        //Permet d'optimiser le code et ne pas répéter toutes les opérations dans le switch qui suit
         int cases[]=new int[4];
 
-
+        //Rend les animations linéaires
         Interpolator interpolator=new LinearInterpolator();
 
+        //Défini l'emplacement de chaque case (puisqu'elles se déplacent lors de l'animation)
         switch(countPos[id]%4) {
             case 0:
                 cases[0] = 0;
@@ -341,8 +362,8 @@ public class MainActivity extends AppCompatActivity implements AsyncListener, Po
                 break;
         }
 
+        //Remplace la prochaine image du rouleau par l'image correspondante
             switch(prochain){
-                //On remplace l'image 0 du rouleau choisi (id) par l'image correspondante
                 case "C": affichageRouleaux[id][cases[3]].setImageResource(R.drawable.cerise);break;
                 case "Ci": affichageRouleaux[id][cases[3]].setImageResource(R.drawable.citron);break;
                 case "Cl": affichageRouleaux[id][cases[3]].setImageResource(R.drawable.cloche);break;
@@ -352,45 +373,49 @@ public class MainActivity extends AppCompatActivity implements AsyncListener, Po
                 case "R": affichageRouleaux[id][cases[3]].setImageResource(R.drawable.raisin);break;
                 case "7": affichageRouleaux[id][cases[3]].setImageResource(R.drawable.sept);break;
             }
-            //renvoie top
-            layoutRouleaux[id][cases[3]].animate()
-                    .y(baseTop.getY())
-                    .setStartDelay(0)
-                    .setDuration(0)
-                    .start();
 
-            layoutRouleaux[id][cases[0]].animate()
-                    .y(layoutRouleaux[id][cases[0]].getY() + distance)
-                    .setInterpolator(interpolator)
-                    .setDuration(tempsRotation)
-                    .start();
-            layoutRouleaux[id][cases[1]].animate()
-                    .y(layoutRouleaux[id][cases[1]].getY() + distance)
-                    .setInterpolator(interpolator)
-                    .setDuration(tempsRotation)
-                    .start();
+        //Renvoie la case cachée en bas vers le haut (cachée aussi)
+        layoutRouleaux[id][cases[3]].animate()
+                .y(baseTop.getY())
+                .setStartDelay(0)
+                .setDuration(0)
+                .start();
 
-            layoutRouleaux[id][cases[2]].animate()
-                    .y(layoutRouleaux[id][cases[2]].getY() + distance)
-                    .setInterpolator(interpolator)
-                    .setDuration(tempsRotation)
-                    .start();
-            layoutRouleaux[id][cases[3]].animate()
-                    .y(layoutRouleaux[id][cases[3]].getY() + distance)
-                    .setInterpolator(interpolator)
-                    .setDuration(tempsRotation)
-                    .start();
+        //Anime tous les rouleaux vers le bas
+        layoutRouleaux[id][cases[0]].animate()
+                .y(layoutRouleaux[id][cases[0]].getY() + distance)
+                .setInterpolator(interpolator)
+                .setDuration(tempsRotation)
+                .start();
+        layoutRouleaux[id][cases[1]].animate()
+                .y(layoutRouleaux[id][cases[1]].getY() + distance)
+                .setInterpolator(interpolator)
+                .setDuration(tempsRotation)
+                .start();
 
-            this.countPos[id]++;
+        layoutRouleaux[id][cases[2]].animate()
+                .y(layoutRouleaux[id][cases[2]].getY() + distance)
+                .setInterpolator(interpolator)
+                .setDuration(tempsRotation)
+                .start();
+        layoutRouleaux[id][cases[3]].animate()
+                .y(layoutRouleaux[id][cases[3]].getY() + distance)
+                .setInterpolator(interpolator)
+                .setDuration(tempsRotation)
+                .start();
+
+        //Indique qu'un tour a eu lieu
+        this.countPos[id]++;
     }
 
-
+    //Replace les cases à leur emplacement fixe
     public void correctionPosition(int id){
-        id--;
+        id--;   //puisque le rouleau 1 a l'id 0
 
+        //Permet d'optimiser le code et ne pas répéter toutes les opérations dans le switch qui suit
         int cases[]=new int[4];
 
-
+        //Défini l'emplacement de chaque case (puisqu'elles se déplacent lors de l'animation)
         switch(countPos[id]%4) {
             case 0:
                 cases[0] = 0;
@@ -418,6 +443,7 @@ public class MainActivity extends AppCompatActivity implements AsyncListener, Po
                 break;
         }
 
+        //Fixe les cases à leur emplacement défini
         layoutRouleaux[id][cases[0]].animate()
                 .y(baseTop.getY()+distance)
                 .setDuration(300)
@@ -437,7 +463,6 @@ public class MainActivity extends AppCompatActivity implements AsyncListener, Po
                 .y(baseTop.getY()+(distance*4))
                 .setDuration(300)
                 .start();
-
     }
 
 
@@ -445,14 +470,18 @@ public class MainActivity extends AppCompatActivity implements AsyncListener, Po
     // -- Gestion des async tasks -- //
     ///////////////////////////////////
 
-
     //On reçoit les informations grace à AsyncListener qui fait le lien avec les AsyncTasks
+
+
+    //Récéption d'un numéro de rouleau lorsqu'il fait un tour et du prochain symbole à arriver
     @Override
-    public void onProgressUpdate(int numRouleau,String prochain) {      //Récéption d'un numéro de rouleau lorsqu'il fait un tour et du prochain symbole à arriver
+    public void onProgressUpdate(int numRouleau,String prochain) {
         animationRouleau(numRouleau,prochain);
     }
 
 
+    //Lors de la fin d'une AsyncTask (d'un rouleau), on corrige sa position.
+    // Si ils sont tous arretés, on lance la vérification
     @Override
     public void onComplete(int numRouleau, String prochain){
         correctionPosition(numRouleau);
@@ -461,10 +490,20 @@ public class MainActivity extends AppCompatActivity implements AsyncListener, Po
         }
     }
 
+
+
+    //////////////////////
+    //-- Intent combo --//
+    //////////////////////
+
+
     public void combo(View v) {
         Intent intent = new Intent(MainActivity.this, ComboActivity.class);
         startActivity(intent);
     }
+
+
+
     //////////////
     //-- Menu --//
     //////////////

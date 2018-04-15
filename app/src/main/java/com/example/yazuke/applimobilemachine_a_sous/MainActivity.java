@@ -15,6 +15,7 @@ import android.view.animation.Interpolator;
 import android.view.animation.LinearInterpolator;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.Toast;
 
 public class MainActivity extends AppCompatActivity implements AsyncListener, PopupMenu.OnMenuItemClickListener {
@@ -204,52 +205,35 @@ public class MainActivity extends AppCompatActivity implements AsyncListener, Po
 
 
 
-    public void arretRouleau(View v){
+    public void arretRouleau(View v) {
 
-        if(this.jeu.nbIterations!=0){   //Evite les actions sur un jeu non lancé
-            switch(v.getId()){
+        if (this.jeu.nbIterations != 0) {   //Evite les actions sur un jeu non lancé
+            switch (v.getId()) {
                 case R.id.button_stop1:
-                    Log.i("MaS","--X-1-X--");
-                    rouleauAsync1.cancel=true;
+                    Log.i("MaS", "--X-1-X--");
+                    rouleauAsync1.cancel = true;
                     jeu.arreter(1);
                     findViewById(R.id.button_stop1).setBackgroundResource(R.drawable.stopped);
                     break;
                 case R.id.button_stop2:
-                    Log.i("MaS","--X-2-X--");
-                    rouleauAsync2.cancel=true;
+                    Log.i("MaS", "--X-2-X--");
+                    rouleauAsync2.cancel = true;
                     jeu.arreter(2);
                     findViewById(R.id.button_stop2).setBackgroundResource(R.drawable.stopped);
                     break;
                 case R.id.button_stop3:
-                    Log.i("MaS","--X-3-X--");
-                    rouleauAsync3.cancel=true;
+                    Log.i("MaS", "--X-3-X--");
+                    rouleauAsync3.cancel = true;
                     jeu.arreter(3);
                     findViewById(R.id.button_stop3).setBackgroundResource(R.drawable.stopped);
                     break;
             }
-
-
-            if(jeu.fini){
-                Log.i("MaS","Jeu fini");
-                jeu.estLance=false;
-
-                //Remet les boutons dans un été non cliqué
-                resetBoutons();
-
-                //Replace le levier au top
-                levier=findViewById(R.id.levier);
-                levier.animate()
-                        .y(0)
-                        .setDuration(500)
-                        .start();
-
-                //Lance la vérification des rouleaux
-                verifRouleaux();
+            if (jeu.fini) {
+                Log.i("MaS", "Jeu fini");
+                jeu.estLance = false;
             }
         }
-
     }
-
 
     public void resetBoutons(){
         findViewById(R.id.button_stop1).setBackgroundResource(R.drawable.stopper);
@@ -265,14 +249,21 @@ public class MainActivity extends AppCompatActivity implements AsyncListener, Po
 
 
     public void verifRouleaux(){
+            //Remet les boutons dans un état non cliqué
+            resetBoutons();
 
-        //Change le background pour celui éclairé
-        //LinearLayout background=findViewById(R.id.background);
-        //background.setBackgroundResource(R.drawable.background_win);
+            //Replace le levier au top
+            levier=findViewById(R.id.levier);
+            levier.animate()
+                    .y(0)
+                    .setDuration(500)
+                    .start();
+
+
 
         Log.i("MaS","Verif lancée");
 
-        //todo: accesseurs, pas publics
+
         String[] sequence1=rouleauAsync1.rouleau.getAffichage();
         String[] sequence2=rouleauAsync2.rouleau.getAffichage();
         String[] sequence3=rouleauAsync3.rouleau.getAffichage();
@@ -282,9 +273,28 @@ public class MainActivity extends AppCompatActivity implements AsyncListener, Po
         Log.i("MaS","Rouleau 2: "+sequence2[0]+" "+sequence2[1]+" "+sequence2[2]);
         Log.i("MaS","Rouleau 3: "+sequence3[0]+" "+sequence3[1]+" "+sequence3[2]);
 
-        //Vérifications
+        for(int i=0;i<3;i++){
+            //tests lignes
+            if(sequence1[i].equals(sequence2[i])&&sequence2[i].equals(sequence3[i])){
+                LinearLayout background=findViewById(R.id.background);
+                background.setBackgroundResource(R.drawable.background_win);
 
+                Log.i("MaS","WIN EN LIGNE "+(i+1)+", symbole: "+sequence1[i]);
+            }
+        }
 
+        if(sequence1[0].equals(sequence2[1])&&sequence2[1].equals(sequence3[2])){
+            LinearLayout background=findViewById(R.id.background);
+            background.setBackgroundResource(R.drawable.background_win);
+
+            Log.i("MaS","WIN EN DIAGONALE , symbole: "+sequence1[0]);
+        }
+        if(sequence1[2].equals(sequence2[1])&&sequence2[1].equals(sequence3[0])){
+            LinearLayout background=findViewById(R.id.background);
+            background.setBackgroundResource(R.drawable.background_win);
+
+            Log.i("MaS","WIN EN DIAGONALE , symbole: "+sequence1[2]);
+        }
     }
 
 
@@ -378,8 +388,6 @@ public class MainActivity extends AppCompatActivity implements AsyncListener, Po
     public void correctionPosition(int id){
         id--;
 
-        Log.i("MaS",countPos[id]+ " "+rouleauxAsync[id].rouleau.getRoll());
-
         int cases[]=new int[4];
 
 
@@ -448,6 +456,9 @@ public class MainActivity extends AppCompatActivity implements AsyncListener, Po
     @Override
     public void onComplete(int numRouleau, String prochain){
         correctionPosition(numRouleau);
+        if(!jeu.estLance){
+            verifRouleaux();
+        }
     }
 
 

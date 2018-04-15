@@ -378,8 +378,7 @@
                 android:layout_width="50dp"
                 android:layout_height="50dp"
                 android:background="@drawable/stopper"
-                android:onClick="arretRouleau"
-                android:text="X" />
+                android:onClick="arretRouleau"/>
 
             <Button
                 android:id="@+id/button-stop2"
@@ -388,16 +387,14 @@
                 android:layout_marginLeft="20dp"
                 android:layout_marginRight="20dp"
                 android:background="@drawable/stopper"
-                android:onClick="arretRouleau"
-                android:text="X" />
+                android:onClick="arretRouleau"/>
 
             <Button
                 android:id="@+id/button-stop3"
                 android:layout_width="50dp"
                 android:layout_height="50dp"
                 android:background="@drawable/stopper"
-                android:onClick="arretRouleau"
-                android:text="X" />
+                android:onClick="arretRouleau"/>
 
 
         </LinearLayout>

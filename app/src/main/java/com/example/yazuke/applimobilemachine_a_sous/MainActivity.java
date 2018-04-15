@@ -152,11 +152,18 @@ public class MainActivity extends AppCompatActivity implements AsyncListener, Po
                                     .start();
                         }
 
-                        if(view.getY()>=findViewById(R.id.target).getY()){//Est rentré dans la zone de detection, on lance le jeu
-                            if(!jeu.estLance){                          //Evite de lancer plusieurs fois le jeu
+                        //Est rentré dans la zone de detection, on lance le jeu
+                        if(view.getY()>=findViewById(R.id.target).getY()){
+                            //Evite de lancer plusieurs fois le jeu
+                            if(!jeu.estLance){
 
+                                //Remet le fond par défaut
+                                backgroundDefault();
+
+                                //Démarre le jeu
                                 jeu.demarrer();
 
+                                //Remet les boutons par défaut
                                 resetBoutons();
 
                                 //Crée les async tasks, une par rouleau
@@ -178,8 +185,8 @@ public class MainActivity extends AppCompatActivity implements AsyncListener, Po
                         break;
 
                     //Lors du relachement du bouton
+                    //Evite les blocages, si le levier sort du cadre, on le replace correctement
                     case MotionEvent.ACTION_UP:
-                        //Evite les blocages, si le levier sort du cadre, on le replace correctement
 
                         //Si le levier est trop haut
                         if(view.getY()<0)
@@ -261,9 +268,6 @@ public class MainActivity extends AppCompatActivity implements AsyncListener, Po
                 .y(0)
                 .setDuration(500)
                 .start();
-
-        //Remet le fond par défaut
-        backgroundDefault();
 
         //Récupère les trois symboles affichés
         String[] sequence1=rouleauAsync1.getRouleau().getAffichage();

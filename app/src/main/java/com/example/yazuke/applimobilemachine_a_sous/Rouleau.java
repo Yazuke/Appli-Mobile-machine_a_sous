@@ -152,10 +152,11 @@ public class Rouleau {
         }
         return res;
     }
-    public String getSequenceAffichee(){
-        String res=new String();
+    public String[] getSequenceAffichee(){
+        String[] res=new String[3];
+
         for (int i=0;i<3;i++){
-            res+=sequenceAffichee[i]+" ";
+            res[i]=sequenceAffichee[i]+" ";
         }
         return res;
     }
@@ -163,6 +164,16 @@ public class Rouleau {
     public String getSequenceAffichee(int n){
         return sequenceAffichee[n];
     }
-    public String getCaseAffichee(int i){return sequenceAffichee[i];}
+    public String get1(){return sequence[(roll+1)%8];}
+    public String get2(){return sequence[(roll+2)%8];}
+    public String get3(){return sequence[(roll+3)%8];}
+    public String[] getAffichage(){
+        String[] res=new String[3];
+        res[0]=sequence[(roll+1)%8];
+        res[1]=sequence[(roll+2)%8];
+        res[2]=sequence[(roll+3)%8];
+
+        return res;
+    }
     public String getProchain(){return sequence[(roll+3)%8];}
 }

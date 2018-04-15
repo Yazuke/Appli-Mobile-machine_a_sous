@@ -143,7 +143,7 @@
                         android:id="@+id/r1_0"
                         android:layout_width="50dp"
                         android:layout_height="50dp"
-                        android:src="@drawable/cloche" />
+                        android:src="@drawable/fraise" />
                 </FrameLayout>
 
                 <FrameLayout
@@ -159,7 +159,7 @@
                         android:id="@+id/r1_1"
                         android:layout_width="50dp"
                         android:layout_height="50dp"
-                        android:src="@drawable/orange" />
+                        android:src="@drawable/cloche" />
                 </FrameLayout>
 
                 <FrameLayout
@@ -192,8 +192,16 @@
                         android:layout_width="50dp"
                         android:layout_height="50dp"
                         android:src="@drawable/fraise"/>
+
                 </FrameLayout>
 
+                <FrameLayout
+                    android:id="@+id/baseBottom"
+                    android:layout_marginTop="20dp"
+                    android:layout_below="@id/f1_2"
+                    android:layout_marginLeft="4dp"
+                    android:layout_width="50dp"
+                    android:layout_height="50dp" />
 
                 <FrameLayout
                     android:id="@+id/f2_0"

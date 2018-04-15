@@ -28,10 +28,11 @@ public class MainActivity extends AppCompatActivity implements AsyncListener, Po
     private RouleauAsync rouleauAsync1;
     private RouleauAsync rouleauAsync2;
     private RouleauAsync rouleauAsync3;
-
+    private RouleauAsync[] rouleauxAsync=new RouleauAsync[3];
     private float distance;
 
     private FrameLayout baseTop;
+    private FrameLayout baseBottom;
 
     private int[] countPos=new int[3];
     private long tempsRotation=200;
@@ -99,6 +100,7 @@ public class MainActivity extends AppCompatActivity implements AsyncListener, Po
 
 
         this.baseTop=findViewById(R.id.baseTop);
+        this.baseBottom=findViewById(R.id.baseBottom);
 
 
         this.distance = getResources().getDimensionPixelSize(R.dimen.distance);
@@ -160,6 +162,9 @@ public class MainActivity extends AppCompatActivity implements AsyncListener, Po
                                 rouleauAsync2 = new RouleauAsync(MainActivity.this,2, countPos[1]);
                                 rouleauAsync3 = new RouleauAsync(MainActivity.this,3, countPos[2]);
 
+                                rouleauxAsync[0]=rouleauAsync1;
+                                rouleauxAsync[1]=rouleauAsync2;
+                                rouleauxAsync[2]=rouleauAsync3;
 
                                 //Lance les trois async tasks simultanément, en threads
                                 rouleauAsync1.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
@@ -204,34 +209,30 @@ public class MainActivity extends AppCompatActivity implements AsyncListener, Po
         if(this.jeu.nbIterations!=0){   //Evite les actions sur un jeu non lancé
             switch(v.getId()){
                 case R.id.button_stop1:
-                    Log.i("MaS","Arrêt rouleau 1");
+                    Log.i("MaS","--X-1-X--");
                     rouleauAsync1.cancel=true;
                     jeu.arreter(1);
                     findViewById(R.id.button_stop1).setBackgroundResource(R.drawable.stopped);
                     break;
                 case R.id.button_stop2:
-                    Log.i("MaS","Arrêt rouleau 2");
+                    Log.i("MaS","--X-2-X--");
                     rouleauAsync2.cancel=true;
                     jeu.arreter(2);
                     findViewById(R.id.button_stop2).setBackgroundResource(R.drawable.stopped);
                     break;
                 case R.id.button_stop3:
-                    Log.i("MaS","Arrêt rouleau 3");
+                    Log.i("MaS","--X-3-X--");
                     rouleauAsync3.cancel=true;
                     jeu.arreter(3);
                     findViewById(R.id.button_stop3).setBackgroundResource(R.drawable.stopped);
                     break;
             }
 
-            //Change le background si victoire
-            if(jeu.victoire){
+
+            if(jeu.fini){
                 Log.i("MaS","Jeu fini");
-
-                //Change le background pour celui éclairé
-                //LinearLayout background=findViewById(R.id.background);
-                //background.setBackgroundResource(R.drawable.background_win);
-
                 jeu.estLance=false;
+
                 //Remet les boutons dans un été non cliqué
                 resetBoutons();
 
@@ -242,6 +243,8 @@ public class MainActivity extends AppCompatActivity implements AsyncListener, Po
                         .setDuration(500)
                         .start();
 
+                //Lance la vérification des rouleaux
+                verifRouleaux();
             }
         }
 
@@ -252,6 +255,35 @@ public class MainActivity extends AppCompatActivity implements AsyncListener, Po
         findViewById(R.id.button_stop1).setBackgroundResource(R.drawable.stopper);
         findViewById(R.id.button_stop2).setBackgroundResource(R.drawable.stopper);
         findViewById(R.id.button_stop3).setBackgroundResource(R.drawable.stopper);
+    }
+
+
+
+    ////////////////////////////
+    //-- Verif des rouleaux --//
+    ////////////////////////////
+
+
+    public void verifRouleaux(){
+
+        //Change le background pour celui éclairé
+        //LinearLayout background=findViewById(R.id.background);
+        //background.setBackgroundResource(R.drawable.background_win);
+
+        Log.i("MaS","Verif lancée");
+
+        //todo: accesseurs, pas publics
+        String[] sequence1=rouleauAsync1.rouleau.getAffichage();
+        String[] sequence2=rouleauAsync2.rouleau.getAffichage();
+        String[] sequence3=rouleauAsync3.rouleau.getAffichage();
+
+
+        Log.i("MaS","Rouleau 1: "+sequence1[0]+" "+sequence1[1]+" "+sequence1[2]);
+        Log.i("MaS","Rouleau 2: "+sequence2[0]+" "+sequence2[1]+" "+sequence2[2]);
+        Log.i("MaS","Rouleau 3: "+sequence3[0]+" "+sequence3[1]+" "+sequence3[2]);
+
+        //Vérifications
+
 
     }
 
@@ -262,196 +294,143 @@ public class MainActivity extends AppCompatActivity implements AsyncListener, Po
     ////////////////////////////////
 
 
-
     public void animationRouleau(int id,String prochain){
         id--;
         tempsRotation=RouleauAsync.temps;
         tempsRotation/=(id+1);
 
+        int cases[]=new int[4];
+
+
         Interpolator interpolator=new LinearInterpolator();
 
         switch(countPos[id]%4) {
             case 0:
-                switch(prochain){
-                    //On remplace l'image 0 du rouleau choisi (id) par l'image correspondante
-                    case "C": affichageRouleaux[id][3].setImageResource(R.drawable.cerise);break;
-                    case "Ci": affichageRouleaux[id][3].setImageResource(R.drawable.citron);break;
-                    case "Cl": affichageRouleaux[id][3].setImageResource(R.drawable.cloche);break;
-                    case "F": affichageRouleaux[id][3].setImageResource(R.drawable.fraise);break;
-                    case "O": affichageRouleaux[id][3].setImageResource(R.drawable.orange);break;
-                    case "P": affichageRouleaux[id][3].setImageResource(R.drawable.pasteque);break;
-                    case "R": affichageRouleaux[id][3].setImageResource(R.drawable.raisin);break;
-                    case "7": affichageRouleaux[id][3].setImageResource(R.drawable.sept);break;
-                }
-                //renvoie top
-                layoutRouleaux[id][3].animate()
-                        .y(baseTop.getY())
-                        .setStartDelay(0)
-                        .setDuration(0)
-                        .start();
-
-
-                layoutRouleaux[id][0].animate()
-                        .y(layoutRouleaux[id][0].getY() + distance)
-                        .setInterpolator(interpolator)
-                        .setDuration(tempsRotation)
-                        .start();
-                layoutRouleaux[id][1].animate()
-                        .y(layoutRouleaux[id][1].getY() + distance)
-                        .setInterpolator(interpolator)
-                        .setDuration(tempsRotation)
-                        .start();
-
-                layoutRouleaux[id][2].animate()
-                        .y(layoutRouleaux[id][2].getY() + distance)
-                        .setInterpolator(interpolator)
-                        .setDuration(tempsRotation)
-                        .start();
-                layoutRouleaux[id][3].animate()
-                        .y(layoutRouleaux[id][3].getY() + distance)
-                        .setInterpolator(interpolator)
-                        .setDuration(tempsRotation)
-                        .start();
-
-
+                cases[0] = 0;
+                cases[1] = 1;
+                cases[2] = 2;
+                cases[3] = 3;
                 break;
             case 1:
-                switch(prochain){
-                    //On remplace l'image 0 du rouleau choisi (id) par l'image correspondante
-                    case "C": affichageRouleaux[id][2].setImageResource(R.drawable.cerise);break;
-                    case "Ci": affichageRouleaux[id][2].setImageResource(R.drawable.citron);break;
-                    case "Cl": affichageRouleaux[id][2].setImageResource(R.drawable.cloche);break;
-                    case "F": affichageRouleaux[id][2].setImageResource(R.drawable.fraise);break;
-                    case "O": affichageRouleaux[id][2].setImageResource(R.drawable.orange);break;
-                    case "P": affichageRouleaux[id][2].setImageResource(R.drawable.pasteque);break;
-                    case "R": affichageRouleaux[id][2].setImageResource(R.drawable.raisin);break;
-                    case "7": affichageRouleaux[id][2].setImageResource(R.drawable.sept);break;
-                }
-                //renvoie top
-                layoutRouleaux[id][2].animate()
-                        .y(baseTop.getY())
-                        .setStartDelay(0)
-                        .setDuration(0)
-                        .start();
-
-
-                layoutRouleaux[id][3].animate()
-                        .y(layoutRouleaux[id][3].getY() + distance)
-                        .setInterpolator(interpolator)
-                        .setDuration(tempsRotation)
-                        .start();
-                layoutRouleaux[id][0].animate()
-                        .y(layoutRouleaux[id][0].getY() + distance)
-                        .setInterpolator(interpolator)
-                        .setDuration(tempsRotation)
-                        .start();
-
-                layoutRouleaux[id][1].animate()
-                        .y(layoutRouleaux[id][1].getY() + distance)
-                        .setInterpolator(interpolator)
-                        .setDuration(tempsRotation)
-                        .start();
-
-                layoutRouleaux[id][2].animate()
-                        .y(layoutRouleaux[id][2].getY() + distance)
-                        .setInterpolator(interpolator)
-                        .setDuration(tempsRotation)
-                        .start();
-
+                cases[0] = 3;
+                cases[1] = 0;
+                cases[2] = 1;
+                cases[3] = 2;
                 break;
             case 2:
-                switch(prochain){
-                    //On remplace l'image 0 du rouleau choisi (id) par l'image correspondante
-                    case "C": affichageRouleaux[id][1].setImageResource(R.drawable.cerise);break;
-                    case "Ci": affichageRouleaux[id][1].setImageResource(R.drawable.citron);break;
-                    case "Cl": affichageRouleaux[id][1].setImageResource(R.drawable.cloche);break;
-                    case "F": affichageRouleaux[id][1].setImageResource(R.drawable.fraise);break;
-                    case "O": affichageRouleaux[id][1].setImageResource(R.drawable.orange);break;
-                    case "P": affichageRouleaux[id][1].setImageResource(R.drawable.pasteque);break;
-                    case "R": affichageRouleaux[id][1].setImageResource(R.drawable.raisin);break;
-                    case "7": affichageRouleaux[id][1].setImageResource(R.drawable.sept);break;
-                }
-
-                //renvoie top
-                layoutRouleaux[id][1].animate()
-                        .y(baseTop.getY())
-                        .setStartDelay(0)
-                        .setDuration(0)
-                        .start();
-
-
-                layoutRouleaux[id][2].animate()
-                        .y(layoutRouleaux[id][2].getY() + distance)
-                        .setInterpolator(interpolator)
-                        .setDuration(tempsRotation)
-                        .start();
-                layoutRouleaux[id][3].animate()
-                        .y(layoutRouleaux[id][3].getY() + distance)
-                        .setInterpolator(interpolator)
-                        .setDuration(tempsRotation)
-                        .start();
-
-                layoutRouleaux[id][0].animate()
-                        .y(layoutRouleaux[id][0].getY() + distance)
-                        .setInterpolator(interpolator)
-                        .setDuration(tempsRotation)
-                        .start();
-
-                layoutRouleaux[id][1].animate()
-                        .y(layoutRouleaux[id][1].getY() + distance)
-                        .setInterpolator(interpolator)
-                        .setDuration(tempsRotation)
-                        .start();
-
+                cases[0] = 2;
+                cases[1] = 3;
+                cases[2] = 0;
+                cases[3] = 1;
                 break;
             case 3:
-                switch(prochain){
-                    //On remplace l'image 0 du rouleau choisi (id) par l'image correspondante
-                    case "C": affichageRouleaux[id][0].setImageResource(R.drawable.cerise);break;
-                    case "Ci": affichageRouleaux[id][0].setImageResource(R.drawable.citron);break;
-                    case "Cl": affichageRouleaux[id][0].setImageResource(R.drawable.cloche);break;
-                    case "F": affichageRouleaux[id][0].setImageResource(R.drawable.fraise);break;
-                    case "O": affichageRouleaux[id][0].setImageResource(R.drawable.orange);break;
-                    case "P": affichageRouleaux[id][0].setImageResource(R.drawable.pasteque);break;
-                    case "R": affichageRouleaux[id][0].setImageResource(R.drawable.raisin);break;
-                    case "7": affichageRouleaux[id][0].setImageResource(R.drawable.sept);break;
-                }
-
-                //renvoie top
-                layoutRouleaux[id][0].animate()
-                        .y(baseTop.getY())
-                        .setStartDelay(0)
-                        .setDuration(0)
-                        .start();
-
-                layoutRouleaux[id][1].animate()
-                        .y(layoutRouleaux[id][1].getY() + distance)
-                        .setInterpolator(interpolator)
-                        .setDuration(tempsRotation)
-                        .start();
-                layoutRouleaux[id][2].animate()
-                        .y(layoutRouleaux[id][2].getY() + distance)
-                        .setInterpolator(interpolator)
-                        .setDuration(tempsRotation)
-                        .start();
-
-                layoutRouleaux[id][3].animate()
-                        .y(layoutRouleaux[id][3].getY() + distance)
-                        .setInterpolator(interpolator)
-                        .setDuration(tempsRotation)
-                        .start();
-
-                layoutRouleaux[id][0].animate()
-                        .y(layoutRouleaux[id][0].getY() + distance)
-                        .setInterpolator(interpolator)
-                        .setDuration(tempsRotation)
-                        .start();
+                cases[0] = 1;
+                cases[1] = 2;
+                cases[2] = 3;
+                cases[3] = 0;
                 break;
-
         }
+
+            switch(prochain){
+                //On remplace l'image 0 du rouleau choisi (id) par l'image correspondante
+                case "C": affichageRouleaux[id][cases[3]].setImageResource(R.drawable.cerise);break;
+                case "Ci": affichageRouleaux[id][cases[3]].setImageResource(R.drawable.citron);break;
+                case "Cl": affichageRouleaux[id][cases[3]].setImageResource(R.drawable.cloche);break;
+                case "F": affichageRouleaux[id][cases[3]].setImageResource(R.drawable.fraise);break;
+                case "O": affichageRouleaux[id][cases[3]].setImageResource(R.drawable.orange);break;
+                case "P": affichageRouleaux[id][cases[3]].setImageResource(R.drawable.pasteque);break;
+                case "R": affichageRouleaux[id][cases[3]].setImageResource(R.drawable.raisin);break;
+                case "7": affichageRouleaux[id][cases[3]].setImageResource(R.drawable.sept);break;
+            }
+            //renvoie top
+            layoutRouleaux[id][cases[3]].animate()
+                    .y(baseTop.getY())
+                    .setStartDelay(0)
+                    .setDuration(0)
+                    .start();
+
+            layoutRouleaux[id][cases[0]].animate()
+                    .y(layoutRouleaux[id][cases[0]].getY() + distance)
+                    .setInterpolator(interpolator)
+                    .setDuration(tempsRotation)
+                    .start();
+            layoutRouleaux[id][cases[1]].animate()
+                    .y(layoutRouleaux[id][cases[1]].getY() + distance)
+                    .setInterpolator(interpolator)
+                    .setDuration(tempsRotation)
+                    .start();
+
+            layoutRouleaux[id][cases[2]].animate()
+                    .y(layoutRouleaux[id][cases[2]].getY() + distance)
+                    .setInterpolator(interpolator)
+                    .setDuration(tempsRotation)
+                    .start();
+            layoutRouleaux[id][cases[3]].animate()
+                    .y(layoutRouleaux[id][cases[3]].getY() + distance)
+                    .setInterpolator(interpolator)
+                    .setDuration(tempsRotation)
+                    .start();
+
             this.countPos[id]++;
     }
 
+
+    public void correctionPosition(int id){
+        id--;
+
+        Log.i("MaS",countPos[id]+ " "+rouleauxAsync[id].rouleau.getRoll());
+
+        int cases[]=new int[4];
+
+
+        switch(countPos[id]%4) {
+            case 0:
+                cases[0] = 0;
+                cases[1] = 1;
+                cases[2] = 2;
+                cases[3] = 3;
+                break;
+            case 1:
+                cases[0] = 3;
+                cases[1] = 0;
+                cases[2] = 1;
+                cases[3] = 2;
+                break;
+            case 2:
+                cases[0] = 2;
+                cases[1] = 3;
+                cases[2] = 0;
+                cases[3] = 1;
+                break;
+            case 3:
+                cases[0] = 1;
+                cases[1] = 2;
+                cases[2] = 3;
+                cases[3] = 0;
+                break;
+        }
+
+        layoutRouleaux[id][cases[0]].animate()
+                .y(baseTop.getY()+distance)
+                .setDuration(300)
+                .start();
+
+        layoutRouleaux[id][cases[1]].animate()
+                .y(baseTop.getY()+(distance*2))
+                .setDuration(300)
+                .start();
+
+        layoutRouleaux[id][cases[2]].animate()
+                .y(baseTop.getY()+(distance*3))
+                .setDuration(300)
+                .start();
+
+        layoutRouleaux[id][cases[3]].animate()
+                .y(baseTop.getY()+(distance*4))
+                .setDuration(300)
+                .start();
+
+    }
 
 
     ///////////////////////////////////
@@ -462,14 +441,14 @@ public class MainActivity extends AppCompatActivity implements AsyncListener, Po
     //On reçoit les informations grace à AsyncListener qui fait le lien avec les AsyncTasks
     @Override
     public void onProgressUpdate(int numRouleau,String prochain) {      //Récéption d'un numéro de rouleau lorsqu'il fait un tour et du prochain symbole à arriver
-
         animationRouleau(numRouleau,prochain);
-
     }
 
 
     @Override
-    public void onComplete(int numRouleau){}
+    public void onComplete(int numRouleau, String prochain){
+        correctionPosition(numRouleau);
+    }
 
 
     @Override

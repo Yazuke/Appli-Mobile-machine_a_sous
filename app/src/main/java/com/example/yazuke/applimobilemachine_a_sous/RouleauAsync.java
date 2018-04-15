@@ -8,7 +8,7 @@ public class RouleauAsync
 
     private final AsyncListener listener;
     private int id;
-    private Rouleau rouleau;
+    public Rouleau rouleau;
     public boolean cancel;
     public static long temps=500L;
 
@@ -20,6 +20,9 @@ public class RouleauAsync
         cancel=false;
     }
 
+    public String[] getSequenceAffichee(){
+        return this.rouleau.getSequenceAffichee();
+    }
 
 
 
@@ -36,8 +39,8 @@ public class RouleauAsync
             try {
                 Thread.sleep(temps/id);
                 this.rouleau.roll();
+                publishProgress();
             } catch (InterruptedException e) {e.printStackTrace();}
-            publishProgress();
         }
         return "Executed";
     }
@@ -54,6 +57,6 @@ public class RouleauAsync
     @Override
     protected void onPostExecute(String result) {
         super.onPostExecute(result);
-        listener.onComplete(this.id);
+        listener.onComplete(this.id,this.rouleau.getProchain());
     }
 }

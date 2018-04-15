@@ -416,6 +416,11 @@ public class MainActivity extends AppCompatActivity implements AsyncListener, Po
     public void correctionPosition(int id){
         id--;   //puisque le rouleau 1 a l'id 0
 
+
+        //Récupère le temps de rotation d'un rouleauAsync (pour permettre une animation propre)
+        tempsRotation=RouleauAsync.temps;
+        tempsRotation/=(id+1);
+
         //Permet d'optimiser le code et ne pas répéter toutes les opérations dans le switch qui suit
         int cases[]=new int[4];
 
@@ -450,22 +455,22 @@ public class MainActivity extends AppCompatActivity implements AsyncListener, Po
         //Fixe les cases à leur emplacement défini
         layoutRouleaux[id][cases[0]].animate()
                 .y(baseTop.getY()+distance)
-                .setDuration(300)
+                .setDuration(tempsRotation)
                 .start();
 
         layoutRouleaux[id][cases[1]].animate()
                 .y(baseTop.getY()+(distance*2))
-                .setDuration(300)
+                .setDuration(tempsRotation)
                 .start();
 
         layoutRouleaux[id][cases[2]].animate()
                 .y(baseTop.getY()+(distance*3))
-                .setDuration(300)
+                .setDuration(tempsRotation)
                 .start();
 
         layoutRouleaux[id][cases[3]].animate()
                 .y(baseTop.getY()+(distance*4))
-                .setDuration(300)
+                .setDuration(tempsRotation)
                 .start();
     }
 

@@ -419,7 +419,6 @@ public class MainActivity extends AppCompatActivity implements AsyncListener, Po
 
         //Récupère le temps de rotation d'un rouleauAsync (pour permettre une animation propre)
         tempsRotation=RouleauAsync.temps;
-        tempsRotation/=(id+1);
 
         //Permet d'optimiser le code et ne pas répéter toutes les opérations dans le switch qui suit
         int cases[]=new int[4];

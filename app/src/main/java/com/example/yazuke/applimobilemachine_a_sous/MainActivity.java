@@ -259,16 +259,6 @@ public class MainActivity extends AppCompatActivity implements AsyncListener, Po
 
 
     public void verifRouleaux(){
-        //Remet les boutons dans un état non cliqué
-        resetBoutons();
-
-        //Replace le levier au top
-        levier=findViewById(R.id.levier);
-        levier.animate()
-                .y(0)
-                .setDuration(500)
-                .start();
-
         //Récupère les trois symboles affichés
         String[] sequence1=rouleauAsync1.getRouleau().getAffichage();
         String[] sequence2=rouleauAsync2.getRouleau().getAffichage();
@@ -280,22 +270,40 @@ public class MainActivity extends AppCompatActivity implements AsyncListener, Po
         Log.i("MaS","Rouleau 3: "+sequence3[0]+" "+sequence3[1]+" "+sequence3[2]);
 
 
+        boolean victoire=false;
+
         //Teste chaque ligne horizontale pour voir si elle est gagnante
         for(int i=0;i<3;i++){
             if(sequence1[i].equals(sequence2[i])&&sequence2[i].equals(sequence3[i])){
-                backgroundWin();
+                victoire=true;
                 Log.i("MaS","WIN EN LIGNE "+(i+1)+", symbole: "+sequence1[i]);
             }
         }
 
         //Teste les diagonales
         if(sequence1[0].equals(sequence2[1])&&sequence2[1].equals(sequence3[2])){
-            backgroundWin();
+            victoire=true;
             Log.i("MaS","WIN EN DIAGONALE , symbole: "+sequence1[0]);
         }
         if(sequence1[2].equals(sequence2[1])&&sequence2[1].equals(sequence3[0])){
-            backgroundWin();
+            victoire=true;
             Log.i("MaS","WIN EN DIAGONALE , symbole: "+sequence1[2]);
+        }
+
+        //Fait clignoter le fond
+        if(victoire){
+            Blinker blinker=new Blinker();
+            blinker.execute(1);
+        }else{
+            //Replace le levier au top
+            levier=findViewById(R.id.levier);
+            levier.animate()
+                    .y(0)
+                    .setDuration(500)
+                    .start();
+
+            //Remet les boutons dans un état non cliqué
+            resetBoutons();
         }
     }
 
@@ -309,6 +317,7 @@ public class MainActivity extends AppCompatActivity implements AsyncListener, Po
     //Change le fond pour celui de victoire
     public void backgroundWin(){
         LinearLayout background=findViewById(R.id.background);
+
         background.setBackgroundResource(R.drawable.background_win);
     }
 
@@ -550,7 +559,61 @@ public class MainActivity extends AppCompatActivity implements AsyncListener, Po
 
     public void quitApp(){finish();}
 
+
+
+
+
+
+
+    ///////////////////////////////////////////
+    //-- Clignotement du fond (async task) --//
+    ///////////////////////////////////////////
+
+
+    private class Blinker extends AsyncTask<Integer, Integer, Integer> {
+        private boolean on=false;
+        private boolean fini=false;
+        //Chaque 800ms, envoie publishProgress()
+        @Override
+        protected Integer doInBackground(Integer...params) {
+            int i=0;
+            while(i<4){
+                if (i==3)
+                    fini=true;
+                try {
+                    on=!on;
+                    i++;
+                    Thread.sleep(800);
+                    publishProgress();
+                } catch (InterruptedException e) {e.printStackTrace();}
+            }
+            return 1;
+        }
+
+        //Change le fond pour l'autre afin de créer un clignotement
+        //Une fois fini, on replace le levier et reset boutons
+        @Override
+        protected void onProgressUpdate(Integer...params){
+            if(on)
+                backgroundDefault();
+            else
+                backgroundWin();
+
+            if(fini){
+                //Replace le levier au top
+                levier=findViewById(R.id.levier);
+                levier.animate()
+                        .y(0)
+                        .setDuration(500)
+                        .start();
+
+                resetBoutons();
+            }
+        }
+    }
+
 }
+
 
 
 

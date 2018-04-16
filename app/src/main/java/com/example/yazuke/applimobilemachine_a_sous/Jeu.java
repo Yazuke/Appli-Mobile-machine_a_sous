@@ -19,13 +19,6 @@ public class Jeu {
     // -- Démarrage du jeu -- //
     ////////////////////////////
 
-    //IMPORTANT/////////
-
-    //Les threads sont remplacés par des AsyncTasks dans le MainActivity
-    //La classe jeu va juste servir à gérer les mises, les tests de victoire etc mais pas les rouleaux eux mêmes
-
-    //////////////////
-
 
     public void demarrer(){
         nbIterations++;

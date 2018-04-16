@@ -1,8 +1,6 @@
 package com.example.yazuke.applimobilemachine_a_sous;
 
 import android.content.Intent;
-import android.graphics.Color;
-import android.media.Image;
 import android.os.AsyncTask;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -33,7 +31,6 @@ public class MainActivity extends AppCompatActivity implements AsyncListener, Po
     private float distance;
 
     private FrameLayout baseTop;
-    private FrameLayout baseBottom;
 
     private int[] countPos=new int[3];
     private long tempsRotation=200;
@@ -102,7 +99,6 @@ public class MainActivity extends AppCompatActivity implements AsyncListener, Po
 
         //Layouts invisibles utilisés comme références
         this.baseTop=findViewById(R.id.baseTop);
-        this.baseBottom=findViewById(R.id.baseBottom);
 
         this.distance = getResources().getDimensionPixelSize(R.dimen.distance);
 
@@ -217,27 +213,29 @@ public class MainActivity extends AppCompatActivity implements AsyncListener, Po
 
         //Arrete le rouleau et l'async Task liés au bouton d'arret
         if (this.jeu.nbIterations != 0) {   //Evite les actions sur un jeu non lancé
-            switch (v.getId()) {
-                case R.id.button_stop1:
-                    Log.i("MaS", "--X-1-X--");
-                    rouleauAsync1.cancel = true;
-                    jeu.arreter(1);
-                    findViewById(R.id.button_stop1).setBackgroundResource(R.drawable.stopped);
-                    break;
-                case R.id.button_stop2:
-                    Log.i("MaS", "--X-2-X--");
-                    rouleauAsync2.cancel = true;
-                    jeu.arreter(2);
-                    findViewById(R.id.button_stop2).setBackgroundResource(R.drawable.stopped);
-                    break;
-                case R.id.button_stop3:
-                    Log.i("MaS", "--X-3-X--");
-                    rouleauAsync3.cancel = true;
-                    jeu.arreter(3);
-                    findViewById(R.id.button_stop3).setBackgroundResource(R.drawable.stopped);
-                    break;
+            if(!jeu.fini){
+                switch (v.getId()) {
+                    case R.id.button_stop1:
+                        Log.i("MaS", "--X-1-X--");
+                        rouleauAsync1.cancel = true;
+                        jeu.arreter(1);
+                        findViewById(R.id.button_stop1).setBackgroundResource(R.drawable.stopped);
+                        break;
+                    case R.id.button_stop2:
+                        Log.i("MaS", "--X-2-X--");
+                        rouleauAsync2.cancel = true;
+                        jeu.arreter(2);
+                        findViewById(R.id.button_stop2).setBackgroundResource(R.drawable.stopped);
+                        break;
+                    case R.id.button_stop3:
+                        Log.i("MaS", "--X-3-X--");
+                        rouleauAsync3.cancel = true;
+                        jeu.arreter(3);
+                        findViewById(R.id.button_stop3).setBackgroundResource(R.drawable.stopped);
+                        break;
+                }
             }
-            if (jeu.fini) {
+            if(jeu.fini){
                 Log.i("MaS", "Jeu fini");
                 jeu.estLance = false;
             }

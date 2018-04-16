@@ -1,7 +1,6 @@
 package com.example.yazuke.applimobilemachine_a_sous;
 
 import android.os.AsyncTask;
-import android.util.Log;
 
 public class RouleauAsync
         extends AsyncTask<Void, Integer, String> {

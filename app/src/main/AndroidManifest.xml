@@ -9,15 +9,21 @@
         android:roundIcon="@mipmap/cherry"
         android:supportsRtl="true"
         android:theme="@style/Theme.AppCompat.Light.NoActionBar.FullScreen">
-        <activity android:name=".MainActivity"
+        <activity android:name=".Login"
             android:screenOrientation="landscape">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity android:name=".Inscription"
+            android:screenOrientation="landscape"/>
 
-        <activity android:name=".ComboActivity"
+        <activity android:name=".MainActivity"
+            android:screenOrientation="landscape">
+        </activity>
+
+        <activity android:name=".ComboActivity$ComboActivity"
             android:screenOrientation="landscape"/>
     </application>
 

@@ -11,4 +11,9 @@
     <string name="menu3">Leaderboard</string>
     <string name="menu4">Quit</string>
     <string name="retour">Retour_au_jeu</string>
+    <string name="casino">CASINO</string>
+    <string name="pseudo">Pseudo :</string>
+    <string name="mdp">Mot de passe :</string>
+    <string name="sign_in">Envoyer</string>
+    <string name="sign_up">Inscription</string>
 </resources>

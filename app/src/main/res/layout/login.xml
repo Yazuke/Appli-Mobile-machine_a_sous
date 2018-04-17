@@ -5,7 +5,7 @@
     android:layout_height="match_parent">
 
     <LinearLayout
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="0dp"
         android:orientation="vertical"
         android:layout_weight="1">
@@ -28,63 +28,79 @@
     </LinearLayout>
 
 
-    <LinearLayout
-        android:layout_width="wrap_content"
+    <RelativeLayout
+        android:layout_width="match_parent"
         android:layout_height="0dp"
+        android:layout_weight="2"
         android:orientation="vertical"
-        android:layout_weight="1">
+        android:textAlignment="center">
 
         <LinearLayout
             android:layout_width="wrap_content"
-            android:layout_height="0dp"
-            android:orientation="horizontal"
-            android:layout_weight="1">
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:id="@+id/layout_user1">
 
-            <TextView
+            <Button
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textAlignment="center"
-                android:textSize="40px"
-                android:text="@string/pseudo" />
-            <EditText
-                android:id="@+id/pseudo"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content" />
+                android:layout_marginTop="20dp"
+                android:text="Utilisateur 1"
+                android:onClick="jeu"
+                android:id="@+id/user1" />
+
+            <Button
+                android:layout_width="40dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:text="X" />
 
         </LinearLayout>
+
         <LinearLayout
             android:layout_width="wrap_content"
-            android:layout_height="0dp"
-            android:orientation="horizontal"
-            android:layout_weight="1">
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:layout_below="@+id/layout_user1"
+            android:layout_marginTop="20dp"
+            android:id="@+id/layout_user2">
 
-            <TextView
+            <Button
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textAlignment="center"
-                android:text="@string/mdp"
-                android:textSize="40px"/>
-            <EditText
-                android:id="@+id/mdp"
-                android:layout_width="wrap_content"
-                android:inputType="textPassword"
-                android:layout_height="wrap_content" />
+                android:text="Utilisateur 2"
+                android:onClick="jeu"
+                android:id="@+id/user2" />
 
+            <Button
+                android:layout_width="40dp"
+                android:layout_height="wrap_content"
+                android:text="X" />
         </LinearLayout>
 
-        <Button
+        <LinearLayout
             android:layout_width="wrap_content"
-            android:textAlignment="center"
             android:layout_height="wrap_content"
-            android:onClick="connect"
-            android:text="@string/sign_in" />
-        <Button
-            android:layout_width="wrap_content"
-            android:textAlignment="center"
-            android:layout_height="wrap_content"
-            android:onClick="inscription"
-            android:text="@string/sign_up" />
-    </LinearLayout>
+            android:layout_centerHorizontal="true"
+            android:layout_below="@+id/layout_user2"
+            android:layout_marginTop="20dp"
+            android:id="@+id/layout_user3">
+
+            <Button
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Utilisateur 3"
+                android:onClick="jeu"
+                android:id="@+id/user3" />
+
+            <Button
+                android:layout_width="40dp"
+                android:layout_height="wrap_content"
+                android:text="X" />
+        </LinearLayout>
+
+
+    </RelativeLayout>
 
 
 </LinearLayout>

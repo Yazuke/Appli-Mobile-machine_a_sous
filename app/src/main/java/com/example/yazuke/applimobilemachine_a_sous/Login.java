@@ -14,17 +14,23 @@ public class Login extends AppCompatActivity {
     String pseudo=new String();
     String password=new String();
 
+//    @Override
+//    protected void onCreate(Bundle savedInstanceState) {
+//        super.onCreate(savedInstanceState);
+//        setContentView(R.layout.login);
+//        EditText psd = (EditText) findViewById (R.id.pseudo);
+//        pseudo = psd.getText().toString();
+//
+//        EditText mdp = (EditText) findViewById (R.id.mdp);
+//        password = mdp.getText().toString();
+//
+//
+//    }
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.login);
-        EditText psd = (EditText) findViewById (R.id.pseudo);
-        pseudo = psd.getText().toString();
-
-        EditText mdp = (EditText) findViewById (R.id.mdp);
-        password = mdp.getText().toString();
-
-
     }
 
     public void connect(View v){
@@ -42,4 +48,12 @@ public class Login extends AppCompatActivity {
             startActivity(intent);
 
     }
+
+    //lance le jeu sans connection (tests)
+    public void jeu(View v){
+        Intent intent = new Intent(Login.this, MainActivity.class);
+        startActivity(intent);
+    }
+
+
 }

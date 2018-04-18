@@ -2,6 +2,7 @@ package com.example.yazuke.applimobilemachine_a_sous;
 
 import android.content.ContentValues;
 import android.content.Context;
+import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.util.Log;
@@ -32,10 +33,7 @@ public class DatabaseHandler extends SQLiteOpenHelper {
     }
 
     @Override
-    public void onCreate(SQLiteDatabase db) {
-
-        db.execSQL(TABLE_CREATE);
-    }
+    public void onCreate(SQLiteDatabase db) {db.execSQL(TABLE_CREATE);}
 
     @Override
     public void onUpgrade(SQLiteDatabase db, int i, int i1) {
@@ -54,6 +52,13 @@ public class DatabaseHandler extends SQLiteOpenHelper {
         if (result == -1) {
             return false;
         } else return true;
+    }
+
+    public Cursor selectionner(String pseudo,String mdp){
+        SQLiteDatabase db = this.getWritableDatabase();
+        String query="SELECT ID FROM "+TABLE_NAME+" WHERE pseudo = ? AND mdp= ?";
+        Cursor data=db.rawQuery(query,new String[] {pseudo, mdp});
+        return data;
     }
 }
 

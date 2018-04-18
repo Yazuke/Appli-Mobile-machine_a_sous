@@ -5,25 +5,14 @@ package com.example.yazuke.applimobilemachine_a_sous;
  */
 
 public class User {
-    private long id;
     private String pseudo;
     private String mdp;
     private int solde;
 
-    public User(long id, String pseudo, String mdp,int solde) {
-        super();
-        this.id = id;
+    public User(String pseudo, String mdp) {
         this.pseudo = pseudo;
         this.mdp = mdp;
-        this.solde=solde;
-    }
-
-    public long getId() {
-        return id;
-    }
-
-    public void setId(long id) {
-        this.id = id;
+        this.solde=1000;
     }
 
     public String getPseudo() {

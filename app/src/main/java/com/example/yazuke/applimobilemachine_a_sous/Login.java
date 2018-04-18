@@ -6,54 +6,33 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.EditText;
+import android.widget.Toast;
 
 
 public class Login extends AppCompatActivity {
-    UserDAO u=new UserDAO(this);
-    String sql= new String("select ID from User where pseudo =? AND mdp=?");
-    String pseudo=new String();
-    String password=new String();
+    DatabaseHandler mDatabaseHandler;
+    private EditText psd, mdp;
 
-//    @Override
-//    protected void onCreate(Bundle savedInstanceState) {
-//        super.onCreate(savedInstanceState);
-//        setContentView(R.layout.login);
-//        EditText psd = (EditText) findViewById (R.id.pseudo);
-//        pseudo = psd.getText().toString();
-//
-//        EditText mdp = (EditText) findViewById (R.id.mdp);
-//        password = mdp.getText().toString();
-//
-//
-//    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.login);
-    }
+        psd = (EditText) findViewById(R.id.pseudo);
+        //       pseudo = psd.getText().toString();
 
-    public void connect(View v){
-        u.open();
-        Cursor c=u.selectionner(sql,new String[]{pseudo,password});
-        if(c!=null){
-            Intent intent = new Intent(Login.this, MainActivity.class);
-            startActivity(intent);
-        }
-        u.close();
-    }
-    public void inscription(View v){
-        u.open();
-            Intent intent = new Intent(Login.this, Inscription.class);
-            startActivity(intent);
+        mdp = (EditText) findViewById(R.id.mdp);
+        //      password = mdp.getText().toString();
+
 
     }
 
-    //lance le jeu sans connection (tests)
-    public void jeu(View v){
-        Intent intent = new Intent(Login.this, MainActivity.class);
+    public void toastMessage(String message) {
+        Toast.makeText(this, message, Toast.LENGTH_LONG).show();
+    }
+
+    public void inscription(View view){
+        Intent intent=new Intent(Login.this,Inscription.class);
         startActivity(intent);
     }
-
-
 }

@@ -54,11 +54,33 @@ public class DatabaseHandler extends SQLiteOpenHelper {
         } else return true;
     }
 
-    public Cursor selectionner(String pseudo,String mdp){
+    public Cursor selectionner(){
         SQLiteDatabase db = this.getWritableDatabase();
-        String query="SELECT ID FROM "+TABLE_NAME+" WHERE pseudo = ? AND mdp= ?";
-        Cursor data=db.rawQuery(query,new String[] {pseudo, mdp});
+        String query="SELECT * FROM "+TABLE_NAME;
+        Cursor data=db.rawQuery(query,null);
         return data;
+    }
+
+    public Cursor getItemID(String name){
+        SQLiteDatabase db= this.getWritableDatabase();
+        String query="SELECT "+USER_KEY+" FROM "+TABLE_NAME+" WHERE "+USER_PSEUDO+" = '"+name+"'";
+        Cursor data=db.rawQuery(query,null);
+        return data;
+    }
+
+    public void updateName(String newName,int id,String oldName){
+        SQLiteDatabase db=this.getWritableDatabase();
+        String query="UPDATE "+TABLE_NAME+" SET "+USER_PSEUDO+" = '"+newName+"' WHERE "+ USER_KEY+" = '"+id+"' AND "+USER_PSEUDO+" = '"+oldName+"'";
+        Log.d(TAG,"updateName: requête: "+query);
+        Log.d(TAG,"updateName: Remplacement du pseudo par "+newName);
+        db.execSQL(query);
+    }
+
+    public void supprimer(int id, String name){
+        SQLiteDatabase db=this.getWritableDatabase();
+        String query="DELETE FROM "+TABLE_NAME+" WHERE "+USER_KEY+" = '"+id+"' AND "+USER_PSEUDO+" = '"+name+"'";
+        Log.d(TAG,"supprimer: suppression de "+name+ " de la base de données");
+        db.execSQL(query);
     }
 }
 

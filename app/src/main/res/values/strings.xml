@@ -16,9 +16,10 @@
     <string name="casino">CASINO</string>
     <string name="pseudo">Pseudo :</string>
     <string name="mdp">Mot de passe :</string>
-    <string name="sign_in">Connection</string>
     <string name="sign_up">Inscription</string>
     <string name="validate">Valider</string>
+    <string name="delete">Supprimer</string>
+    <string name="save">Sauvegarder</string>
     <string name="contrat">J\'accepte les conditions générales d\'utilisation</string>
 
 </resources>

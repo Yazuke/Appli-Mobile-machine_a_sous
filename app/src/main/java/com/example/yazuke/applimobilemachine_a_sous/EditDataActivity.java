@@ -4,10 +4,14 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
+
+import static android.content.ContentValues.TAG;
 
 /**
  * Created by Yazuke on 2018-04-19.
@@ -16,6 +20,7 @@ import android.widget.Toast;
 public class EditDataActivity extends AppCompatActivity {
     private static final String TAG = "EditDataActivity";
     private Button btnSave,btnDelete;
+    private TextView btnPlay;
     private EditText editable_item;
     DatabaseHandler mDatabaseHandler;
     private String selectedName;
@@ -27,6 +32,7 @@ public class EditDataActivity extends AppCompatActivity {
         setContentView(R.layout.edit_data_layout);
         btnSave=(Button) findViewById(R.id.save);
         btnDelete=(Button) findViewById(R.id.delete);
+        btnPlay=(TextView)findViewById(R.id.play);
         editable_item=(EditText) findViewById(R.id.editable_item);
         mDatabaseHandler=new DatabaseHandler(this);
         //On récupère les infos de l'Intent
@@ -57,9 +63,20 @@ public class EditDataActivity extends AppCompatActivity {
             }
         });
 
+        btnPlay.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Log.d(TAG,"play: L'ID "+selectedID+" démarre la partie");
+                Intent editIntent = new Intent(EditDataActivity.this,MainActivity.class);
+                editIntent.putExtra("id",selectedID);
+                startActivity(editIntent);
+            }
+        });
+
     }
 
     public void toastMessage(String message) {
         Toast.makeText(this, message, Toast.LENGTH_LONG).show();
     }
+
 }

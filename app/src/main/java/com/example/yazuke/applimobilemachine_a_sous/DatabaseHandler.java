@@ -17,7 +17,6 @@ public class DatabaseHandler extends SQLiteOpenHelper {
     public static final String TABLE_NAME = "user";
     public static final String USER_KEY = "ID";
     public static final String USER_PSEUDO = "pseudo";
-    public static final String USER_MDP = "mdp";
     public static final String USER_SOLDE = "solde";
 
     public static final String TABLE_DROP = "DROP TABLE IF EXISTS " + TABLE_NAME + ";";
@@ -25,7 +24,6 @@ public class DatabaseHandler extends SQLiteOpenHelper {
             "CREATE TABLE " + TABLE_NAME + " (" +
                     USER_KEY + " INTEGER PRIMARY KEY AUTOINCREMENT, " +
                     USER_PSEUDO + " TEXT, " +
-                    USER_MDP + " TEXT, " +
                     USER_SOLDE + " INT);";
 
     public DatabaseHandler(Context context) {
@@ -45,7 +43,6 @@ public class DatabaseHandler extends SQLiteOpenHelper {
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues value = new ContentValues();
         value.put(USER_PSEUDO, u.getPseudo());
-        value.put(USER_MDP, u.getMdp());
         value.put(USER_SOLDE, u.getSolde());
         Log.d(TAG, "ajout " + u.getPseudo() + " to " + TABLE_NAME);
         long result = db.insert(TABLE_NAME, null, value);

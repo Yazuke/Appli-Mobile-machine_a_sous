@@ -6,12 +6,10 @@ package com.example.yazuke.applimobilemachine_a_sous;
 
 public class User {
     private String pseudo;
-    private String mdp;
     private int solde;
 
-    public User(String pseudo, String mdp) {
+    public User(String pseudo) {
         this.pseudo = pseudo;
-        this.mdp = mdp;
         this.solde=1000;
     }
 
@@ -23,13 +21,6 @@ public class User {
         this.pseudo = pseudo;
     }
 
-    public String getMdp() {
-        return mdp;
-    }
-
-    public void setMdp(String mdp) {
-        this.mdp = mdp;
-    }
 
     public int getSolde(){
         return solde;

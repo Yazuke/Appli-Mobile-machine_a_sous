@@ -1,13 +1,11 @@
 package com.example.yazuke.applimobilemachine_a_sous;
 
-import android.app.DialogFragment;
+
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
-import android.widget.ArrayAdapter;
 import android.widget.EditText;
-import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -19,33 +17,32 @@ import android.widget.Toast;
 public class Inscription extends AppCompatActivity{
     DatabaseHandler mDatabaseHandler;
     private TextView btnAdd;
-    private EditText psd, mdp;
-
+    private EditText psd;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.inscription);
         psd = (EditText) findViewById(R.id.pseudo);
-        mdp = (EditText) findViewById(R.id.mdp);
         mDatabaseHandler = new DatabaseHandler(this);
+
         btnAdd = (TextView) findViewById(R.id.validate);
         btnAdd.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 String pseudo = psd.getText().toString();
-                String password = mdp.getText().toString();
-                if (psd.length() != 0 && mdp.length() != 0) {
-                    inscription(pseudo, password);
+                if (psd.length() != 0) {
+                    inscription(pseudo);
                     psd.setText("");
-                    mdp.setText("");
                 } else {
                     toastMessage("Veuillez entrer votre pseudo et mot de passe pour vous connecter");
                 }
             }
         });
     }
-    public void inscription(String pseudo, String mdp){
-        User u=new User(pseudo,mdp);
+
+
+    public void inscription(String pseudo){
+        User u=new User(pseudo);
         boolean insertData = mDatabaseHandler.ajouter(u);
         if(insertData){
             Intent intent=new Intent(Inscription.this,MainActivity.class);

@@ -89,6 +89,7 @@
             android:layout_weight="1"
             android:textAlignment="center"
             android:textSize="50px"
+                android:id="@+id/score"
             android:text="@string/total" />
 
             <Button

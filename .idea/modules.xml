@@ -2,10 +2,12 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://C:\Users\Yazuke\Documents\GitHub\AppliMobilemachine_a_sous\Appli-Mobile-machine_a_sous.iml" filepath="C:\Users\Yazuke\Documents\GitHub\AppliMobilemachine_a_sous\Appli-Mobile-machine_a_sous.iml" />
-      <module fileurl="file://D:\..\..\..\Yazuke\Documents\GitHub\AppliMobilemachine_a_sous\Appli-Mobile-machine_a_sous.iml" filepath="D:\..\..\..\Yazuke\Documents\GitHub\AppliMobilemachine_a_sous\Appli-Mobile-machine_a_sous.iml" />
+      <module fileurl="file://$PROJECT_DIR$/Appli-Mobile-machine_a_sous.iml" filepath="$PROJECT_DIR$/Appli-Mobile-machine_a_sous.iml" />
+      <module fileurl="file://$PROJECT_DIR$/../../../../Yazuke/Documents/GitHub/AppliMobilemachine_a_sous/Appli-Mobile-machine_a_sous.iml" filepath="$PROJECT_DIR$/../../../../Yazuke/Documents/GitHub/AppliMobilemachine_a_sous/Appli-Mobile-machine_a_sous.iml" />
+      <module fileurl="file://D:/../../../Yazuke/Documents/GitHub/AppliMobilemachine_a_sous/Appli-Mobile-machine_a_sous.iml" filepath="D:/../../../Yazuke/Documents/GitHub/AppliMobilemachine_a_sous/Appli-Mobile-machine_a_sous.iml" />
       <module fileurl="file://$PROJECT_DIR$/AppliMobilemachine_a_sous.iml" filepath="$PROJECT_DIR$/AppliMobilemachine_a_sous.iml" />
-      <module fileurl="file://D:\Appli-Mobile-machine_a_sous\AppliMobilemachine_a_sous.iml" filepath="D:\Appli-Mobile-machine_a_sous\AppliMobilemachine_a_sous.iml" />
+      <module fileurl="file://D:/Appli-Mobile-machine_a_sous/AppliMobilemachine_a_sous.iml" filepath="D:/Appli-Mobile-machine_a_sous/AppliMobilemachine_a_sous.iml" />
+      <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
     </modules>
   </component>

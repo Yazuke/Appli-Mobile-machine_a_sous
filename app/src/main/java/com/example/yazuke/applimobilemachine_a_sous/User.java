@@ -12,7 +12,9 @@ public class User {
         this.pseudo = pseudo;
         this.solde=1000;
     }
+    public User() {
 
+    }
     public String getPseudo() {
         return pseudo;
     }

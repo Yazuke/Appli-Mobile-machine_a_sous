@@ -9,17 +9,22 @@ import android.util.Log;
 import android.view.MenuItem;
 import android.view.MotionEvent;
 import android.view.View;
+import android.view.ViewDebug;
 import android.view.animation.Interpolator;
 import android.view.animation.LinearInterpolator;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.TextView;
 import android.widget.Toast;
+
+import static android.content.ContentValues.TAG;
 
 public class MainActivity extends AppCompatActivity implements AsyncListener, PopupMenu.OnMenuItemClickListener {
 
     private Jeu jeu;
     private ImageView levier;
+    DatabaseHandler mDatabaseHandler;
 
     private ImageView[][] affichageRouleaux;
     private FrameLayout[][] layoutRouleaux;
@@ -29,24 +34,34 @@ public class MainActivity extends AppCompatActivity implements AsyncListener, Po
     private RouleauAsync rouleauAsync3;
     private RouleauAsync[] rouleauxAsync=new RouleauAsync[3];
     private float distance;
+    private int selectedID;
+    private TextView score;
 
+    private User user;
     private FrameLayout baseTop;
 
     private int[] countPos=new int[3];
     private long tempsRotation=200;
-
+    private int cout=50;
+    private int prix=500;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
+        mDatabaseHandler=new DatabaseHandler(this);
         //////////////////////////////////////
         //////////////////////////////////////
+        //--set up user--//
+        //////////////////////////
+        Intent receivedIntent=getIntent();
+        selectedID=receivedIntent.getIntExtra("id",-1);
+        user=mDatabaseHandler.getUser(selectedID);
+        //toastMessage(user.getPseudo() + user.getSolde());
 
 
-
-
+        score = (TextView)findViewById(R.id.score);
+        score.setText("" + user.getSolde()+"$");
         /////////////////////////////
         //-- Images des rouleaux --//
         /////////////////////////////
@@ -159,6 +174,10 @@ public class MainActivity extends AppCompatActivity implements AsyncListener, Po
                                 //Démarre le jeu
                                 jeu.demarrer();
 
+                                //ajuste le solde
+                                user.setSolde(user.getSolde()-cout);
+                                score.setText("" + user.getSolde()+"$");
+                                mDatabaseHandler.updateSolde(selectedID, user.getSolde());
                                 //Remet les boutons par défaut
                                 resetBoutons();
 
@@ -302,6 +321,11 @@ public class MainActivity extends AppCompatActivity implements AsyncListener, Po
 
             //Remet les boutons dans un état non cliqué
             resetBoutons();
+        }
+        if(victoire==true){
+            user.setSolde(user.getSolde()+prix);
+            score.setText("" + user.getSolde()+"$");
+            mDatabaseHandler.updateSolde(selectedID, user.getSolde());
         }
     }
 
@@ -612,6 +636,11 @@ public class MainActivity extends AppCompatActivity implements AsyncListener, Po
             }
         }
     }
+
+    public void toastMessage(String message) {
+        Toast.makeText(this, message, Toast.LENGTH_LONG).show();
+    }
+
 
 }
 

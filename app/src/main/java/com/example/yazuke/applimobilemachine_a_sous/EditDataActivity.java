@@ -39,7 +39,7 @@ public class EditDataActivity extends AppCompatActivity {
         Intent receivedIntent=getIntent();
         selectedID=receivedIntent.getIntExtra("id",-1);
         selectedName=receivedIntent.getStringExtra("name");
-
+        //toastMessage(selectedName);
         editable_item.setText(selectedName);
 
         btnSave.setOnClickListener(new View.OnClickListener() {

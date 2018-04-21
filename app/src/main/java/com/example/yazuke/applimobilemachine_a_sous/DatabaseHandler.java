@@ -44,6 +44,7 @@ public class DatabaseHandler extends SQLiteOpenHelper {
         ContentValues value = new ContentValues();
         value.put(USER_PSEUDO, u.getPseudo());
         value.put(USER_SOLDE, u.getSolde());
+        //value.put(USER_SOLDE, 500);
         Log.d(TAG, "ajout " + u.getPseudo() + " to " + TABLE_NAME);
         long result = db.insert(TABLE_NAME, null, value);
         if (result == -1) {
@@ -73,12 +74,43 @@ public class DatabaseHandler extends SQLiteOpenHelper {
         db.execSQL(query);
     }
 
+    public void updateSolde(int id,int solde){
+        SQLiteDatabase db=this.getWritableDatabase();
+        String query="UPDATE "+TABLE_NAME+" SET "+USER_SOLDE+" = '"+solde+"' WHERE "+ USER_KEY+" = '"+id+"'";
+        Log.d(TAG,"updateName: requête: "+query);
+        //Log.d(TAG,"updateName: Remplacement du pseudo par "+newName);
+        db.execSQL(query);
+    }
+
     public void supprimer(int id, String name){
         SQLiteDatabase db=this.getWritableDatabase();
         String query="DELETE FROM "+TABLE_NAME+" WHERE "+USER_KEY+" = '"+id+"' AND "+USER_PSEUDO+" = '"+name+"'";
         Log.d(TAG,"supprimer: suppression de "+name+ " de la base de données");
         db.execSQL(query);
     }
+
+    public User getUser(int user_id) {
+        SQLiteDatabase db = this.getReadableDatabase();
+
+        String selectQuery = "SELECT  * FROM " + TABLE_NAME + " WHERE "
+                + USER_KEY + " = " + user_id;
+
+        //Log.e(LOG, selectQuery);
+
+        Cursor c = db.rawQuery(selectQuery, null);
+
+        if (c != null)
+            c.moveToFirst();
+
+        User u = new User();
+        //u.setId(c.getInt(c.getColumnIndex(KEY_ID)));
+        u.setPesudo((c.getString(c.getColumnIndex(USER_PSEUDO))));
+        u.setSolde(c.getInt(c.getColumnIndex(USER_SOLDE)));
+
+        return u;
+    }
+
+
 }
 
 

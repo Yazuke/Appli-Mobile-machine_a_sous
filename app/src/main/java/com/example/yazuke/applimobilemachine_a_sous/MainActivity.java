@@ -297,6 +297,7 @@ public class MainActivity extends AppCompatActivity implements AsyncListener, Po
                 ajustPrix(sequence1[i]);
                 victoire=true;
                 Log.i("MaS","WIN EN LIGNE "+(i+1)+", symbole: "+sequence1[i]);
+
             }
         }
 
@@ -331,6 +332,7 @@ public class MainActivity extends AppCompatActivity implements AsyncListener, Po
             user.setSolde(user.getSolde()+prix);
             score.setText("" + user.getSolde()+"$");
             mDatabaseHandler.updateSolde(selectedID, user.getSolde());
+            Log.i("MaS","LE PRIX EST DE: ---> "+prix);;
         }
     }
 
@@ -595,27 +597,35 @@ public class MainActivity extends AppCompatActivity implements AsyncListener, Po
         switch (s){
             case "C":
                 prix = 100;
+                break;
 
             case "O":
                 prix = 200;
+                break;
 
             case "Cl":
                 prix = 300;
+                break;
 
             case "F":
                 prix = 400;
+                break;
 
             case "P":
                 prix = 500;
+                break;
 
             case "R":
                 prix = 600;
+                break;
 
             case "Ci":
                 prix = 700;
+                break;
 
             case "7":
-                prix = 800;
+                prix = 1800;
+                break;
         }
     }
 

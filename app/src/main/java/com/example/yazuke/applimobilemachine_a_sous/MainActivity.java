@@ -287,11 +287,14 @@ public class MainActivity extends AppCompatActivity implements AsyncListener, Po
         Log.i("MaS","Rouleau 3: "+sequence3[0]+" "+sequence3[1]+" "+sequence3[2]);
 
 
+
+
         boolean victoire=false;
 
         //Teste chaque ligne horizontale pour voir si elle est gagnante
         for(int i=0;i<3;i++){
             if(sequence1[i].equals(sequence2[i])&&sequence2[i].equals(sequence3[i])){
+                ajustPrix(sequence1[i]);
                 victoire=true;
                 Log.i("MaS","WIN EN LIGNE "+(i+1)+", symbole: "+sequence1[i]);
             }
@@ -299,10 +302,12 @@ public class MainActivity extends AppCompatActivity implements AsyncListener, Po
 
         //Teste les diagonales
         if(sequence1[0].equals(sequence2[1])&&sequence2[1].equals(sequence3[2])){
+            ajustPrix(sequence1[1]);
             victoire=true;
             Log.i("MaS","WIN EN DIAGONALE , symbole: "+sequence1[0]);
         }
         if(sequence1[2].equals(sequence2[1])&&sequence2[1].equals(sequence3[0])){
+            ajustPrix(sequence1[1]);
             victoire=true;
             Log.i("MaS","WIN EN DIAGONALE , symbole: "+sequence1[2]);
         }
@@ -585,7 +590,34 @@ public class MainActivity extends AppCompatActivity implements AsyncListener, Po
     public void quitApp(){finish();}
 
 
+    public void ajustPrix(String s){
 
+        switch (s){
+            case "C":
+                prix = 100;
+
+            case "O":
+                prix = 200;
+
+            case "Cl":
+                prix = 300;
+
+            case "F":
+                prix = 400;
+
+            case "P":
+                prix = 500;
+
+            case "R":
+                prix = 600;
+
+            case "Ci":
+                prix = 700;
+
+            case "7":
+                prix = 800;
+        }
+    }
 
 
 

@@ -68,7 +68,7 @@
                         android:layout_marginLeft="5dp"
                         android:layout_marginStart="5dp"
                         android:fontFamily="sans-serif-condensed"
-                        android:text="x $"
+                        android:text="100 $"
                         android:textSize="40sp" />
                 </LinearLayout>
 
@@ -118,7 +118,7 @@
                         android:layout_marginLeft="5dp"
                         android:layout_marginStart="5dp"
                         android:fontFamily="sans-serif-condensed"
-                        android:text="x $"
+                        android:text="200 $"
                         android:textSize="40sp" />
                 </LinearLayout>
 
@@ -168,7 +168,7 @@
                         android:layout_marginLeft="5dp"
                         android:layout_marginStart="5dp"
                         android:fontFamily="sans-serif-condensed"
-                        android:text="x $"
+                        android:text="300 $"
                         android:textSize="40sp" />
                 </LinearLayout>
 
@@ -219,7 +219,7 @@
                         android:layout_marginLeft="5dp"
                         android:layout_marginStart="5dp"
                         android:fontFamily="sans-serif-condensed"
-                        android:text="x $"
+                        android:text="400 $"
                         android:textSize="40sp" />
                 </LinearLayout>
             </LinearLayout>
@@ -279,7 +279,7 @@
                         android:layout_marginLeft="5dp"
                         android:layout_marginStart="5dp"
                         android:fontFamily="sans-serif-condensed"
-                        android:text="x $"
+                        android:text="500 $"
                         android:textSize="40sp" />
                 </LinearLayout>
 
@@ -329,7 +329,7 @@
                         android:layout_marginLeft="5dp"
                         android:layout_marginStart="5dp"
                         android:fontFamily="sans-serif-condensed"
-                        android:text="x $"
+                        android:text="1800 $"
                         android:textSize="40sp" />
                 </LinearLayout>
 
@@ -379,7 +379,7 @@
                         android:layout_marginLeft="5dp"
                         android:layout_marginStart="5dp"
                         android:fontFamily="sans-serif-condensed"
-                        android:text="x $"
+                        android:text="600 $"
                         android:textSize="40sp" />
 
                 </LinearLayout>
@@ -431,7 +431,7 @@
                         android:layout_marginLeft="5dp"
                         android:layout_marginStart="5dp"
                         android:fontFamily="sans-serif-condensed"
-                        android:text="x $"
+                        android:text="700 $"
                         android:textSize="40sp" />
                 </LinearLayout>
             </LinearLayout>

@@ -26,13 +26,15 @@ public class Leaderboard extends AppCompatActivity {
     DatabaseHandler mDatabaseHandler;
     private TextView btnIns;
     private ListView mListView;
+    private ListView mListViewScore;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.login);
+        setContentView(R.layout.leaderboard);
         mDatabaseHandler = new DatabaseHandler(this);
 
         mListView=(ListView) findViewById(R.id.listView);
+        mListViewScore=(ListView) findViewById(R.id.listViewScore);
         btnIns = (TextView) findViewById(R.id.textView2);
 
         populateListView();
@@ -71,6 +73,8 @@ public class Leaderboard extends AppCompatActivity {
 
         final ListAdapter adapter=new ArrayAdapter<>(this,android.R.layout.simple_list_item_1,listPseudo);
         mListView.setAdapter(adapter);
+        final ListAdapter adapter1=new ArrayAdapter<>(this,android.R.layout.simple_list_item_1,listData);
+        mListViewScore.setAdapter(adapter1);
         mListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {

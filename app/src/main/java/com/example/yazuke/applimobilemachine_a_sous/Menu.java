@@ -53,20 +53,9 @@ public class Menu extends AppCompatActivity {
 
     }
 
+    
+
 
 }
 
 
-
-//    public void quitterApp() {
-//        //On appel l'intention du HOME pour quitter l'application
-//        this.finish();
-//        Intent intent = new Intent(Intent.ACTION_MAIN);
-//        intent.addCategory(Intent.CATEGORY_HOME);
-//        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-//        startActivity(intent);
-//
-//    /*int pid = android.os.Process.myPid();=====> use this if you want to kill your activity. But its not a good one to do.
-//    android.os.Process.killProcess(pid);*/
-//
-//    }

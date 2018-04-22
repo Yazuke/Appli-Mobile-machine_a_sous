@@ -558,15 +558,18 @@ public class MainActivity extends AppCompatActivity implements AsyncListener, Po
     @Override
     public boolean onMenuItemClick(MenuItem item) {
         switch (item.getItemId()){
-            case R.id.item1:
-                Toast.makeText(this, "TEST", Toast.LENGTH_SHORT).show();
+            case R.id.item1: //Changé utilisateur// Redirige sur la page de login
+                Intent intent2 = new Intent(MainActivity.this,
+                        Login.class);
+                startActivity(intent2);
                 return true;
             case R.id.item2: // Retour au menu principal
-                Intent intent = new Intent(MainActivity.this, // New intent avec en paramètres
-                        Menu.class); // le contex de l'application et la classe menu.
+                Intent intent = new Intent(MainActivity.this, // New intent avec en paramètres // le contex de l'application et la classe menu.
+                        Menu.class);
                 startActivity(intent);
                 return true;
             case R.id.item3:
+                Toast.makeText(this, "TEST", Toast.LENGTH_SHORT).show();
                 return true;
             case R.id.item4:
                 Intent homeIntent = new Intent(Intent.ACTION_MAIN);

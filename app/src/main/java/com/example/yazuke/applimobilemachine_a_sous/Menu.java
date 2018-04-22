@@ -40,6 +40,12 @@ public class Menu extends AppCompatActivity {
         startActivity(intent);
     }
 
+    public void changeUsers(){
+        Intent intent2 = new Intent(this,Login.class);
+        startActivity(intent2);
+    }
+
+
     //On appel l'intention du HOME pour quitter l'application
     public void quitterApp() {
         this.finish();
@@ -53,7 +59,7 @@ public class Menu extends AppCompatActivity {
 
     }
 
-    
+
 
 
 }

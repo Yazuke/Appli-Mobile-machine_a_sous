@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item android:id="@+id/multiplier1"
+        android:title="@string/x2"/>
+
+    <item android:id="@+id/multiplier2"
+        android:title="@string/x5"/>
+
+    <item android:id="@+id/multiplier3"
+        android:title="@string/x10"/>
+
+    <item android:id="@+id/multiplier4"
+        android:title="@string/x20"
+        />
+</menu>
+

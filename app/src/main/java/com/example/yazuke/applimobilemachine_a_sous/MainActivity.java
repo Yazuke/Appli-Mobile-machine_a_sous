@@ -34,7 +34,7 @@ public class MainActivity extends AppCompatActivity implements AsyncListener, Po
     private RouleauAsync rouleauAsync3;
     private RouleauAsync[] rouleauxAsync=new RouleauAsync[3];
     private float distance;
-    private int selectedID;
+    private int selectedID, multiplier = 1;
     private TextView score;
 
     private User user;
@@ -331,10 +331,10 @@ public class MainActivity extends AppCompatActivity implements AsyncListener, Po
             resetBoutons();
         }
         if(victoire==true){
-            user.setSolde(user.getSolde()+prix);
+            user.setSolde(user.getSolde()+prix* multiplier);
             score.setText("" + user.getSolde()+"$");
             mDatabaseHandler.updateSolde(selectedID, user.getSolde());
-            Log.i("MaS","LE PRIX EST DE: ---> "+prix);;
+            Log.i("MaS","LE PRIX EST DE: ---> "+prix *multiplier);
         }
     }
 
@@ -580,6 +580,27 @@ public class MainActivity extends AppCompatActivity implements AsyncListener, Po
                 homeIntent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                 startActivity(homeIntent);
                 return true;
+            case R.id.multiplier1:
+                multiplier = 2;
+                cout = 50 * multiplier;
+                prix = 500 * multiplier;
+                return true;
+            case R.id.multiplier2:
+                multiplier = 5;
+                cout = 50 * multiplier;
+                prix = 500 * multiplier;
+                return true;
+            case R.id.multiplier3:
+                multiplier = 10;
+                cout = 50 * multiplier;
+                prix = 500 * multiplier;
+                return true;
+            case R.id.multiplier4:
+                multiplier = 20;
+                cout = 50 * multiplier;
+                prix = 500 * multiplier;
+                return true;
+
             default:
                 return false;
         }
@@ -594,8 +615,13 @@ public class MainActivity extends AppCompatActivity implements AsyncListener, Po
         popup.show();
     }
 
+    public void showCombo(View v){
+        PopupMenu popup = new PopupMenu(this, v);
+        popup.setOnMenuItemClickListener(this);
+        popup.inflate(R.menu.multiplicateur_menu);
+        popup.show();
+    }
 
-    public void quitApp(){finish();}
 
 
     public void ajustPrix(String s){

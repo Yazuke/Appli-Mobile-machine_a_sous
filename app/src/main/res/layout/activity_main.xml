@@ -49,27 +49,15 @@
             android:orientation="vertical">
 
                 <Button
-                android:id="@+id/button1x"
-                android:layout_width="match_parent"
-                android:layout_height="10dp"
-                android:textSize="25dp"
-                android:text="@string/button1x" />
+                    android:id="@+id/button2x"
+                    android:layout_width="match_parent"
+                    android:layout_height="58dp"
+                    android:layout_below="@+id/button1x"
+                    android:onClick="showCombo"
+                    android:text="@string/button1x"
+                    android:textSize="25px" />
 
-                <Button
-                android:id="@+id/button2x"
-                android:layout_width="match_parent"
-                android:layout_height="fill_parent"
-                android:layout_below="@+id/button1x"
-                android:textSize="25px"
-                android:text="@string/button2x" />
 
-                <Button
-                android:id="@+id/button5x"
-                android:layout_width="match_parent"
-                android:layout_height="fill_parent"
-                android:layout_below="@+id/button2x"
-                android:textSize="25px"
-                android:text="@string/button5x" />
             </LinearLayout>
 
             <TextView
@@ -127,9 +115,9 @@
 
                 <FrameLayout
                     android:id="@+id/baseTop"
-                    android:layout_marginTop="-70dp"
                     android:layout_width="50dp"
-                    android:layout_height="50dp" />
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="-70dp" />
 
                 <FrameLayout
                     android:id="@+id/f1_0"

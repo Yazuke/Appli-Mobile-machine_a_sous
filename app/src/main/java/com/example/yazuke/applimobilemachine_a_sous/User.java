@@ -12,6 +12,12 @@ public class User {
         this.pseudo = pseudo;
         this.solde=1000;
     }
+
+    public User(String pseudo, int solde) {
+        this.pseudo = pseudo;
+        this.solde=solde;
+    }
+
     public User() {
 
     }

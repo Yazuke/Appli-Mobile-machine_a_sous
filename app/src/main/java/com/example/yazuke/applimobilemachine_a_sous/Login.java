@@ -28,9 +28,21 @@ public class Login extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.login);
         mDatabaseHandler = new DatabaseHandler(this);
+        //add users in database//
+        if(mDatabaseHandler.getUserCount()==0) {
+            User user1 = new User("Julien", 555);
+            User user2 = new User("Momo", 800);
+            User user3 = new User("Nicolas", 7777);
+            User user4 = new User("Simon", 2000);
+
+            boolean insertData = mDatabaseHandler.ajouter(user1);
+            insertData = mDatabaseHandler.ajouter(user2);
+            insertData = mDatabaseHandler.ajouter(user3);
+            insertData = mDatabaseHandler.ajouter(user4);
+        }
         mListView=(ListView) findViewById(R.id.listView);
         btnIns = (TextView) findViewById(R.id.textView2);
-        
+
         populateListView();
         btnIns.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -39,6 +51,8 @@ public class Login extends AppCompatActivity {
                 startActivity(intent);
             }
         });
+
+
     }
 
 

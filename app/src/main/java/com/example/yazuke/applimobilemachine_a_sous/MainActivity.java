@@ -62,6 +62,8 @@ public class MainActivity extends AppCompatActivity implements AsyncListener, Po
 
         score = (TextView)findViewById(R.id.score);
         score.setText("" + user.getSolde()+"$");
+
+
         /////////////////////////////
         //-- Images des rouleaux --//
         /////////////////////////////

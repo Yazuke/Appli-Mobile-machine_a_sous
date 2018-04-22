@@ -10,7 +10,7 @@ import android.widget.Button;
 
 public class Menu extends AppCompatActivity {
 
-
+    private int selectedID;
     private  Button button, button4, button2;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -42,10 +42,14 @@ public class Menu extends AppCompatActivity {
             }
 
         });
+
+        Intent receivedIntent=getIntent();
+        selectedID=receivedIntent.getIntExtra("id",-1);
     }
 
     public void DemarrerPartie() {
         Intent intent = new Intent(this, MainActivity.class);
+        intent.putExtra("id",selectedID);
         startActivity(intent);
     }
 

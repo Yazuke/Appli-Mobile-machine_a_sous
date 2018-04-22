@@ -568,6 +568,7 @@ public class MainActivity extends AppCompatActivity implements AsyncListener, Po
             case R.id.item2: // Retour au menu principal
                 Intent intent = new Intent(MainActivity.this, // New intent avec en paramètres // le contex de l'application et la classe menu.
                         Menu.class);
+                intent.putExtra("id",selectedID);
                 startActivity(intent);
                 return true;
             case R.id.item3:

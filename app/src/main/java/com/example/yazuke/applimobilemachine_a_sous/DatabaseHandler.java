@@ -110,6 +110,27 @@ public class DatabaseHandler extends SQLiteOpenHelper {
         return u;
     }
 
+    public User getUserBySolde(int user_solde) {
+        SQLiteDatabase db = this.getReadableDatabase();
+
+        String selectQuery = "SELECT  * FROM " + TABLE_NAME + " WHERE "
+                + USER_SOLDE + " = " + user_solde;
+
+        //Log.e(LOG, selectQuery);
+
+        Cursor c = db.rawQuery(selectQuery, null);
+
+        if (c != null)
+            c.moveToFirst();
+
+        User u = new User();
+        //u.setId(c.getInt(c.getColumnIndex(KEY_ID)));
+        u.setPesudo((c.getString(c.getColumnIndex(USER_PSEUDO))));
+        u.setSolde(c.getInt(c.getColumnIndex(USER_SOLDE)));
+
+        return u;
+    }
+
     public int getUserCount() {
         String countQuery = "SELECT  * FROM " + TABLE_NAME;
         SQLiteDatabase db = this.getReadableDatabase();

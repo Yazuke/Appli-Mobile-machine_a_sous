@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
+import android.view.ViewDebug;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListAdapter;
@@ -14,6 +15,8 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.function.DoubleToIntFunction;
 
 import static android.content.ContentValues.TAG;
 
@@ -28,18 +31,7 @@ public class Leaderboard extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.login);
         mDatabaseHandler = new DatabaseHandler(this);
-        //add users in database//
-        if(mDatabaseHandler.getUserCount()==0) {
-            User user1 = new User("Julien", 555);
-            User user2 = new User("Momo", 800);
-            User user3 = new User("Nicolas", 7777);
-            User user4 = new User("Simon", 2000);
 
-            boolean insertData = mDatabaseHandler.ajouter(user1);
-            insertData = mDatabaseHandler.ajouter(user2);
-            insertData = mDatabaseHandler.ajouter(user3);
-            insertData = mDatabaseHandler.ajouter(user4);
-        }
         mListView=(ListView) findViewById(R.id.listView);
         btnIns = (TextView) findViewById(R.id.textView2);
 
@@ -59,11 +51,25 @@ public class Leaderboard extends AppCompatActivity {
     private void populateListView() {
         Log.d(TAG,"populateListView: Affichage des données dans la ListView");
         Cursor data= mDatabaseHandler.selectionner();
-        ArrayList<String> listData=new ArrayList<>();
+        ArrayList<Double> listData=new ArrayList<>();
+        ArrayList<User> listUser=new ArrayList<>();
+        ArrayList<String> listPseudo=new ArrayList<>();
         while(data.moveToNext()){
-            listData.add(data.getString(1));
+            listData.add(data.getDouble(2));
         }
-        final ListAdapter adapter=new ArrayAdapter<>(this,android.R.layout.simple_list_item_1,listData);
+
+
+
+        Collections.sort(listData);
+        Collections.reverse(listData);
+        for (double temp : listData) {
+            listUser.add(mDatabaseHandler.getUserBySolde((int)temp));
+        }
+        for (User temp : listUser) {
+            listPseudo.add(temp.getPseudo());
+        }
+
+        final ListAdapter adapter=new ArrayAdapter<>(this,android.R.layout.simple_list_item_1,listPseudo);
         mListView.setAdapter(adapter);
         mListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override

@@ -3,6 +3,7 @@ package com.example.yazuke.applimobilemachine_a_sous;
 
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.View;
 import android.content.Intent;
 import android.widget.Button;
@@ -10,7 +11,7 @@ import android.widget.Button;
 public class Menu extends AppCompatActivity {
 
 
-    private  Button button, button4;
+    private  Button button, button4, button2;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -23,6 +24,14 @@ public class Menu extends AppCompatActivity {
                 DemarrerPartie();
             }
 
+        });
+
+        button = (Button) findViewById(R.id.button2);// Bouton pour changer d'utilisateur
+        button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                changeUsers();
+            }
         });
 
         button4 = (Button) findViewById(R.id.button4); // Boutton pour quitter l'application
@@ -41,7 +50,8 @@ public class Menu extends AppCompatActivity {
     }
 
     public void changeUsers(){
-        Intent intent2 = new Intent(this,Login.class);
+        Log.i("MaS", "CHANGER UTILISATEURS");
+        Intent intent2 = new Intent(this, Login.class);
         startActivity(intent2);
     }
 

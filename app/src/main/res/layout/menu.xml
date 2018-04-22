@@ -32,6 +32,7 @@
         android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"
         android:layout_marginBottom="245dp"
+        android:onClick="changeUsers"
         android:text="@string/menu1" />
 
     <Button

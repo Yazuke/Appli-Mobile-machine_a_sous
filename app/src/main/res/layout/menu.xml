@@ -42,6 +42,7 @@
         android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"
         android:layout_marginBottom="153dp"
+        android:onClick="accesLeaderboard"
         android:text="@string/menu3" />
 
     <Button

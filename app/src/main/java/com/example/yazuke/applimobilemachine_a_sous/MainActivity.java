@@ -572,7 +572,10 @@ public class MainActivity extends AppCompatActivity implements AsyncListener, Po
                 startActivity(intent);
                 return true;
             case R.id.item3:
-                Toast.makeText(this, "TEST", Toast.LENGTH_SHORT).show();
+                Intent intent3 = new Intent(MainActivity.this, // New intent avec en paramètres // le contex de l'application et la classe menu.
+                        Leaderboard.class);
+                intent3.putExtra("id",selectedID);
+                startActivity(intent3);
                 return true;
             case R.id.item4:
                 Intent homeIntent = new Intent(Intent.ACTION_MAIN);

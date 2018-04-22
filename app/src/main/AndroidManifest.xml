@@ -33,6 +33,9 @@
         <activity android:name=".Menu"
             android:screenOrientation="portrait"/>
 
+        <activity android:name=".Leaderboard"
+            android:screenOrientation="portrait"/>
+
     </application>
 
 </manifest>

@@ -11,7 +11,7 @@ import android.widget.Button;
 public class Menu extends AppCompatActivity {
 
     private int selectedID;
-    private  Button button, button4, button2;
+    private  Button button, button4, button2, button3;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -26,12 +26,21 @@ public class Menu extends AppCompatActivity {
 
         });
 
-        button = (Button) findViewById(R.id.button2);// Bouton pour changer d'utilisateur
-        button.setOnClickListener(new View.OnClickListener() {
+        button2 = (Button) findViewById(R.id.button2);// Bouton pour changer d'utilisateur
+        button2.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 changeUsers();
             }
+        });
+
+        button3 = (Button) findViewById(R.id.button3); // Boutton pour accéder au leaderboard
+        button3.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View v) {
+                accesLeaderboard();
+            }
+
         });
 
         button4 = (Button) findViewById(R.id.button4); // Boutton pour quitter l'application
@@ -53,12 +62,17 @@ public class Menu extends AppCompatActivity {
         startActivity(intent);
     }
 
+    public void accesLeaderboard() {
+        Intent intent = new Intent(this, Leaderboard.class);
+        intent.putExtra("id",selectedID);
+        startActivity(intent);
+    }
+
     public void changeUsers(){
         Log.i("MaS", "CHANGER UTILISATEURS");
         Intent intent2 = new Intent(this, Login.class);
         startActivity(intent2);
     }
-
 
     //On appel l'intention du HOME pour quitter l'application
     public void quitterApp() {

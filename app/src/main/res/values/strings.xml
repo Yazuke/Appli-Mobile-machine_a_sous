@@ -23,9 +23,11 @@
     <string name="play">Jouer</string>
 
     <string name="contrat">J\'accepte les conditions générales d\'utilisation</string>
+    <string name="x1">x1</string>
     <string name="x2">x2</string>
     <string name="x5">x5</string>
     <string name="x10">x10</string>
     <string name="x20">x20</string>
+
 
 </resources>

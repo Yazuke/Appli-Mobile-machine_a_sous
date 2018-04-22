@@ -43,7 +43,7 @@ public class MainActivity extends AppCompatActivity implements AsyncListener, Po
     private int[] countPos=new int[3];
     private long tempsRotation=200;
     private int cout=50;
-    private int prix=500;
+    private int prix=0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -305,12 +305,12 @@ public class MainActivity extends AppCompatActivity implements AsyncListener, Po
 
         //Teste les diagonales
         if(sequence1[0].equals(sequence2[1])&&sequence2[1].equals(sequence3[2])){
-            ajustPrix(sequence1[1]);
+            ajustPrix(sequence1[0]);
             victoire=true;
             Log.i("MaS","WIN EN DIAGONALE , symbole: "+sequence1[0]);
         }
         if(sequence1[2].equals(sequence2[1])&&sequence2[1].equals(sequence3[0])){
-            ajustPrix(sequence1[1]);
+            ajustPrix(sequence1[2]);
             victoire=true;
             Log.i("MaS","WIN EN DIAGONALE , symbole: "+sequence1[2]);
         }
@@ -597,6 +597,11 @@ public class MainActivity extends AppCompatActivity implements AsyncListener, Po
                 return true;
             case R.id.multiplier4:
                 multiplier = 20;
+                cout = 50 * multiplier;
+                prix = 500 * multiplier;
+                return true;
+            case R.id.multiplier5:
+                multiplier = 1;
                 cout = 50 * multiplier;
                 prix = 500 * multiplier;
                 return true;

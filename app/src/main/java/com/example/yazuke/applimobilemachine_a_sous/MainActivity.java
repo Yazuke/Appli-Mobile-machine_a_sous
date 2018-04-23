@@ -36,6 +36,7 @@ public class MainActivity extends AppCompatActivity implements AsyncListener, Po
     private float distance;
     private int selectedID, multiplier = 1;
     private TextView score;
+    private TextView multiplicateur;
 
     private User user;
     private FrameLayout baseTop;
@@ -63,7 +64,7 @@ public class MainActivity extends AppCompatActivity implements AsyncListener, Po
         score = (TextView)findViewById(R.id.score);
         score.setText("" + user.getSolde()+"$");
 
-
+        multiplicateur = (TextView)findViewById(R.id.multiplicateur);
         /////////////////////////////
         //-- Images des rouleaux --//
         /////////////////////////////
@@ -585,26 +586,31 @@ public class MainActivity extends AppCompatActivity implements AsyncListener, Po
                 return true;
             case R.id.multiplier1:
                 multiplier = 2;
+                multiplicateur.setText("(X" + multiplier+")");
                 cout = 50 * multiplier;
                 prix = 500 * multiplier;
                 return true;
             case R.id.multiplier2:
                 multiplier = 5;
+                multiplicateur.setText("(X" + multiplier+")");
                 cout = 50 * multiplier;
                 prix = 500 * multiplier;
                 return true;
             case R.id.multiplier3:
                 multiplier = 10;
+                multiplicateur.setText("(X" + multiplier+")");
                 cout = 50 * multiplier;
                 prix = 500 * multiplier;
                 return true;
             case R.id.multiplier4:
                 multiplier = 20;
+                multiplicateur.setText("(X" + multiplier+")");
                 cout = 50 * multiplier;
                 prix = 500 * multiplier;
                 return true;
             case R.id.multiplier5:
                 multiplier = 1;
+                multiplicateur.setText("(X" + multiplier+")");
                 cout = 50 * multiplier;
                 prix = 500 * multiplier;
                 return true;

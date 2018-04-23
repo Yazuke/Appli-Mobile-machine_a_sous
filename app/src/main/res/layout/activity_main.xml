@@ -54,13 +54,14 @@
                     android:layout_height="58dp"
                     android:layout_below="@+id/button1x"
                     android:onClick="showCombo"
-                    android:text="@string/button1x"
-                    android:textSize="25px" />
+                    android:text="@string/multiplier"
+                    android:textSize="50px" />
 
 
             </LinearLayout>
 
             <TextView
+                android:id="@+id/multiplicateur"
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1"

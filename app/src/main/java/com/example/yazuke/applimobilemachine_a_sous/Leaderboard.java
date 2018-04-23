@@ -41,7 +41,7 @@ public class Leaderboard extends AppCompatActivity {
         btnIns.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent=new Intent(Leaderboard.this,Inscription.class);
+                Intent intent=new Intent(Leaderboard.this,Menu.class);
                 startActivity(intent);
             }
         });

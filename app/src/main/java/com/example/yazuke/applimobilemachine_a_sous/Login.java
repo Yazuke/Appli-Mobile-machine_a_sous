@@ -63,7 +63,7 @@ public class Login extends AppCompatActivity {
         while(data.moveToNext()){
             listData.add(data.getString(1));
         }
-        final ListAdapter adapter=new ArrayAdapter<>(this,android.R.layout.simple_list_item_1,listData);
+        ListAdapter adapter=new ArrayAdapter<>(this,android.R.layout.simple_list_item_1,listData);
         mListView.setAdapter(adapter);
         mListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
@@ -80,7 +80,7 @@ public class Login extends AppCompatActivity {
                     Intent editIntent = new Intent(Login.this,EditDataActivity.class);
                     editIntent.putExtra("id",itemID);
                     editIntent.putExtra("name",name);
-                    startActivity(editIntent);
+                    startActivityForResult(editIntent,0);
                 }
                 else{
                     toastMessage("Aucun compte associé avec ce nom");
@@ -88,7 +88,16 @@ public class Login extends AppCompatActivity {
             }
         });
     }
+    @Override
 
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (requestCode == 0) {
+            if(resultCode == RESULT_OK) {
+       //         adapter.notifyDataSetChanged();
+            }
+        }
+    }
 
     public void toastMessage(String message) {
         Toast.makeText(this, message, Toast.LENGTH_LONG).show();

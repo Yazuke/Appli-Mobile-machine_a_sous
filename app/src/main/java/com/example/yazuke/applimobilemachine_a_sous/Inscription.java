@@ -2,12 +2,16 @@ package com.example.yazuke.applimobilemachine_a_sous;
 
 
 import android.content.Intent;
+import android.database.Cursor;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import static android.content.ContentValues.TAG;
 
 
 /**
@@ -45,9 +49,20 @@ public class Inscription extends AppCompatActivity{
         User u=new User(pseudo);
         boolean insertData = mDatabaseHandler.ajouter(u);
         if(insertData){
-            Intent intent=new Intent(Inscription.this,MainActivity.class);
-            startActivity(intent);
-            toastMessage("Votre inscription a bien été effectué");
+            Cursor data=mDatabaseHandler.getItemID(pseudo);
+            int itemID=-1;
+            while(data.moveToNext()){
+                itemID=data.getInt(0);
+            }
+            if(itemID>-1){
+                Log.d(TAG,"play: L'ID "+itemID+" démarre la partie");
+                Intent editIntent = new Intent(Inscription.this,MainActivity.class);
+                editIntent.putExtra("id",itemID);
+                startActivity(editIntent);
+            }
+            else{
+                toastMessage("Aucun compte associé avec ce nom");
+            }
         } else {
             toastMessage("Erreure");
         }

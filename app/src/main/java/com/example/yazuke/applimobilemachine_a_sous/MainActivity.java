@@ -18,6 +18,8 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import java.util.concurrent.TimeUnit;
+
 import static android.content.ContentValues.TAG;
 
 public class MainActivity extends AppCompatActivity implements AsyncListener, PopupMenu.OnMenuItemClickListener {
@@ -178,6 +180,18 @@ public class MainActivity extends AppCompatActivity implements AsyncListener, Po
                                 jeu.demarrer();
 
                                 //ajuste le solde
+                                if(user.getSolde()-cout<=0){
+                                    levier=findViewById(R.id.levier);
+                                    levier.animate()
+                                            .y(0)
+                                            ;
+
+
+                                    //Remet les boutons dans un état non cliqué
+                                    resetBoutons();
+                                    toastMessage("Fonds insuffisant!");
+                                    return false;
+                                }
                                 user.setSolde(user.getSolde()-cout);
                                 score.setText("" + user.getSolde()+"$");
                                 mDatabaseHandler.updateSolde(selectedID, user.getSolde());

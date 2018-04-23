@@ -31,7 +31,7 @@
             android:layout_alignParentBottom="true"
             android:layout_centerHorizontal="true"
             android:layout_marginBottom="50dp"
-            app:cardBackgroundColor="#232336"
+            app:cardBackgroundColor="#656667"
             app:cardCornerRadius="25dp"
             app:cardElevation="10dp">
 

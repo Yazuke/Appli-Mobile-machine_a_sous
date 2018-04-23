@@ -55,7 +55,7 @@
                     android:layout_below="@+id/button1x"
                     android:onClick="showCombo"
                     android:text="@string/multiplier"
-                    android:textSize="50px" />
+                    android:textSize="35px" />
 
 
             </LinearLayout>

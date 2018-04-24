@@ -3,6 +3,7 @@ package com.example.yazuke.applimobilemachine_a_sous;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.media.Image;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
@@ -10,6 +11,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -27,7 +29,7 @@ public class EditDataActivity extends AppCompatActivity {
     DatabaseHandler mDatabaseHandler;
     private String selectedName;
     private int selectedID;
-
+    private ImageView logo;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState){
@@ -44,7 +46,13 @@ public class EditDataActivity extends AppCompatActivity {
         selectedName=receivedIntent.getStringExtra("name");
         //toastMessage(selectedName);
         editable_item.setText(selectedName);
-
+        logo=(ImageView) findViewById(R.id.imageView3);
+        logo.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                finish();
+            }
+        });
         btnSave.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
